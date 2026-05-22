@@ -37,19 +37,42 @@ textarea{resize:vertical;min-height:90px}
 select option{background:#2B2D2F}
 .f{margin-bottom:14px}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 .btn{font-family:'Barlow',sans-serif;font-size:13px;font-weight:500;padding:9px 18px;border-radius:7px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
 .bp{background:#E8620A;color:#fff}
 .bg2{background:transparent;color:#9DA0A4;border:1px solid rgba(255,255,255,0.1)}
+.bg2:hover{background:rgba(255,255,255,0.05);color:#F0F1F2}
 .bs{background:rgba(46,204,113,0.15);color:#2ECC71;border:1px solid rgba(46,204,113,0.3)}
 .bd{background:rgba(231,76,60,0.15);color:#E74C3C;border:1px solid rgba(231,76,60,0.3)}
+.bblue{background:rgba(52,152,219,0.15);color:#3498DB;border:1px solid rgba(52,152,219,0.3)}
+.bpurple{background:rgba(155,89,182,0.15);color:#b97ddd;border:1px solid rgba(155,89,182,0.3)}
 .sm{padding:5px 10px;font-size:11px}
 .re{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
 .rb{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .mt12{margin-top:12px}
 .mt16{margin-top:16px}
+/* SOURCE CHIPS WITH COLOURS */
 .chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
-.chip{font-size:11px;font-weight:600;padding:4px 11px;border-radius:20px;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#9DA0A4;transition:all 0.15s}
-.chip.on{border-color:#E8620A;background:rgba(232,98,10,0.2);color:#E8620A}
+.chip{font-size:11px;font-weight:600;padding:4px 11px;border-radius:20px;cursor:pointer;transition:all 0.15s;border:1px solid transparent}
+.chip-fb{background:rgba(66,103,178,0.15);color:#7a9be8;border-color:rgba(66,103,178,0.25)}
+.chip-fb.on{background:rgba(66,103,178,0.4);border-color:#4267b2;color:#a8c0f0}
+.chip-mp{background:rgba(66,103,178,0.1);color:#7a9be8;border-color:rgba(66,103,178,0.2)}
+.chip-mp.on{background:rgba(66,103,178,0.35);border-color:#4267b2;color:#a8c0f0}
+.chip-dd{background:rgba(232,98,10,0.12);color:#e88030;border-color:rgba(232,98,10,0.25)}
+.chip-dd.on{background:rgba(232,98,10,0.35);border-color:#E8620A;color:#ffaa70}
+.chip-mh{background:rgba(46,204,113,0.1);color:#4ecb7a;border-color:rgba(46,204,113,0.2)}
+.chip-mh.on{background:rgba(46,204,113,0.3);border-color:#2ECC71;color:#80e8a8}
+.chip-ad{background:rgba(52,152,219,0.12);color:#6ab3e8;border-color:rgba(52,152,219,0.22)}
+.chip-ad.on{background:rgba(52,152,219,0.35);border-color:#3498DB;color:#a0d0f0}
+.chip-cg{background:rgba(155,89,182,0.12);color:#b97ddd;border-color:rgba(155,89,182,0.22)}
+.chip-cg.on{background:rgba(155,89,182,0.35);border-color:#9b59b6;color:#d4a8f0}
+.chip-tk{background:rgba(255,0,80,0.1);color:#ff6699;border-color:rgba(255,0,80,0.2)}
+.chip-tk.on{background:rgba(255,0,80,0.3);border-color:#ff0050;color:#ff99bb}
+.chip-ig{background:rgba(225,48,108,0.12);color:#e8849c;border-color:rgba(225,48,108,0.22)}
+.chip-ig.on{background:rgba(225,48,108,0.35);border-color:#e1306c;color:#f0a8c0}
+.chip-rf{background:rgba(243,156,18,0.1);color:#f5c060;border-color:rgba(243,156,18,0.2)}
+.chip-rf.on{background:rgba(243,156,18,0.35);border-color:#F39C12;color:#f8d898}
+/* RESULT */
 .aibox{background:rgba(232,98,10,0.05);border:1px solid rgba(232,98,10,0.35);border-radius:10px;padding:16px 18px;margin-top:14px}
 .aih{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;color:#E8620A;margin-bottom:8px}
 .aiq{background:#1A1B1C;border-left:3px solid #E8620A;padding:12px 14px;border-radius:0 7px 7px 0;font-size:13px;line-height:1.6;color:#F0F1F2}
@@ -62,7 +85,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}
 th{text-align:left;padding:8px 10px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#6B6E72;border-bottom:1px solid rgba(255,255,255,0.08)}
 td{padding:10px 10px;border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:top}
 tr:hover td{background:rgba(255,255,255,0.02)}
-.prr{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px}
+.prr{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px}
 .prt{border-bottom:none;border-top:1px solid rgba(255,255,255,0.1);margin-top:4px;padding-top:10px;font-weight:600;font-size:15px;color:#E8620A}
 .prow{display:grid;grid-template-columns:2fr 1fr 0.8fr 0.8fr 80px;gap:8px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);align-items:center;font-size:12px}
 .phdr{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#6B6E72;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.08)}
@@ -90,12 +113,40 @@ tr:hover td{background:rgba(255,255,255,0.02)}
 .nbdg{background:#E8620A;color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-left:4px;vertical-align:middle}
 .wa{background:rgba(243,156,18,0.08);border:1px solid rgba(243,156,18,0.25);border-radius:8px;padding:10px 14px;font-size:12px;color:#F39C12;margin-bottom:14px}
 .result-big{font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:700;color:#E8620A;text-align:center;padding:20px 0 4px}
-.result-sub{font-size:13px;color:#9DA0A4;text-align:center;margin-bottom:20px}
+.result-sub{font-size:13px;color:#9DA0A4;text-align:center;margin-bottom:16px}
 .tag-row{display:flex;gap:8px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
 .tag{font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px}
 .tag-low{background:rgba(46,204,113,0.15);color:#2ECC71}
 .tag-med{background:rgba(243,156,18,0.15);color:#F39C12}
 .tag-high{background:rgba(231,76,60,0.15);color:#E74C3C}
+.tag-blue{background:rgba(52,152,219,0.15);color:#3498DB}
+/* PRINT STYLES */
+@media print {
+  body{background:#fff;color:#000;font-size:12pt}
+  header,nav,.main > .pnl:not(#pnl-print){display:none!important}
+  #pnl-print{display:block!important;padding:0}
+  .no-print{display:none!important}
+  .print-doc{max-width:100%;padding:0}
+}
+.print-doc{background:#fff;color:#000;border-radius:10px;padding:32px;font-family:'Barlow',sans-serif}
+.print-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;padding-bottom:20px;border-bottom:3px solid #E8620A}
+.print-logo{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:700}
+.print-logo em{color:#E8620A;font-style:normal}
+.print-co{font-size:12px;color:#555;margin-top:4px;line-height:1.6}
+.print-doc-type{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:700;color:#E8620A;text-align:right}
+.print-ref{font-size:11px;color:#777;text-align:right;margin-top:4px}
+.print-to{margin-bottom:24px}
+.print-to h3{font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:#888;margin-bottom:6px}
+.print-to p{font-size:13px;color:#222;line-height:1.7}
+.print-table{width:100%;border-collapse:collapse;margin-bottom:24px;font-size:13px}
+.print-table th{background:#2B2D2F;color:#fff;padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
+.print-table td{padding:10px 12px;border-bottom:1px solid #eee}
+.print-table tr:nth-child(even) td{background:#f9f9f9}
+.print-totals{margin-left:auto;width:280px;margin-bottom:24px}
+.print-total-row{display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-bottom:1px solid #eee}
+.print-total-final{display:flex;justify-content:space-between;padding:10px 0;font-size:16px;font-weight:700;color:#E8620A;border-top:2px solid #E8620A;margin-top:4px}
+.print-terms{font-size:11px;color:#666;line-height:1.7;padding-top:20px;border-top:1px solid #eee}
+.print-footer{text-align:center;font-size:10px;color:#999;margin-top:24px;padding-top:12px;border-top:1px solid #eee}
 </style>
 </head>
 <body>
@@ -113,9 +164,12 @@ tr:hover td{background:rgba(255,255,255,0.02)}
   <button class="tb" id="tab-leads">Lead Log <span class="nbdg" id="lc">0</span></button>
   <button class="tb" id="tab-planning">Planning Alerts</button>
   <button class="tb" id="tab-outreach">Outreach Templates</button>
+  <button class="tb" id="tab-docs">Quotes &amp; Invoices</button>
+  <button class="tb" id="tab-rates">Edit Rates</button>
 </nav>
 <div class="main">
 
+<!-- PRICER -->
 <div class="pnl on" id="pnl-pricer">
   <div class="g2" style="align-items:start">
     <div>
@@ -124,22 +178,22 @@ tr:hover td{background:rgba(255,255,255,0.02)}
         <div class="f">
           <label>Source</label>
           <div class="chips" id="chips">
-            <div class="chip on" data-src="Facebook Groups">Facebook Groups</div>
-            <div class="chip" data-src="FB Marketplace">FB Marketplace</div>
-            <div class="chip" data-src="Done Deal">Done Deal</div>
-            <div class="chip" data-src="MyHome.ie">MyHome.ie</div>
-            <div class="chip" data-src="Adverts.ie">Adverts.ie</div>
-            <div class="chip" data-src="Community Group">Community Group</div>
-            <div class="chip" data-src="TikTok">TikTok</div>
-            <div class="chip" data-src="Instagram">Instagram</div>
-            <div class="chip" data-src="Referral">Referral</div>
+            <div class="chip chip-fb on" data-src="Facebook Groups">Facebook Groups</div>
+            <div class="chip chip-mp" data-src="FB Marketplace">FB Marketplace</div>
+            <div class="chip chip-dd" data-src="Done Deal">Done Deal</div>
+            <div class="chip chip-mh" data-src="MyHome.ie">MyHome.ie</div>
+            <div class="chip chip-ad" data-src="Adverts.ie">Adverts.ie</div>
+            <div class="chip chip-cg" data-src="Community Group">Community Group</div>
+            <div class="chip chip-tk" data-src="TikTok">TikTok</div>
+            <div class="chip chip-ig" data-src="Instagram">Instagram</div>
+            <div class="chip chip-rf" data-src="Referral">Referral</div>
           </div>
         </div>
         <div class="r2">
           <div class="f" style="margin:0"><label>Location</label><input type="text" id="loc" placeholder="e.g. Navan, Co. Meath"></div>
           <div class="f" style="margin:0"><label>Job Type</label>
             <select id="jt">
-              <option value="">Auto-detect from description</option>
+              <option value="">Auto-detect</option>
               <option value="painting">Painting &amp; Decorating</option>
               <option value="plastering">Plastering</option>
               <option value="tiling">Tiling</option>
@@ -147,6 +201,7 @@ tr:hover td{background:rgba(255,255,255,0.02)}
               <option value="kitchen">Kitchen Fit-out</option>
               <option value="extension">Extension / Build</option>
               <option value="roofing">Roofing</option>
+              <option value="chimney">Chimney Work</option>
               <option value="guttering">Guttering / Fascia</option>
               <option value="garden">Garden / Landscaping</option>
               <option value="flooring">Flooring</option>
@@ -154,7 +209,6 @@ tr:hover td{background:rgba(255,255,255,0.02)}
               <option value="plumbing">Plumbing</option>
               <option value="maintenance">General Maintenance</option>
               <option value="cleaning">Cleaning</option>
-              <option value="chimney">Chimney / Roofing</option>
               <option value="damp">Damp / Insulation</option>
             </select>
           </div>
@@ -172,17 +226,21 @@ tr:hover td{background:rgba(255,255,255,0.02)}
         <div id="pp" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 0;text-align:center;color:#6B6E72">
           <div style="font-size:32px;margin-bottom:10px;opacity:0.3">&#9889;</div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;color:#9DA0A4">Paste a job and hit Price This Job</div>
-          <div style="font-size:12px;margin-top:6px">Instant Irish market pricing</div>
+          <div style="font-size:12px;margin-top:6px;color:#6B6E72">Instant Irish market pricing — no internet needed</div>
         </div>
         <div id="pr" style="display:none"></div>
       </div>
-      <div id="sw" style="display:none;margin-top:10px">
-        <button class="btn bs" id="btn-save" style="width:100%;justify-content:center">&#10003; Save to Lead Log</button>
+      <div id="sw" style="display:none;margin-top:10px;display:none">
+        <div style="display:flex;gap:8px">
+          <button class="btn bs" id="btn-save" style="flex:1;justify-content:center">&#10003; Save to Lead Log</button>
+          <button class="btn bblue" id="btn-quote" style="flex:1;justify-content:center">&#128196; Create Quote</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- LEADS -->
 <div class="pnl" id="pnl-leads">
   <div class="rb">
     <div class="stitle" style="margin:0">Lead Log</div>
@@ -206,11 +264,12 @@ tr:hover td{background:rgba(255,255,255,0.02)}
   <div class="card mt16" style="overflow-x:auto">
     <table>
       <thead><tr><th>Date</th><th>Source</th><th>Job</th><th>Location</th><th>Quote</th><th>Status</th><th>Action</th></tr></thead>
-      <tbody id="ltb"><tr><td colspan="7" style="text-align:center;padding:40px;color:#6B6E72">No leads yet. Use the Pricer to add your first lead.</td></tr></tbody>
+      <tbody id="ltb"><tr><td colspan="7" style="text-align:center;padding:40px;color:#6B6E72">No leads yet.</td></tr></tbody>
     </table>
   </div>
 </div>
 
+<!-- PLANNING -->
 <div class="pnl" id="pnl-planning">
   <div class="g2" style="align-items:start;gap:20px">
     <div>
@@ -249,6 +308,7 @@ tr:hover td{background:rgba(255,255,255,0.02)}
   </div>
 </div>
 
+<!-- OUTREACH -->
 <div class="pnl" id="pnl-outreach">
   <div class="rb">
     <div class="stitle" style="margin:0">Outreach Templates</div>
@@ -266,7 +326,7 @@ tr:hover td{background:rgba(255,255,255,0.02)}
   <div class="mt16">
     <div class="stitle">Quick Personalise</div>
     <div class="card ca">
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+      <div class="r3" style="margin-bottom:12px">
         <div><label>Name</label><input type="text" id="pn" placeholder="e.g. John"></div>
         <div><label>Job Type</label><input type="text" id="pj" placeholder="e.g. bathroom reno"></div>
         <div><label>Price</label><input type="text" id="pp3" placeholder="e.g. 1200"></div>
@@ -277,41 +337,124 @@ tr:hover td{background:rgba(255,255,255,0.02)}
   </div>
 </div>
 
+<!-- QUOTES & INVOICES -->
+<div class="pnl" id="pnl-docs">
+  <div class="rb">
+    <div class="stitle" style="margin:0">Quotes &amp; Invoices</div>
+    <div style="display:flex;gap:8px">
+      <button class="btn bp sm" id="btn-new-quote">+ New Quote</button>
+      <button class="btn bpurple sm" id="btn-new-invoice">+ New Invoice</button>
+    </div>
+  </div>
+  <div class="g2" style="align-items:start;gap:20px">
+    <div>
+      <div class="card ca">
+        <div class="ct">Document Details</div>
+        <div class="r2">
+          <div class="f" style="margin:0"><label>Document Type</label>
+            <select id="doc-type">
+              <option value="QUOTATION">Quotation</option>
+              <option value="INVOICE">Invoice</option>
+            </select>
+          </div>
+          <div class="f" style="margin:0"><label>Ref Number</label><input type="text" id="doc-ref" placeholder="e.g. Q-001"></div>
+        </div>
+        <div class="r2 mt12">
+          <div class="f" style="margin:0"><label>Date</label><input type="date" id="doc-date"></div>
+          <div class="f" style="margin:0"><label>Valid Until / Due Date</label><input type="date" id="doc-due"></div>
+        </div>
+        <div class="f mt12"><label>Customer Name</label><input type="text" id="doc-cust" placeholder="Full name"></div>
+        <div class="f"><label>Customer Address</label><textarea id="doc-addr" rows="2" placeholder="Street, Town, County"></textarea></div>
+        <div class="f"><label>Job Description</label><textarea id="doc-job" rows="3" placeholder="Brief description of works"></textarea></div>
+        <div class="ct mt12" style="margin-bottom:8px">Line Items</div>
+        <div id="line-items"></div>
+        <button class="btn bg2 sm mt12" id="btn-add-line">+ Add Line</button>
+        <div class="f mt12"><label>Notes / Terms</label><textarea id="doc-notes" rows="2" placeholder="e.g. Payment due within 14 days. All work guaranteed for 12 months."></textarea></div>
+        <div class="re">
+          <button class="btn bg2 sm" id="btn-preview">Preview</button>
+          <button class="btn bp" id="btn-print">&#128424; Print / Save PDF</button>
+        </div>
+      </div>
+    </div>
+    <div id="doc-preview-wrap">
+      <div class="stitle">Preview</div>
+      <div class="print-doc" id="doc-preview">
+        <div style="text-align:center;padding:40px;color:#aaa;font-size:13px">Fill in the details and click Preview</div>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button class="btn bp" onclick="window.print()" style="flex:1;justify-content:center">&#128424; Print / Save as PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT RATES -->
+<div class="pnl" id="pnl-rates">
+  <div class="rb">
+    <div class="stitle" style="margin:0">Edit Pricing Rates</div>
+    <button class="btn bg2 sm" id="btn-reset-rates">Reset to Defaults</button>
+  </div>
+  <div style="font-size:12px;color:#9DA0A4;margin-bottom:16px">Update these to match your own pricing. Changes are saved automatically.</div>
+  <div class="card">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:8px;margin-bottom:8px">
+      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#6B6E72">Job Type</div>
+      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#6B6E72">Low (€)</div>
+      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#6B6E72">High (€)</div>
+      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#6B6E72">Labour (€)</div>
+      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#6B6E72">Materials (€)</div>
+    </div>
+    <div id="rates-grid"></div>
+  </div>
+</div>
+
+<!-- PRINT PANEL (hidden, shown on print) -->
+<div class="pnl" id="pnl-print"></div>
+
 </div>
 <script>
 var leads = [];
 var src = 'Facebook Groups';
 var lastRes = null;
 var selTpl = null;
+var lineCount = 0;
+var docItems = [];
 
-var RATES = {
-  painting:    {lo:350,  hi:600,  labour:280, mat:90,  hrs:'4-8',   name:'Painting & Decorating'},
-  plastering:  {lo:450,  hi:750,  labour:350, mat:120, hrs:'4-8',   name:'Plastering'},
-  tiling:      {lo:500,  hi:900,  labour:320, mat:200, hrs:'6-10',  name:'Tiling'},
+var DEFAULT_RATES = {
+  painting:    {lo:350,  hi:600,  labour:280, mat:90,  hrs:'4-8h',  name:'Painting & Decorating'},
+  plastering:  {lo:450,  hi:750,  labour:350, mat:120, hrs:'4-8h',  name:'Plastering'},
+  tiling:      {lo:500,  hi:900,  labour:320, mat:200, hrs:'6-10h', name:'Tiling'},
   bathroom:    {lo:3000, hi:5000, labour:2000,mat:900, hrs:'3-5d',  name:'Bathroom Fit-out'},
   kitchen:     {lo:3500, hi:6000, labour:2200,mat:1200,hrs:'4-7d',  name:'Kitchen Fit-out'},
   extension:   {lo:18000,hi:28000,labour:12000,mat:9000,hrs:'8-12w',name:'Extension / Build'},
   roofing:     {lo:2000, hi:4000, labour:1300,mat:700, hrs:'2-4d',  name:'Roofing'},
-  chimney:     {lo:1200, hi:2200, labour:800, mat:400, hrs:'1-2d',  name:'Chimney / Roofing Work'},
-  guttering:   {lo:350,  hi:650,  labour:280, mat:120, hrs:'4-8',   name:'Guttering / Fascia'},
+  chimney:     {lo:1200, hi:2200, labour:800, mat:400, hrs:'1-2d',  name:'Chimney Work'},
+  guttering:   {lo:350,  hi:650,  labour:280, mat:120, hrs:'4-8h',  name:'Guttering / Fascia'},
   garden:      {lo:500,  hi:1500, labour:380, mat:250, hrs:'1-3d',  name:'Garden / Landscaping'},
   flooring:    {lo:800,  hi:1800, labour:500, mat:450, hrs:'1-3d',  name:'Flooring'},
-  electrical:  {lo:200,  hi:600,  labour:160, mat:100, hrs:'2-6',   name:'Electrical'},
-  plumbing:    {lo:180,  hi:500,  labour:140, mat:80,  hrs:'2-5',   name:'Plumbing'},
-  maintenance: {lo:180,  hi:400,  labour:150, mat:60,  hrs:'2-5',   name:'General Maintenance'},
-  cleaning:    {lo:100,  hi:250,  labour:80,  mat:30,  hrs:'2-6',   name:'Cleaning'},
+  electrical:  {lo:200,  hi:600,  labour:160, mat:100, hrs:'2-6h',  name:'Electrical'},
+  plumbing:    {lo:180,  hi:500,  labour:140, mat:80,  hrs:'2-5h',  name:'Plumbing'},
+  maintenance: {lo:180,  hi:400,  labour:150, mat:60,  hrs:'2-5h',  name:'General Maintenance'},
+  cleaning:    {lo:100,  hi:250,  labour:80,  mat:30,  hrs:'2-6h',  name:'Cleaning'},
   damp:        {lo:600,  hi:2000, labour:450, mat:350, hrs:'1-3d',  name:'Damp / Insulation'}
 };
+
+var RATES = {};
+
+function loadRates(){
+  try{var s=localStorage.getItem('ecc_rates');if(s)RATES=JSON.parse(s);else RATES=JSON.parse(JSON.stringify(DEFAULT_RATES));}
+  catch(e){RATES=JSON.parse(JSON.stringify(DEFAULT_RATES));}
+}
+function saveRates(){try{localStorage.setItem('ecc_rates',JSON.stringify(RATES));}catch(e){}}
 
 var KEYWORDS = {
   painting:   ['paint','decorat','wall','ceiling','colour','primer','gloss','emulsion'],
   plastering: ['plaster','render','skim','dry line','dry-line'],
-  tiling:     ['til','grout','mosaic','slate tile','ceramic'],
+  tiling:     ['til','grout','mosaic','ceramic'],
   bathroom:   ['bathroom','shower','bath','wetroom','wet room','toilet','ensuite','en-suite','sanit'],
   kitchen:    ['kitchen','worktop','cabinet','press','counter'],
   extension:  ['extension','build','conservatory','sunroom','sun room','attic conversion','dormer'],
-  roofing:    ['roof','felt','slate','flat roof','lead','soffit'],
-  chimney:    ['chimney','flue','stack','breast'],
+  roofing:    ['roof','felt','flat roof','lead','soffit'],
+  chimney:    ['chimney','flue','stack','breast','slate','slates'],
   guttering:  ['gutter','fascia','downpipe','drain pipe'],
   garden:     ['garden','landscap','lawn','patio','driveway','block pav','decking','fence'],
   flooring:   ['floor','laminate','carpet','vinyl','hardwood','engineered','timber floor'],
@@ -322,82 +465,68 @@ var KEYWORDS = {
   damp:       ['damp','mould','mold','insulation','cavity','rising damp']
 };
 
-function detectJob(desc, selected) {
-  if (selected && RATES[selected]) return selected;
-  var d = desc.toLowerCase();
-  var best = null, bestScore = 0;
-  for (var type in KEYWORDS) {
-    var kws = KEYWORDS[type];
-    var score = 0;
-    for (var i = 0; i < kws.length; i++) {
-      if (d.indexOf(kws[i]) >= 0) score++;
-    }
-    if (score > bestScore) { bestScore = score; best = type; }
-  }
-  return best || 'maintenance';
+function detectJob(desc, selected){
+  if(selected && RATES[selected])return selected;
+  var d=desc.toLowerCase();var best=null,bestScore=0;
+  for(var type in KEYWORDS){var kws=KEYWORDS[type];var score=0;for(var i=0;i<kws.length;i++){if(d.indexOf(kws[i])>=0)score++;}if(score>bestScore){bestScore=score;best=type;}}
+  return best||'maintenance';
 }
-
-function getComplexity(desc) {
-  var d = desc.toLowerCase();
-  var highWords = ['full','complete','entire','whole house','multiple','large','scaffold','structural','planning'];
-  var lowWords = ['small','minor','single','one room','quick','simple','touch up'];
-  for (var i = 0; i < highWords.length; i++) if (d.indexOf(highWords[i]) >= 0) return 'High';
-  for (var i = 0; i < lowWords.length; i++) if (d.indexOf(lowWords[i]) >= 0) return 'Low';
+function getComplexity(desc){
+  var d=desc.toLowerCase();
+  var hi=['full','complete','entire','whole house','multiple','large','scaffold','structural','planning','2 storey','two storey'];
+  var lo=['small','minor','single','one room','quick','simple','touch up','patch'];
+  for(var i=0;i<hi.length;i++)if(d.indexOf(hi[i])>=0)return 'High';
+  for(var i=0;i<lo.length;i++)if(d.indexOf(lo[i])>=0)return 'Low';
   return 'Medium';
 }
-
-function getUrgency(desc) {
-  var d = desc.toLowerCase();
-  var urgent = ['urgent','asap','emergency','leak','flood','immediately','today','tomorrow'];
-  for (var i = 0; i < urgent.length; i++) if (d.indexOf(urgent[i]) >= 0) return 'High';
+function getUrgency(desc){
+  var d=desc.toLowerCase();
+  var u=['urgent','asap','emergency','leak','flood','immediately','today','tomorrow'];
+  for(var i=0;i<u.length;i++)if(d.indexOf(u[i])>=0)return 'High';
   return 'Low';
 }
-
-function getScope(desc) {
-  var d = desc.toLowerCase();
-  if (d.indexOf('full house') >= 0 || d.indexOf('whole house') >= 0 || d.indexOf('entire') >= 0 || d.indexOf('multiple') >= 0) return 'full';
-  if (d.indexOf('2 bed') >= 0 || d.indexOf('two bed') >= 0 || d.indexOf('2bed') >= 0) return 'medium';
-  if (d.indexOf('3 bed') >= 0 || d.indexOf('three bed') >= 0 || d.indexOf('3bed') >= 0) return 'large';
-  if (d.indexOf('4 bed') >= 0 || d.indexOf('four bed') >= 0 || d.indexOf('4bed') >= 0) return 'xlarge';
-  if (d.indexOf('room') >= 0 || d.indexOf('single') >= 0 || d.indexOf('one room') >= 0) return 'small';
-  if (d.indexOf('scaffold') >= 0 || d.indexOf('storey') >= 0 || d.indexOf('2 storey') >= 0 || d.indexOf('two storey') >= 0) return 'large';
+function getScope(desc){
+  var d=desc.toLowerCase();
+  if(d.indexOf('full house')>=0||d.indexOf('whole house')>=0||d.indexOf('entire')>=0||d.indexOf('multiple rooms')>=0)return 'full';
+  if(d.indexOf('4 bed')>=0||d.indexOf('four bed')>=0)return 'xlarge';
+  if(d.indexOf('3 bed')>=0||d.indexOf('three bed')>=0)return 'large';
+  if(d.indexOf('2 bed')>=0||d.indexOf('two bed')>=0)return 'medium';
+  if(d.indexOf('room')>=0||d.indexOf('single')>=0||d.indexOf('one room')>=0||d.indexOf('patch')>=0)return 'small';
+  if(d.indexOf('scaffold')>=0||d.indexOf('2 storey')>=0||d.indexOf('two storey')>=0)return 'large';
   return 'medium';
 }
-
-function getFlags(desc, type) {
-  var d = desc.toLowerCase();
-  var flags = [];
-  if (d.indexOf('scaffold') >= 0) flags.push('Scaffolding required — add €500-€800');
-  if (d.indexOf('skip') >= 0 || d.indexOf('rubbish') >= 0 || d.indexOf('rubble') >= 0) flags.push('Skip/waste removal needed — add €200-€400');
-  if (d.indexOf('asbestos') >= 0) flags.push('Possible asbestos — survey required before pricing');
-  if (d.indexOf('damp') >= 0 && type !== 'damp') flags.push('Damp noted — may need additional treatment');
-  if (d.indexOf('planning') >= 0) flags.push('Planning permission may be required — check with council');
+function getFlags(desc,type){
+  var d=desc.toLowerCase();var flags=[];
+  if(d.indexOf('scaffold')>=0)flags.push('Scaffolding required — allow €500-€800 extra');
+  if(d.indexOf('skip')>=0||d.indexOf('rubbish')>=0||d.indexOf('rubble')>=0)flags.push('Skip/waste removal needed — allow €200-€400 extra');
+  if(d.indexOf('asbestos')>=0)flags.push('Possible asbestos — survey required before pricing');
+  if(d.indexOf('damp')>=0&&type!=='damp')flags.push('Damp noted — may need additional treatment');
+  if(d.indexOf('planning')>=0)flags.push('Planning permission may be required');
   return flags;
 }
-
-function priceJob(desc, selected) {
-  var type = detectJob(desc, selected);
-  var r = RATES[type];
-  var complexity = getComplexity(desc);
-  var urgency = getUrgency(desc);
-  var scope = getScope(desc);
-  var flags = getFlags(desc, type);
-  var scopeMult = scope === 'small' ? 0.7 : scope === 'medium' ? 1.0 : scope === 'large' ? 1.25 : scope === 'xlarge' ? 1.5 : 1.4;
-  var compMult = complexity === 'High' ? 1.15 : complexity === 'Low' ? 0.9 : 1.0;
-  var mult = scopeMult * compMult;
-  var base = (r.lo + r.hi) / 2 * mult;
-  var qlo = Math.round((base * 0.9) / 50) * 50;
-  var qhi = Math.round((base * 1.1) / 50) * 50;
-  var labour = Math.round(r.labour * mult / 50) * 50;
-  var mat = Math.round(r.mat * mult / 50) * 50;
-  var scopeLabel = scope === 'small' ? 'Small scope' : scope === 'medium' ? 'Standard scope' : scope === 'large' ? 'Large scope' : 'Full house';
-  var responses = [
+function priceJob(desc,selected){
+  var type=detectJob(desc,selected);
+  var r=RATES[type];
+  var complexity=getComplexity(desc);
+  var urgency=getUrgency(desc);
+  var scope=getScope(desc);
+  var flags=getFlags(desc,type);
+  var scopeMult=scope==='small'?0.7:scope==='medium'?1.0:scope==='large'?1.25:scope==='xlarge'?1.5:1.4;
+  var compMult=complexity==='High'?1.15:complexity==='Low'?0.9:1.0;
+  var mult=scopeMult*compMult;
+  var base=(r.lo+r.hi)/2*mult;
+  var qlo=Math.round((base*0.9)/50)*50;
+  var qhi=Math.round((base*1.1)/50)*50;
+  var labour=Math.round(r.labour*mult/50)*50;
+  var mat=Math.round(r.mat*mult/50)*50;
+  var scopeLabel=scope==='small'?'Small scope':scope==='medium'?'Standard scope':scope==='large'?'Large scope':scope==='xlarge'?'4-bed scale':'Full house';
+  var responses=[
     'Hi there! Thanks for posting — we cover this area and do this type of work regularly. Happy to come out and give you a free no-obligation quote. Are you still looking to get this sorted?',
     'Hi! Saw your post — this is right up our street. We are a local team covering Meath, Dublin and surrounding areas. We can have someone out to quote within 48 hours. Still looking for someone?',
     'Hi, just spotted your post. We do this type of work all the time and would be happy to give you a competitive quote. No call-out charge. When suits you for a visit?'
   ];
-  var msg = responses[Math.floor(Math.random() * responses.length)];
-  return { type: type, name: r.name, complexity: complexity, urgency: urgency, scope: scopeLabel, hrs: r.hrs, labour: labour, mat: mat, qlo: qlo, qhi: qhi, msg: msg, flags: flags };
+  var msg=responses[Math.floor(Math.random()*responses.length)];
+  return{type:type,name:r.name,complexity:complexity,urgency:urgency,scope:scopeLabel,hrs:r.hrs,labour:labour,mat:mat,qlo:qlo,qhi:qhi,msg:msg,flags:flags};
 }
 
 function loadLeads(){try{var s=localStorage.getItem('ecc4');if(s)leads=JSON.parse(s);}catch(e){leads=[];}}
@@ -409,7 +538,7 @@ function show(id){var el=document.getElementById(id);if(el)el.style.display='blo
 function hide(id){var el=document.getElementById(id);if(el)el.style.display='none';}
 function notif(msg){var el=document.createElement('div');el.className='ntf';el.textContent=msg;document.body.appendChild(el);setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},2000);}
 
-var tabIds=['pricer','leads','planning','outreach'];
+var tabIds=['pricer','leads','planning','outreach','docs','rates'];
 for(var ti=0;ti<tabIds.length;ti++){
   (function(id){var btn=document.getElementById('tab-'+id);if(btn)btn.addEventListener('click',function(){goTab(id);});})(tabIds[ti]);
 }
@@ -417,17 +546,16 @@ function goTab(id){
   for(var i=0;i<tabIds.length;i++){var p=document.getElementById('pnl-'+tabIds[i]);var b=document.getElementById('tab-'+tabIds[i]);if(p)p.classList.remove('on');if(b)b.classList.remove('on');}
   var pnl=document.getElementById('pnl-'+id);var btn=document.getElementById('tab-'+id);
   if(pnl)pnl.classList.add('on');if(btn)btn.classList.add('on');
-  if(id==='leads')drawLeads();if(id==='planning')drawPlanning();if(id==='outreach')drawTemplates();
+  if(id==='leads')drawLeads();if(id==='planning')drawPlanning();if(id==='outreach')drawTemplates();if(id==='rates')drawRates();if(id==='docs')initDoc();
 }
 
 var chipsEl=document.getElementById('chips');
 if(chipsEl){var chipEls=chipsEl.querySelectorAll('.chip');for(var ci=0;ci<chipEls.length;ci++){(function(chip){chip.addEventListener('click',function(){for(var j=0;j<chipEls.length;j++)chipEls[j].classList.remove('on');chip.classList.add('on');src=chip.getAttribute('data-src')||'Facebook Groups';});})(chipEls[ci]);}}
 
-document.getElementById('btn-clear').addEventListener('click',function(){document.getElementById('desc').value='';document.getElementById('loc').value='';document.getElementById('jt').value='';hide('pr');hide('sw');show('pp');lastRes=null;});
+document.getElementById('btn-clear').addEventListener('click',function(){document.getElementById('desc').value='';document.getElementById('loc').value='';document.getElementById('jt').value='';hide('pr');document.getElementById('sw').style.display='none';show('pp');lastRes=null;});
 
 document.getElementById('btn-price').addEventListener('click',function(){
-  var desc=gV('desc');
-  if(!desc){alert('Please paste a job description first.');return;}
+  var desc=gV('desc');if(!desc){alert('Please paste a job description first.');return;}
   var selected=document.getElementById('jt').value;
   var result=priceJob(desc,selected);
   lastRes={result:result,desc:desc,loc:gV('loc')};
@@ -435,30 +563,53 @@ document.getElementById('btn-price').addEventListener('click',function(){
 });
 
 document.getElementById('btn-save').addEventListener('click',function(){
-  if(!lastRes)return;
-  var r=lastRes.result;
+  if(!lastRes)return;var r=lastRes.result;
   leads.push({id:Date.now(),date:new Date().toISOString(),src:src,desc:lastRes.desc.substring(0,200),loc:lastRes.loc||'Unknown',jtype:r.name,qlo:r.qlo,qhi:r.qhi,status:'new'});
-  saveLeads();hide('sw');notif('Lead saved!');
+  saveLeads();document.getElementById('sw').style.display='none';notif('Lead saved!');
 });
+
+document.getElementById('btn-quote').addEventListener('click',function(){
+  if(!lastRes)return;var r=lastRes.result;
+  goTab('docs');
+  setTimeout(function(){
+    var el=document.getElementById('doc-type');if(el)el.value='QUOTATION';
+    var dj=document.getElementById('doc-job');if(dj)dj.value=r.name+(lastRes.desc?' — '+lastRes.desc.substring(0,80):'');
+    var dl=document.getElementById('doc-cust');if(dl&&lastRes.loc)dl.value='';
+    document.getElementById('doc-date').value=new Date().toISOString().substring(0,10);
+    var due=new Date();due.setDate(due.getDate()+14);
+    document.getElementById('doc-due').value=due.toISOString().substring(0,10);
+    addLineFromResult(r);
+  },100);
+});
+
+function addLineFromResult(r){
+  addLine();
+  var rows=document.getElementById('line-items').querySelectorAll('.line-row');
+  if(rows.length>0){
+    var last=rows[rows.length-1];
+    var desc=last.querySelector('.li-desc');var qty=last.querySelector('.li-qty');var rate=last.querySelector('.li-rate');
+    if(desc)desc.value=r.name;if(qty)qty.value='1';if(rate)rate.value=Math.round((r.qlo+r.qhi)/2);
+    calcLine(last);
+  }
+}
 
 function showResult(r){
   hide('pp');
-  var cc=r.complexity==='High'?'#E74C3C':r.complexity==='Medium'?'#F39C12':'#2ECC71';
-  var uc=r.urgency==='High'?'#E74C3C':'#2ECC71';
   var ctag=r.complexity==='High'?'tag-high':r.complexity==='Medium'?'tag-med':'tag-low';
   var utag=r.urgency==='High'?'tag-high':'tag-low';
   var h='<div class="result-big">€'+r.qlo+' – €'+r.qhi+'</div>';
   h+='<div class="result-sub">Estimated Quote Range — '+r.name+'</div>';
-  h+='<div class="tag-row"><span class="tag '+ctag+'">'+r.complexity+' Complexity</span><span class="tag '+utag+'">Urgency: '+r.urgency+'</span><span class="tag tag-low">'+r.scope+'</span><span class="tag tag-low">'+r.hrs+' hrs</span></div>';
+  h+='<div class="tag-row"><span class="tag '+ctag+'">'+r.complexity+' Complexity</span><span class="tag '+utag+'">Urgency: '+r.urgency+'</span><span class="tag tag-blue">'+r.scope+'</span><span class="tag tag-low">'+r.hrs+'</span></div>';
   h+='<div style="margin-bottom:14px">';
   h+='<div class="prr"><span style="color:#9DA0A4">Labour estimate</span><span>€'+r.labour+'</span></div>';
   h+='<div class="prr"><span style="color:#9DA0A4">Materials estimate</span><span>€'+r.mat+'</span></div>';
   h+='<div class="prr prt"><span>Total Quote Range</span><span>€'+r.qlo+' – €'+r.qhi+'</span></div></div>';
-  h+='<div class="aibox"><div class="aih">Ready-to-Send Response</div>';
+  if(r.flags&&r.flags.length){for(var fi=0;fi<r.flags.length;fi++)h+='<div style="font-size:12px;color:#F39C12;padding:3px 0">&#9888; '+r.flags[fi]+'</div>';}
+  h+='<div class="aibox" style="margin-top:14px"><div class="aih">Ready-to-Send Response</div>';
   h+='<div class="aiq" id="rmsg">'+r.msg+'</div>';
   h+='<div style="margin-top:10px"><button class="btn bg2 sm" id="btn-cpy">Copy Message</button></div></div>';
   var prEl=document.getElementById('pr');if(prEl){prEl.innerHTML=h;prEl.style.display='block';}
-  show('sw');
+  document.getElementById('sw').style.display='block';
   var cpyBtn=document.getElementById('btn-cpy');
   if(cpyBtn)cpyBtn.addEventListener('click',function(){var rmsg=document.getElementById('rmsg');if(rmsg)navigator.clipboard.writeText(rmsg.textContent).then(function(){notif('Copied!');});});
 }
@@ -466,9 +617,7 @@ function showResult(r){
 document.getElementById('lsrch').addEventListener('input',drawLeads);
 document.getElementById('lflt').addEventListener('change',drawLeads);
 function drawLeads(){
-  var srch=(document.getElementById('lsrch').value||'').toLowerCase();
-  var flt=document.getElementById('lflt').value;
-  var fil=[];
+  var srch=(document.getElementById('lsrch').value||'').toLowerCase();var flt=document.getElementById('lflt').value;var fil=[];
   for(var i=0;i<leads.length;i++){var l=leads[i];if((!flt||l.status===flt)&&(!srch||(l.desc||'').toLowerCase().indexOf(srch)>=0||(l.loc||'').toLowerCase().indexOf(srch)>=0||(l.jtype||'').toLowerCase().indexOf(srch)>=0))fil.push(l);}
   var tot=0,won=0;for(var i=0;i<leads.length;i++){tot+=(leads[i].qlo+leads[i].qhi)/2;if(leads[i].status==='won')won++;}
   setT('st',leads.length);setT('sv2','€'+Math.round(tot).toLocaleString());setT('sw2',won);setT('sc',leads.length?Math.round(won/leads.length*100)+'%':'0%');
@@ -508,10 +657,9 @@ var PLAN=[
 ];
 document.getElementById('btn-pfilter').addEventListener('click',drawPlanning);
 function drawPlanning(){
-  var co=document.getElementById('pc').value;var ty=document.getElementById('pt2').value;
-  var fil=[];for(var i=0;i<PLAN.length;i++){if((!co||PLAN[i].county===co)&&(!ty||PLAN[i].type===ty))fil.push(PLAN[i]);}
-  var tc={Extension:'pe','New Build':'pn2',Renovation:'pr2',Commercial:'pco'};
-  var html='';
+  var co=document.getElementById('pc').value;var ty=document.getElementById('pt2').value;var fil=[];
+  for(var i=0;i<PLAN.length;i++){if((!co||PLAN[i].county===co)&&(!ty||PLAN[i].type===ty))fil.push(PLAN[i]);}
+  var tc={Extension:'pe','New Build':'pn2',Renovation:'pr2',Commercial:'pco'};var html='';
   for(var i=0;i<fil.length;i++){var p=fil[i];var cls=tc[p.type]||'pco';html+='<div class="prow"><div style="color:#F0F1F2">'+p.addr+'</div><div style="color:#9DA0A4">'+p.app+'</div><div><span class="ptag '+cls+'">'+p.type+'</span></div><div style="color:#9DA0A4">'+p.county+'</div><div><button class="btn bg2 sm fp" data-app="'+p.app+'" data-addr="'+p.addr+'" data-type="'+p.type+'">Contact</button></div></div>';}
   document.getElementById('ptb').innerHTML=html||'<div style="padding:30px;text-align:center;color:#6B6E72">No matching applications.</div>';
   var fpbs=document.getElementById('ptb').querySelectorAll('.fp');
@@ -522,7 +670,6 @@ function drawPlanning(){
   for(var i=0;i<entries.length;i++){var pct=Math.round(entries[i][1]/mx*100);bhtml+='<div class="cbar"><div class="cn">'+entries[i][0]+'</div><div class="ctrack"><div class="cfill" style="width:'+pct+'%"></div></div><div class="ccount">'+entries[i][1]+'</div></div>';}
   document.getElementById('cb').innerHTML=bhtml;
 }
-
 document.getElementById('btn-pletter').addEventListener('click',function(){
   var name=gV('pna');var addr=gV('pad');var type=document.getElementById('pat').value;
   if(!name||!addr){alert('Fill in applicant name and address first.');return;}
@@ -536,17 +683,16 @@ document.getElementById('btn-pletter').addEventListener('click',function(){
 var TPLS=[
   {id:'t1',cat:'social',name:'First Contact — Social Media',tag:'Social Media',prev:'Hi there! Saw your post looking for...',body:'Hi [NAME]! Saw your post looking for help with [JOB TYPE]. We are a local property maintenance company covering Meath, Dublin and surrounding counties.\n\nWe can get someone out to have a look and give you a proper quote, no obligation. Are you still looking to get this sorted?\n\nFeel free to DM or call us directly.'},
   {id:'t2',cat:'social',name:'Fast Response — Marketplace',tag:'Marketplace',prev:'Hey, just seen your listing...',body:'Hey [NAME], just seen your listing. We cover [LOCATION] and this is exactly the type of work we do.\n\nCan have someone over to quote within 48 hours. What is the best way to reach you?'},
-  {id:'t3',cat:'planning',name:'Planning Application Letter',tag:'Planning',prev:'Dear [NAME], I noticed your planning application...',body:'Dear [NAME],\n\nI hope this message finds you well. I noticed your recent planning application for [JOB TYPE] at [ADDRESS] and wanted to reach out.\n\nAt EASY Property Services we specialise in exactly this type of project across Co. Meath, Dublin, and Louth. We would be happy to offer a free site consultation and detailed quote before your project gets underway.\n\nIf you would like to chat, please do not hesitate to get in touch.\n\nKind regards,\nEASY Property Services'},
+  {id:'t3',cat:'planning',name:'Planning Application Letter',tag:'Planning',prev:'Dear [NAME], I noticed your planning application...',body:'Dear [NAME],\n\nI hope this message finds you well. I noticed your recent planning application for [JOB TYPE] at [ADDRESS] and wanted to reach out.\n\nAt EASY Property Services we specialise in exactly this type of project. We would be happy to offer a free site consultation and detailed quote.\n\nKind regards,\nEASY Property Services'},
   {id:'t4',cat:'followup',name:'Follow-up — No Reply',tag:'Follow-up',prev:'Just following up on my message...',body:'Hi [NAME], just following up on my message from earlier this week about your [JOB TYPE].\n\nWe still have availability and would love to help. Even a quick call to discuss what you are looking for would be great.\n\nNo worries if you have gone with someone else, just let us know either way!'},
-  {id:'t5',cat:'quote',name:'Quote Delivery',tag:'Quote',prev:'Hi [NAME], thanks for your time today...',body:'Hi [NAME], thanks for your time today.\n\nAs discussed, here is our quote for the [JOB TYPE]:\n\nEstimated price: [PRICE]\n\nThis includes all labour and standard materials. Any extras agreed beforehand.\n\nTo proceed just reply or give us a call, we can confirm a start date within 24 hours.\n\nThanks!\nEASY Property Services'},
-  {id:'t6',cat:'followup',name:'Follow-up After Quote',tag:'Follow-up',prev:'Hi [NAME], just checking in on the quote...',body:'Hi [NAME], just checking in on the quote we sent over for the [JOB TYPE].\n\nAny questions at all, happy to talk it through. We can also adjust the scope if the budget needs flexibility.\n\nHope to hear from you!'},
-  {id:'t7',cat:'won',name:'Job Confirmed',tag:'Job Won',prev:'Brilliant, great to have you confirmed...',body:'Brilliant [NAME], great to have you confirmed!\n\nWe will be in touch shortly with the start date and a rundown of how the job will progress.\n\nLooking forward to working with you!\nEASY Property Services'},
-  {id:'t8',cat:'social',name:'Done Deal / Adverts Response',tag:'Done Deal',prev:'Hi, saw your ad looking for a contractor...',body:'Hi [NAME], saw your ad looking for a contractor for [JOB TYPE].\n\nWe are a fully insured local firm with experience in exactly this type of work. Happy to come out and give you a free no-obligation quote.\n\nWhat area are you in? We cover Meath, Louth, Dublin and Kildare.'}
+  {id:'t5',cat:'quote',name:'Quote Delivery',tag:'Quote',prev:'Hi [NAME], thanks for your time today...',body:'Hi [NAME], thanks for your time today.\n\nAs discussed, here is our quote for the [JOB TYPE]:\n\nEstimated price: [PRICE]\n\nThis includes all labour and standard materials.\n\nTo proceed just reply or give us a call.\n\nThanks!\nEASY Property Services'},
+  {id:'t6',cat:'followup',name:'Follow-up After Quote',tag:'Follow-up',prev:'Hi [NAME], just checking in on the quote...',body:'Hi [NAME], just checking in on the quote we sent over for the [JOB TYPE].\n\nAny questions at all, happy to talk it through.\n\nHope to hear from you!'},
+  {id:'t7',cat:'won',name:'Job Confirmed',tag:'Job Won',prev:'Brilliant, great to have you confirmed...',body:'Brilliant [NAME], great to have you confirmed!\n\nWe will be in touch shortly with the start date.\n\nLooking forward to working with you!\nEASY Property Services'},
+  {id:'t8',cat:'social',name:'Done Deal / Adverts Response',tag:'Done Deal',prev:'Hi, saw your ad looking for a contractor...',body:'Hi [NAME], saw your ad looking for a contractor for [JOB TYPE].\n\nWe are a fully insured local firm. Happy to come out and give you a free no-obligation quote.\n\nWe cover Meath, Louth, Dublin and Kildare.'}
 ];
 document.getElementById('tflt').addEventListener('change',drawTemplates);
 function drawTemplates(){
-  var flt=document.getElementById('tflt').value;
-  var fil=[];for(var i=0;i<TPLS.length;i++){if(!flt||TPLS[i].cat===flt)fil.push(TPLS[i]);}
+  var flt=document.getElementById('tflt').value;var fil=[];for(var i=0;i<TPLS.length;i++){if(!flt||TPLS[i].cat===flt)fil.push(TPLS[i]);}
   var html='';
   for(var i=0;i<fil.length;i++){var t=fil[i];var on=selTpl===t.id?' on':'';html+='<div class="tcard'+on+'" data-id="'+t.id+'"><div class="tn">'+t.name+'</div><div class="tt">'+t.tag+'</div><div class="tp">'+t.prev+'</div><div class="tbody2">'+t.body.replace(/\n/g,'<br>')+'</div><div class="tbns"><button class="btn bg2 sm ut" data-id="'+t.id+'">Use</button><button class="btn bp sm ct2" data-id="'+t.id+'">Copy</button></div></div>';}
   document.getElementById('tg').innerHTML=html;
@@ -558,13 +704,103 @@ function drawTemplates(){
   for(var i=0;i<cpys.length;i++){(function(btn){btn.addEventListener('click',function(e){e.stopPropagation();var id=btn.getAttribute('data-id');for(var j=0;j<TPLS.length;j++){if(TPLS[j].id===id){navigator.clipboard.writeText(TPLS[j].body).then(function(){notif('Copied!');});break;}}});})(cpys[i]);}
 }
 document.getElementById('btn-cpypers').addEventListener('click',function(){
-  var txt=document.getElementById('pout').value;
-  var n=document.getElementById('pn').value;var j=document.getElementById('pj').value;var p=document.getElementById('pp3').value;
+  var txt=document.getElementById('pout').value;var n=document.getElementById('pn').value;var j=document.getElementById('pj').value;var p=document.getElementById('pp3').value;
   if(n)txt=txt.split('[NAME]').join(n);if(j)txt=txt.split('[JOB TYPE]').join(j);if(p)txt=txt.split('[PRICE]').join(p);
   navigator.clipboard.writeText(txt).then(function(){notif('Copied!');});
 });
 
-loadLeads();updHdr();drawPlanning();drawTemplates();
+// DOCS
+function initDoc(){
+  var li=document.getElementById('line-items');if(li&&li.children.length===0)addLine();
+  var dd=document.getElementById('doc-date');if(dd&&!dd.value)dd.value=new Date().toISOString().substring(0,10);
+  var due=new Date();due.setDate(due.getDate()+14);
+  var df=document.getElementById('doc-due');if(df&&!df.value)df.value=due.toISOString().substring(0,10);
+  var ref=document.getElementById('doc-ref');if(ref&&!ref.value)ref.value='Q-'+String(leads.length+1).padStart(3,'0');
+}
+function addLine(){
+  lineCount++;
+  var li=document.getElementById('line-items');
+  var row=document.createElement('div');
+  row.className='line-row';
+  row.style.cssText='display:grid;grid-template-columns:2fr 0.6fr 1fr 1fr 32px;gap:6px;margin-bottom:6px;align-items:center';
+  row.innerHTML='<input type="text" class="li-desc" placeholder="Description of work" style="font-size:12px;padding:6px 8px"><input type="number" class="li-qty" placeholder="Qty" value="1" style="font-size:12px;padding:6px 8px;text-align:center"><input type="number" class="li-rate" placeholder="Rate €" style="font-size:12px;padding:6px 8px"><input type="number" class="li-total" placeholder="Total €" readonly style="font-size:12px;padding:6px 8px;color:#E8620A;font-weight:600"><button style="background:rgba(231,76,60,0.15);color:#E74C3C;border:1px solid rgba(231,76,60,0.3);border-radius:5px;cursor:pointer;padding:0;width:28px;height:28px;font-size:14px;display:flex;align-items:center;justify-content:center" class="rm-line">x</button>';
+  li.appendChild(row);
+  var qty=row.querySelector('.li-qty');var rate=row.querySelector('.li-rate');
+  function calc(){calcLine(row);}
+  qty.addEventListener('input',calc);rate.addEventListener('input',calc);
+  var rm=row.querySelector('.rm-line');rm.addEventListener('click',function(){li.removeChild(row);});
+}
+function calcLine(row){
+  var qty=parseFloat(row.querySelector('.li-qty').value)||0;
+  var rate=parseFloat(row.querySelector('.li-rate').value)||0;
+  row.querySelector('.li-total').value=(qty*rate).toFixed(0);
+}
+document.getElementById('btn-add-line').addEventListener('click',addLine);
+document.getElementById('btn-preview').addEventListener('click',buildPreview);
+document.getElementById('btn-print').addEventListener('click',function(){buildPreview();setTimeout(function(){window.print();},300);});
+document.getElementById('btn-new-quote').addEventListener('click',function(){goTab('docs');initDoc();document.getElementById('doc-type').value='QUOTATION';});
+document.getElementById('btn-new-invoice').addEventListener('click',function(){goTab('docs');initDoc();document.getElementById('doc-type').value='INVOICE';});
+
+function buildPreview(){
+  var type=document.getElementById('doc-type').value;
+  var ref=gV('doc-ref')||'Q-001';
+  var date=document.getElementById('doc-date').value;
+  var due=document.getElementById('doc-due').value;
+  var cust=gV('doc-cust')||'Customer';
+  var addr=gV('doc-addr')||'';
+  var job=gV('doc-job')||'';
+  var notes=gV('doc-notes')||'Payment due within 14 days. All work is guaranteed for 12 months. EASY Property Services is fully insured.';
+  var rows=document.getElementById('line-items').querySelectorAll('.line-row');
+  var subtotal=0;var lineHtml='';
+  for(var i=0;i<rows.length;i++){
+    var desc=rows[i].querySelector('.li-desc').value||'';
+    var qty=rows[i].querySelector('.li-qty').value||'1';
+    var rate=parseFloat(rows[i].querySelector('.li-rate').value)||0;
+    var total=parseFloat(qty)*rate;
+    subtotal+=total;
+    lineHtml+='<tr><td>'+desc+'</td><td style="text-align:center">'+qty+'</td><td style="text-align:right">€'+rate.toFixed(0)+'</td><td style="text-align:right;font-weight:600">€'+total.toFixed(0)+'</td></tr>';
+  }
+  var vat=Math.round(subtotal*0.135);
+  var total=subtotal+vat;
+  var dateStr=date?new Date(date).toLocaleDateString('en-IE',{day:'numeric',month:'long',year:'numeric'}):'';
+  var dueStr=due?new Date(due).toLocaleDateString('en-IE',{day:'numeric',month:'long',year:'numeric'}):'';
+  var dueLabel=type==='INVOICE'?'Due Date:':'Valid Until:';
+  var html='<div class="print-header">';
+  html+='<div><div class="print-logo"><em>EASY</em> PROPERTY SERVICES</div><div class="print-co">Navan, Co. Meath, Ireland<br>Tel: 086 000 0000 | info@easypropertyservices.ie<br>Reg. No: IE000000 | Tax No: IE000000</div></div>';
+  html+='<div><div class="print-doc-type">'+type+'</div><div class="print-ref">Ref: '+ref+'<br>Date: '+dateStr+'<br>'+dueLabel+' '+dueStr+'</div></div>';
+  html+='</div>';
+  html+='<div class="print-to"><h3>To</h3><p><strong>'+cust+'</strong><br>'+addr.replace(/\n/g,'<br>')+'</p></div>';
+  if(job)html+='<div style="margin-bottom:16px;font-size:13px;color:#333"><strong>Works:</strong> '+job+'</div>';
+  html+='<table class="print-table"><thead><tr><th>Description</th><th style="text-align:center">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Amount</th></tr></thead><tbody>'+lineHtml+'</tbody></table>';
+  html+='<div class="print-totals">';
+  html+='<div class="print-total-row"><span>Subtotal</span><span>€'+subtotal.toFixed(0)+'</span></div>';
+  html+='<div class="print-total-row"><span>VAT @ 13.5%</span><span>€'+vat+'</span></div>';
+  html+='<div class="print-total-final"><span>TOTAL</span><span>€'+total.toFixed(0)+'</span></div></div>';
+  html+='<div class="print-terms">'+notes+'</div>';
+  html+='<div class="print-footer">EASY Property Services | Navan, Co. Meath | info@easypropertyservices.ie | Tel: 086 000 0000</div>';
+  document.getElementById('doc-preview').innerHTML=html;
+}
+
+// RATES EDITOR
+function drawRates(){
+  var html='';
+  for(var key in RATES){
+    var r=RATES[key];
+    html+='<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:8px;margin-bottom:8px;align-items:center" data-key="'+key+'">';
+    html+='<div style="font-size:13px;color:#F0F1F2">'+r.name+'</div>';
+    html+='<input type="number" class="re-lo" value="'+r.lo+'" style="padding:6px 8px;font-size:12px" data-key="'+key+'" data-field="lo">';
+    html+='<input type="number" class="re-hi" value="'+r.hi+'" style="padding:6px 8px;font-size:12px" data-key="'+key+'" data-field="hi">';
+    html+='<input type="number" class="re-la" value="'+r.labour+'" style="padding:6px 8px;font-size:12px" data-key="'+key+'" data-field="labour">';
+    html+='<input type="number" class="re-ma" value="'+r.mat+'" style="padding:6px 8px;font-size:12px" data-key="'+key+'" data-field="mat">';
+    html+='</div>';
+  }
+  var rg=document.getElementById('rates-grid');rg.innerHTML=html;
+  var inputs=rg.querySelectorAll('input');
+  for(var i=0;i<inputs.length;i++){(function(inp){inp.addEventListener('change',function(){var k=inp.getAttribute('data-key');var f=inp.getAttribute('data-field');if(RATES[k])RATES[k][f]=parseFloat(inp.value)||0;saveRates();notif('Rate saved!');});})(inputs[i]);}
+}
+document.getElementById('btn-reset-rates').addEventListener('click',function(){if(!confirm('Reset all rates to defaults?'))return;RATES=JSON.parse(JSON.stringify(DEFAULT_RATES));saveRates();drawRates();notif('Rates reset!');});
+
+loadLeads();loadRates();updHdr();drawPlanning();drawTemplates();
 document.getElementById('hd').textContent=new Date().toLocaleDateString('en-IE',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
 </script>
 </body>
