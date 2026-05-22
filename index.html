@@ -285,22 +285,22 @@ var lastRes = null;
 var selTpl = null;
 
 var RATES = {
-  painting:    {lo:300,  hi:800,  labour:220, mat:80,  hrs:'4-8',   name:'Painting & Decorating'},
-  plastering:  {lo:400,  hi:900,  labour:300, mat:100, hrs:'4-8',   name:'Plastering'},
-  tiling:      {lo:400,  hi:1000, labour:280, mat:150, hrs:'6-10',  name:'Tiling'},
-  bathroom:    {lo:2500, hi:6000, labour:1800,mat:800, hrs:'3-5d',  name:'Bathroom Fit-out'},
-  kitchen:     {lo:3000, hi:8000, labour:2000,mat:1200,hrs:'4-7d',  name:'Kitchen Fit-out'},
-  extension:   {lo:15000,hi:35000,labour:10000,mat:8000,hrs:'6-12w',name:'Extension / Build'},
-  roofing:     {lo:1500, hi:5000, labour:1000,mat:600, hrs:'2-5d',  name:'Roofing'},
-  chimney:     {lo:800,  hi:2500, labour:600, mat:300, hrs:'1-3d',  name:'Chimney / Roofing Work'},
-  guttering:   {lo:300,  hi:800,  labour:250, mat:100, hrs:'4-8',   name:'Guttering / Fascia'},
-  garden:      {lo:400,  hi:2000, labour:300, mat:200, hrs:'1-3d',  name:'Garden / Landscaping'},
-  flooring:    {lo:600,  hi:2500, labour:400, mat:400, hrs:'1-3d',  name:'Flooring'},
-  electrical:  {lo:150,  hi:800,  labour:120, mat:80,  hrs:'2-6',   name:'Electrical'},
-  plumbing:    {lo:150,  hi:600,  labour:120, mat:60,  hrs:'2-5',   name:'Plumbing'},
-  maintenance: {lo:150,  hi:500,  labour:120, mat:50,  hrs:'2-5',   name:'General Maintenance'},
-  cleaning:    {lo:80,   hi:300,  labour:70,  mat:30,  hrs:'2-6',   name:'Cleaning'},
-  damp:        {lo:500,  hi:3000, labour:400, mat:300, hrs:'1-4d',  name:'Damp / Insulation'}
+  painting:    {lo:350,  hi:600,  labour:280, mat:90,  hrs:'4-8',   name:'Painting & Decorating'},
+  plastering:  {lo:450,  hi:750,  labour:350, mat:120, hrs:'4-8',   name:'Plastering'},
+  tiling:      {lo:500,  hi:900,  labour:320, mat:200, hrs:'6-10',  name:'Tiling'},
+  bathroom:    {lo:3000, hi:5000, labour:2000,mat:900, hrs:'3-5d',  name:'Bathroom Fit-out'},
+  kitchen:     {lo:3500, hi:6000, labour:2200,mat:1200,hrs:'4-7d',  name:'Kitchen Fit-out'},
+  extension:   {lo:18000,hi:28000,labour:12000,mat:9000,hrs:'8-12w',name:'Extension / Build'},
+  roofing:     {lo:2000, hi:4000, labour:1300,mat:700, hrs:'2-4d',  name:'Roofing'},
+  chimney:     {lo:1200, hi:2200, labour:800, mat:400, hrs:'1-2d',  name:'Chimney / Roofing Work'},
+  guttering:   {lo:350,  hi:650,  labour:280, mat:120, hrs:'4-8',   name:'Guttering / Fascia'},
+  garden:      {lo:500,  hi:1500, labour:380, mat:250, hrs:'1-3d',  name:'Garden / Landscaping'},
+  flooring:    {lo:800,  hi:1800, labour:500, mat:450, hrs:'1-3d',  name:'Flooring'},
+  electrical:  {lo:200,  hi:600,  labour:160, mat:100, hrs:'2-6',   name:'Electrical'},
+  plumbing:    {lo:180,  hi:500,  labour:140, mat:80,  hrs:'2-5',   name:'Plumbing'},
+  maintenance: {lo:180,  hi:400,  labour:150, mat:60,  hrs:'2-5',   name:'General Maintenance'},
+  cleaning:    {lo:100,  hi:250,  labour:80,  mat:30,  hrs:'2-6',   name:'Cleaning'},
+  damp:        {lo:600,  hi:2000, labour:450, mat:350, hrs:'1-3d',  name:'Damp / Insulation'}
 };
 
 var KEYWORDS = {
@@ -353,23 +353,51 @@ function getUrgency(desc) {
   return 'Low';
 }
 
+function getScope(desc) {
+  var d = desc.toLowerCase();
+  if (d.indexOf('full house') >= 0 || d.indexOf('whole house') >= 0 || d.indexOf('entire') >= 0 || d.indexOf('multiple') >= 0) return 'full';
+  if (d.indexOf('2 bed') >= 0 || d.indexOf('two bed') >= 0 || d.indexOf('2bed') >= 0) return 'medium';
+  if (d.indexOf('3 bed') >= 0 || d.indexOf('three bed') >= 0 || d.indexOf('3bed') >= 0) return 'large';
+  if (d.indexOf('4 bed') >= 0 || d.indexOf('four bed') >= 0 || d.indexOf('4bed') >= 0) return 'xlarge';
+  if (d.indexOf('room') >= 0 || d.indexOf('single') >= 0 || d.indexOf('one room') >= 0) return 'small';
+  if (d.indexOf('scaffold') >= 0 || d.indexOf('storey') >= 0 || d.indexOf('2 storey') >= 0 || d.indexOf('two storey') >= 0) return 'large';
+  return 'medium';
+}
+
+function getFlags(desc, type) {
+  var d = desc.toLowerCase();
+  var flags = [];
+  if (d.indexOf('scaffold') >= 0) flags.push('Scaffolding required — add €500-€800');
+  if (d.indexOf('skip') >= 0 || d.indexOf('rubbish') >= 0 || d.indexOf('rubble') >= 0) flags.push('Skip/waste removal needed — add €200-€400');
+  if (d.indexOf('asbestos') >= 0) flags.push('Possible asbestos — survey required before pricing');
+  if (d.indexOf('damp') >= 0 && type !== 'damp') flags.push('Damp noted — may need additional treatment');
+  if (d.indexOf('planning') >= 0) flags.push('Planning permission may be required — check with council');
+  return flags;
+}
+
 function priceJob(desc, selected) {
   var type = detectJob(desc, selected);
   var r = RATES[type];
   var complexity = getComplexity(desc);
   var urgency = getUrgency(desc);
-  var mult = complexity === 'High' ? 1.3 : complexity === 'Low' ? 0.75 : 1.0;
-  var qlo = Math.round(r.lo * mult / 50) * 50;
-  var qhi = Math.round(r.hi * mult / 50) * 50;
+  var scope = getScope(desc);
+  var flags = getFlags(desc, type);
+  var scopeMult = scope === 'small' ? 0.7 : scope === 'medium' ? 1.0 : scope === 'large' ? 1.25 : scope === 'xlarge' ? 1.5 : 1.4;
+  var compMult = complexity === 'High' ? 1.15 : complexity === 'Low' ? 0.9 : 1.0;
+  var mult = scopeMult * compMult;
+  var base = (r.lo + r.hi) / 2 * mult;
+  var qlo = Math.round((base * 0.9) / 50) * 50;
+  var qhi = Math.round((base * 1.1) / 50) * 50;
   var labour = Math.round(r.labour * mult / 50) * 50;
   var mat = Math.round(r.mat * mult / 50) * 50;
+  var scopeLabel = scope === 'small' ? 'Small scope' : scope === 'medium' ? 'Standard scope' : scope === 'large' ? 'Large scope' : 'Full house';
   var responses = [
     'Hi there! Thanks for posting — we cover this area and do this type of work regularly. Happy to come out and give you a free no-obligation quote. Are you still looking to get this sorted?',
     'Hi! Saw your post — this is right up our street. We are a local team covering Meath, Dublin and surrounding areas. We can have someone out to quote within 48 hours. Still looking for someone?',
     'Hi, just spotted your post. We do this type of work all the time and would be happy to give you a competitive quote. No call-out charge. When suits you for a visit?'
   ];
   var msg = responses[Math.floor(Math.random() * responses.length)];
-  return { type: type, name: r.name, complexity: complexity, urgency: urgency, hrs: r.hrs, labour: labour, mat: mat, qlo: qlo, qhi: qhi, msg: msg };
+  return { type: type, name: r.name, complexity: complexity, urgency: urgency, scope: scopeLabel, hrs: r.hrs, labour: labour, mat: mat, qlo: qlo, qhi: qhi, msg: msg, flags: flags };
 }
 
 function loadLeads(){try{var s=localStorage.getItem('ecc4');if(s)leads=JSON.parse(s);}catch(e){leads=[];}}
@@ -421,7 +449,7 @@ function showResult(r){
   var utag=r.urgency==='High'?'tag-high':'tag-low';
   var h='<div class="result-big">€'+r.qlo+' – €'+r.qhi+'</div>';
   h+='<div class="result-sub">Estimated Quote Range — '+r.name+'</div>';
-  h+='<div class="tag-row"><span class="tag '+ctag+'">'+r.complexity+' Complexity</span><span class="tag '+utag+'">Urgency: '+r.urgency+'</span><span class="tag tag-low">'+r.hrs+' hrs</span></div>';
+  h+='<div class="tag-row"><span class="tag '+ctag+'">'+r.complexity+' Complexity</span><span class="tag '+utag+'">Urgency: '+r.urgency+'</span><span class="tag tag-low">'+r.scope+'</span><span class="tag tag-low">'+r.hrs+' hrs</span></div>';
   h+='<div style="margin-bottom:14px">';
   h+='<div class="prr"><span style="color:#9DA0A4">Labour estimate</span><span>€'+r.labour+'</span></div>';
   h+='<div class="prr"><span style="color:#9DA0A4">Materials estimate</span><span>€'+r.mat+'</span></div>';
