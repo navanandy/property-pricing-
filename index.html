@@ -487,37 +487,158 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
   <div class="card"><div class="card-title">Edit Pricing — Updates AI Pricer</div><table class="rates-table"><thead><tr><th>Job Type</th><th>Small (€)</th><th>Medium (€)</th><th>Large (€)</th></tr></thead><tbody id="rates-tbody"></tbody></table></div>
 </div>
 
-<!-- QUOTES -->
+<!-- QUOTES & INVOICES -->
 <div class="panel" id="panel-quotes">
   <div class="section-header">
-    <div class="section-title">Quote Builder</div>
+    <div class="section-title">Quotes &amp; Invoices</div>
     <div class="section-actions">
-      <button class="btn btn-ghost btn-sm" onclick="clearQuote()">Clear</button>
-      <button class="btn btn-primary btn-sm" onclick="printQuote()">Print / PDF</button>
+      <button class="btn btn-ghost btn-sm" onclick="showQTab('builder')">+ New Document</button>
+      <button class="btn btn-outline btn-sm" onclick="showQTab('saved')">Saved Docs</button>
+      <button class="btn btn-ghost btn-sm" onclick="showQTab('settings')">Company Settings</button>
     </div>
   </div>
-  <div class="grid2">
-    <div class="card">
-      <div class="card-title">Quote Details</div>
-      <div class="form-group"><label>Customer Name</label><input type="text" id="q-name" placeholder="John Murphy"></div>
-      <div class="form-group"><label>Address</label><textarea id="q-addr" placeholder="12 Main St, Swords, Co. Dublin" style="min-height:60px;"></textarea></div>
-      <div class="form-group"><label>Job Description</label><textarea id="q-desc" placeholder="Describe the work..."></textarea></div>
-      <div class="grid2" style="gap:8px;">
-        <div class="form-group" style="margin:0;"><label>Quote / Inv No.</label><input type="text" id="q-num"></div>
-        <div class="form-group" style="margin:0;"><label>Date</label><input type="date" id="q-date"></div>
+
+  <!-- SUB-TABS -->
+  <div style="display:flex;gap:0;margin-bottom:16px;border:1px solid var(--border);border-radius:6px;overflow:hidden;width:fit-content;">
+    <button class="qtab active" id="qtab-builder" onclick="showQTab('builder')" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 18px;border:none;cursor:pointer;background:var(--orange);color:#fff;">Builder</button>
+    <button class="qtab" id="qtab-saved" onclick="showQTab('saved')" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 18px;border:none;cursor:pointer;background:var(--bg-card);color:var(--text-m);">Saved</button>
+    <button class="qtab" id="qtab-settings" onclick="showQTab('settings')" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 18px;border:none;cursor:pointer;background:var(--bg-card);color:var(--text-m);">Settings</button>
+  </div>
+
+  <!-- BUILDER -->
+  <div id="qpanel-builder">
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <div class="card-title">Document Type</div>
+          <div style="display:flex;gap:0;border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:16px;">
+            <button id="doctype-quote" onclick="setDocType('quote')" style="flex:1;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;padding:9px;border:none;cursor:pointer;background:var(--orange);color:#fff;">QUOTATION</button>
+            <button id="doctype-invoice" onclick="setDocType('invoice')" style="flex:1;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;padding:9px;border:none;cursor:pointer;background:var(--bg-card2);color:var(--text-m);">INVOICE</button>
+          </div>
+
+          <div class="card-title">Customer Details</div>
+          <div class="form-group"><label>Customer Name</label><input type="text" id="q-name" placeholder="John Murphy" oninput="updateQuote()"></div>
+          <div class="form-group"><label>Address</label><textarea id="q-addr" placeholder="12 Main St&#10;Swords&#10;Co. Dublin" style="min-height:70px;" oninput="updateQuote()"></textarea></div>
+          <div class="form-group"><label>Customer Email (optional)</label><input type="email" id="q-email" placeholder="john@email.com" oninput="updateQuote()"></div>
+          <div class="form-group"><label>Customer Phone (optional)</label><input type="text" id="q-phone" placeholder="086 123 4567" oninput="updateQuote()"></div>
+
+          <div class="divider"></div>
+          <div class="card-title">Document Details</div>
+          <div class="grid2" style="gap:8px;">
+            <div class="form-group" style="margin:0;"><label>Doc Number</label><input type="text" id="q-num" oninput="updateQuote()"></div>
+            <div class="form-group" style="margin:0;"><label>Date</label><input type="date" id="q-date" oninput="updateQuote()"></div>
+          </div>
+          <div class="grid2" style="gap:8px;margin-top:10px;">
+            <div class="form-group" style="margin:0;"><label>Valid / Due Date</label><input type="date" id="q-duedate" oninput="updateQuote()"></div>
+            <div class="form-group" style="margin:0;"><label>Payment Terms</label>
+              <select id="q-terms" onchange="updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:9px 12px;color:var(--text);font-size:13px;outline:none;width:100%;">
+                <option value="due-receipt">Due on Receipt</option>
+                <option value="7">Net 7 Days</option>
+                <option value="14" selected>Net 14 Days</option>
+                <option value="30">Net 30 Days</option>
+                <option value="50pct">50% Deposit, Balance on Completion</option>
+                <option value="stage">Stage Payments</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" id="custom-terms-group" style="margin-top:10px;display:none;">
+            <label>Custom Payment Terms</label>
+            <input type="text" id="q-custom-terms" placeholder="e.g. 30% deposit, 40% mid-stage, 30% on completion" oninput="updateQuote()">
+          </div>
+
+          <div class="divider"></div>
+          <div class="card-title">Job Description</div>
+          <div class="form-group"><label>Description / Scope of Works</label><textarea id="q-desc" placeholder="Describe the work to be carried out..." oninput="updateQuote()"></textarea></div>
+
+          <div class="divider"></div>
+          <div class="card-title">Line Items</div>
+          <div id="q-items"></div>
+          <button class="btn btn-ghost btn-sm" onclick="addQuoteItem()" style="margin-top:8px;">+ Add Line Item</button>
+
+          <div class="divider"></div>
+          <div class="card-title">Tax & Totals</div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:13px;">
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+              <input type="checkbox" id="q-vat-check" checked onchange="updateQuote()">
+              <span>Apply VAT</span>
+            </label>
+            <select id="q-vat-rate" onchange="updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:5px 8px;color:var(--text);font-size:12px;outline:none;">
+              <option value="0.135" selected>13.5% (Construction/Renovation)</option>
+              <option value="0.23">23% (Standard Rate)</option>
+              <option value="0.09">9% (Reduced Rate)</option>
+              <option value="0">0% (Zero Rated)</option>
+            </select>
+          </div>
+          <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px;">
+            <div style="display:flex;justify-content:space-between;font-size:13px;padding:3px 0;"><span style="color:var(--text-m);">Subtotal</span><strong id="q-subtotal">€0.00</strong></div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;padding:3px 0;" id="q-vat-row"><span style="color:var(--text-m);" id="q-vat-label">VAT 13.5%</span><strong id="q-vat">€0.00</strong></div>
+            <div style="display:flex;justify-content:space-between;font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--orange);padding:6px 0;border-top:1px solid var(--border);margin-top:6px;"><span>TOTAL</span><span id="q-total">€0.00</span></div>
+          </div>
+
+          <div class="divider"></div>
+          <div class="card-title">Notes / Terms</div>
+          <div class="form-group"><textarea id="q-footer-note" placeholder="e.g. All materials are guaranteed for 12 months. Work is fully insured. Thank you for your business." style="min-height:60px;" oninput="updateQuote()"></textarea></div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
+            <button class="btn btn-ghost btn-sm" onclick="clearQuote()">Clear</button>
+            <button class="btn btn-outline btn-sm" onclick="saveDoc()">Save Doc</button>
+            <button class="btn btn-primary btn-sm" onclick="printQuote()">Print / PDF</button>
+          </div>
+        </div>
       </div>
-      <div class="divider"></div>
-      <div class="card-title">Line Items</div>
-      <div id="q-items"></div>
-      <button class="btn btn-ghost btn-sm" onclick="addQuoteItem()" style="margin-top:8px;">+ Add Line Item</button>
-      <div class="divider"></div>
-      <div style="text-align:right;">
-        <div style="font-size:13px;color:var(--text-m);margin-bottom:4px;">Subtotal: <strong id="q-subtotal">€0</strong></div>
-        <div style="font-size:13px;color:var(--text-m);margin-bottom:4px;">VAT 13.5%: <strong id="q-vat">€0</strong></div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--orange);">Total: <span id="q-total">€0</span></div>
+
+      <!-- PREVIEW -->
+      <div>
+        <div class="card" style="background:var(--bg);position:sticky;top:70px;">
+          <div class="card-title">Live Preview</div>
+          <div id="quote-preview" style="background:#fff;color:#111;border-radius:4px;padding:24px;font-size:12px;line-height:1.7;min-height:400px;"></div>
+        </div>
       </div>
     </div>
-    <div class="card" style="background:var(--bg);"><div class="card-title">Preview</div><div id="quote-preview" style="background:#fff;color:#111;border-radius:4px;padding:20px;font-size:12px;line-height:1.7;"></div></div>
+  </div>
+
+  <!-- SAVED DOCS -->
+  <div id="qpanel-saved" style="display:none;">
+    <div class="section-header" style="margin-bottom:12px;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--text-m);">Saved Quotes &amp; Invoices</div>
+      <div style="display:flex;gap:8px;">
+        <span class="filter-chip active" onclick="filterDocs('all',this)">All</span>
+        <span class="filter-chip" onclick="filterDocs('quote',this)">Quotes</span>
+        <span class="filter-chip" onclick="filterDocs('invoice',this)">Invoices</span>
+        <span class="filter-chip" onclick="filterDocs('paid',this)">Paid</span>
+        <span class="filter-chip" onclick="filterDocs('overdue',this)">Overdue</span>
+      </div>
+    </div>
+    <div id="saved-docs-list">
+      <div style="color:var(--text-d);font-size:13px;padding:30px;text-align:center;">No saved documents yet. Create a quote or invoice and click "Save Doc".</div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <div class="card-title">Revenue Summary</div>
+      <div class="grid4">
+        <div class="stat-card"><div class="stat-label">Total Quoted</div><div class="stat-val" id="rev-quoted" style="font-size:22px;">€0</div></div>
+        <div class="stat-card"><div class="stat-label">Invoiced</div><div class="stat-val" id="rev-invoiced" style="font-size:22px;color:var(--blue);">€0</div></div>
+        <div class="stat-card"><div class="stat-label">Paid</div><div class="stat-val" id="rev-paid" style="font-size:22px;color:var(--green);">€0</div></div>
+        <div class="stat-card"><div class="stat-label">Outstanding</div><div class="stat-val" id="rev-outstanding" style="font-size:22px;color:var(--red);">€0</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPANY SETTINGS -->
+  <div id="qpanel-settings" style="display:none;">
+    <div class="card" style="max-width:600px;">
+      <div class="card-title">Your Company Details — Used on All Documents</div>
+      <div class="form-group"><label>Company Name</label><input type="text" id="co-name" placeholder="EASY Property Services"></div>
+      <div class="form-group"><label>Address</label><textarea id="co-addr" placeholder="Dublin, Ireland" style="min-height:60px;"></textarea></div>
+      <div class="form-group"><label>Phone</label><input type="text" id="co-phone" placeholder="01 XXX XXXX / 087 XXX XXXX"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="co-email" placeholder="hello@easypropertyservices.ie"></div>
+      <div class="form-group"><label>Website (optional)</label><input type="text" id="co-web" placeholder="www.easypropertyservices.ie"></div>
+      <div class="form-group"><label>VAT / Tax Number (optional)</label><input type="text" id="co-vat" placeholder="IE 123 4567 A"></div>
+      <div class="form-group"><label>Company Reg Number (optional)</label><input type="text" id="co-reg" placeholder="IE 654321"></div>
+      <div class="form-group"><label>Bank / Payment Details (shown on invoices)</label><textarea id="co-bank" placeholder="Bank: Bank of Ireland&#10;Account Name: EASY Property Services&#10;IBAN: IE00 BOFI 1234 5678 9012 34" style="min-height:80px;"></textarea></div>
+      <div class="form-group"><label>Default Quote Footer Note</label><textarea id="co-footer" placeholder="All materials are guaranteed for 12 months. Work is fully insured. Thank you for your business." style="min-height:60px;"></textarea></div>
+      <button class="btn btn-primary" onclick="saveCompany()">Save Company Details</button>
+    </div>
   </div>
 </div>
 
@@ -987,39 +1108,352 @@ function updateRate(k,s,v){rates[k][s]=Number(v);}
 function saveRates(){localStorage.setItem('ecc_rates',JSON.stringify(rates));toast('Rates saved!');}
 
 // ============================================================
-// QUOTES
+// QUOTES & INVOICES
 // ============================================================
-function initQuotes(){
-  if(!quoteItems.length) addQuoteItem();
-  document.getElementById('q-date').value=new Date().toISOString().split('T')[0];
-  if(!document.getElementById('q-num').value) document.getElementById('q-num').value='Q'+new Date().getFullYear()+'-'+String(Math.floor(Math.random()*900)+100);
+var quoteItems = [];
+var docType = 'quote';
+var savedDocs = JSON.parse(localStorage.getItem('ecc_docs') || '[]');
+var docFilter = 'all';
+var company = JSON.parse(localStorage.getItem('ecc_company') || 'null') || {name:'EASY Property Services',addr:'Dublin, Ireland',phone:'',email:'',web:'',vat:'',reg:'',bank:'',footer:'All materials are guaranteed for 12 months. Work is fully insured. Thank you for your business.'};
+
+function showQTab(tab){
+  ['builder','saved','settings'].forEach(function(t){
+    var el=document.getElementById('qpanel-'+t);
+    if(el) el.style.display = t===tab ? 'block' : 'none';
+    var btn=document.getElementById('qtab-'+t);
+    if(btn){ btn.style.background = t===tab ? 'var(--orange)' : 'var(--bg-card)'; btn.style.color = t===tab ? '#fff' : 'var(--text-m)'; }
+  });
+  if(tab==='saved') renderSavedDocs();
+  if(tab==='settings') loadCompanyForm();
+}
+
+function setDocType(type){
+  docType = type;
+  document.getElementById('doctype-quote').style.background  = type==='quote'   ? 'var(--orange)' : 'var(--bg-card2)';
+  document.getElementById('doctype-quote').style.color       = type==='quote'   ? '#fff' : 'var(--text-m)';
+  document.getElementById('doctype-invoice').style.background= type==='invoice' ? 'var(--orange)' : 'var(--bg-card2)';
+  document.getElementById('doctype-invoice').style.color     = type==='invoice' ? '#fff' : 'var(--text-m)';
+  // Auto-update doc number prefix
+  var numEl = document.getElementById('q-num');
+  if(numEl){
+    var seq = String(Math.floor(Math.random()*900)+100);
+    numEl.value = (type==='invoice'?'INV':'Q') + new Date().getFullYear() + '-' + seq;
+  }
+  // Show/hide bank details row in preview
   updateQuote();
 }
-function addQuoteItem(){quoteItems.push({desc:'',qty:1,rate:0});renderQItems();}
-function addQuoteItemWithPrice(desc,price){quoteItems.push({desc:desc,qty:1,rate:price});renderQItems();}
-function removeQItem(i){quoteItems.splice(i,1);renderQItems();updateQuote();}
+
+function initQuotes(){
+  if(!quoteItems.length) addQuoteItem();
+  var today = new Date();
+  document.getElementById('q-date').value = today.toISOString().split('T')[0];
+  // Default due date: 14 days out
+  var due = new Date(today); due.setDate(due.getDate()+14);
+  document.getElementById('q-duedate').value = due.toISOString().split('T')[0];
+  if(!document.getElementById('q-num').value){
+    document.getElementById('q-num').value = 'Q'+today.getFullYear()+'-'+String(Math.floor(Math.random()*900)+100);
+  }
+  // Load footer note from company defaults
+  if(!document.getElementById('q-footer-note').value && company.footer){
+    document.getElementById('q-footer-note').value = company.footer;
+  }
+  updateQuote();
+}
+
+function addQuoteItem(){
+  quoteItems.push({desc:'',qty:1,rate:0});
+  renderQItems();
+  updateQuote();
+}
+function addQuoteItemWithPrice(desc,price){
+  quoteItems.push({desc:desc,qty:1,rate:price});
+  renderQItems();
+  updateQuote();
+}
+function removeQItem(i){
+  quoteItems.splice(i,1);
+  renderQItems();
+  updateQuote();
+}
 function renderQItems(){
-  document.getElementById('q-items').innerHTML=quoteItems.map(function(item,i){
-    return '<div style="display:grid;grid-template-columns:1fr 55px 85px 28px;gap:6px;margin-bottom:6px;align-items:center;"><input type="text" value="'+item.desc+'" placeholder="Description" onchange="quoteItems['+i+'].desc=this.value;updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:7px 10px;color:var(--text);font-size:13px;outline:none;"><input type="number" value="'+item.qty+'" min="1" onchange="quoteItems['+i+'].qty=Number(this.value);updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:7px 6px;color:var(--text);font-size:13px;outline:none;text-align:center;"><input type="number" value="'+item.rate+'" placeholder="Rate" onchange="quoteItems['+i+'].rate=Number(this.value);updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:7px 8px;color:var(--text);font-size:13px;outline:none;text-align:right;"><button onclick="removeQItem('+i+')" style="background:none;border:none;color:var(--text-m);font-size:16px;cursor:pointer;">\xd7</button></div>';
+  document.getElementById('q-items').innerHTML = quoteItems.map(function(item,i){
+    return '<div style="display:grid;grid-template-columns:1fr 55px 85px 90px 28px;gap:5px;margin-bottom:6px;align-items:center;">'
+      +'<input type="text" value="'+item.desc+'" placeholder="Description" onchange="quoteItems['+i+'].desc=this.value;updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:7px 10px;color:var(--text);font-size:12px;outline:none;">'
+      +'<input type="number" value="'+item.qty+'" min="1" placeholder="Qty" onchange="quoteItems['+i+'].qty=Number(this.value);updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:7px 6px;color:var(--text);font-size:12px;outline:none;text-align:center;">'
+      +'<input type="number" value="'+item.rate+'" placeholder="€ Rate" onchange="quoteItems['+i+'].rate=Number(this.value);updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:7px 8px;color:var(--text);font-size:12px;outline:none;text-align:right;">'
+      +'<div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--orange);text-align:right;">€'+(item.qty*item.rate).toLocaleString('en-IE',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div>'
+      +'<button onclick="removeQItem('+i+')" style="background:none;border:none;color:var(--text-m);font-size:16px;cursor:pointer;">×</button>'
+      +'</div>';
   }).join('');
 }
-function updateQuote(){
-  var sub=quoteItems.reduce(function(s,item){return s+(item.qty*item.rate);},0);
-  var vat=sub*0.135;
-  var total=sub+vat;
-  document.getElementById('q-subtotal').textContent='\u20ac'+sub.toFixed(2);
-  document.getElementById('q-vat').textContent='\u20ac'+vat.toFixed(2);
-  document.getElementById('q-total').textContent='\u20ac'+total.toFixed(2);
-  var name=document.getElementById('q-name').value||'[Customer Name]';
-  var addr=(document.getElementById('q-addr').value||'[Address]').replace(/\n/g,'<br>');
-  var desc=document.getElementById('q-desc').value||'';
-  var num=document.getElementById('q-num').value||'Q2026-001';
-  var date=document.getElementById('q-date').value||new Date().toLocaleDateString('en-IE');
-  var rows=quoteItems.map(function(item){return '<tr><td style="padding:6px 8px;border-bottom:1px solid #eee;">'+( item.desc||'—')+'</td><td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:center;">'+item.qty+'</td><td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:right;">\u20ac'+item.rate.toFixed(2)+'</td><td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:right;">\u20ac'+(item.qty*item.rate).toFixed(2)+'</td></tr>';}).join('');
-  document.getElementById('quote-preview').innerHTML='<div style="border-bottom:3px solid #E8620A;padding-bottom:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:flex-start;"><div><div style="font-family:\'Barlow Condensed\',sans-serif;font-size:22px;font-weight:800;"><span style="color:#E8620A;">E</span>ASY Property Services</div><div style="font-size:11px;color:#666;">Dublin, Ireland</div></div><div style="text-align:right;"><div style="font-family:\'Barlow Condensed\',sans-serif;font-size:18px;font-weight:700;">QUOTATION</div><div style="font-size:11px;color:#888;">'+num+' | '+date+'</div></div></div><div style="margin-bottom:14px;font-size:12px;"><strong>To:</strong> '+name+'<br><span style="color:#555;">'+addr+'</span></div>'+(desc?'<div style="margin-bottom:14px;font-size:11px;color:#444;background:#f9f9f9;padding:8px;border-radius:4px;"><strong>Re:</strong> '+desc+'</div>':'')+'<table style="width:100%;border-collapse:collapse;font-size:11px;"><thead><tr style="background:#f5f5f5;"><th style="padding:6px 8px;text-align:left;">Description</th><th style="padding:6px 8px;text-align:center;">Qty</th><th style="padding:6px 8px;text-align:right;">Rate</th><th style="padding:6px 8px;text-align:right;">Total</th></tr></thead><tbody>'+rows+'</tbody></table><div style="margin-top:12px;text-align:right;border-top:1px solid #eee;padding-top:10px;"><div style="font-size:11px;color:#666;">Subtotal: <strong>\u20ac'+sub.toFixed(2)+'</strong></div><div style="font-size:11px;color:#666;">VAT @ 13.5%: <strong>\u20ac'+vat.toFixed(2)+'</strong></div><div style="font-family:\'Barlow Condensed\',sans-serif;font-size:18px;font-weight:800;color:#E8620A;margin-top:4px;">Total: \u20ac'+total.toFixed(2)+'</div></div><div style="margin-top:14px;font-size:10px;color:#888;border-top:1px solid #eee;padding-top:10px;">This quotation is valid for 30 days. All work carried out by EASY Property Services, fully insured.</div>';
+
+function getVatRate(){
+  var check = document.getElementById('q-vat-check');
+  var rate  = document.getElementById('q-vat-rate');
+  if(!check || !check.checked) return 0;
+  return Number(rate ? rate.value : 0.135);
 }
-function clearQuote(){quoteItems=[];document.getElementById('q-name').value='';document.getElementById('q-addr').value='';document.getElementById('q-desc').value='';addQuoteItem();updateQuote();}
-function printQuote(){var w=window.open('','_blank');w.document.write('<!DOCTYPE html><html><head><title>Quote</title><style>body{font-family:Arial,sans-serif;padding:40px;max-width:700px;margin:0 auto;}@media print{body{padding:0;}}</style></head><body>'+document.getElementById('quote-preview').innerHTML+'</body></html>');w.document.close();w.print();}
+
+function getPaymentTermsText(){
+  var sel = document.getElementById('q-terms');
+  if(!sel) return '';
+  var v = sel.value;
+  if(v==='due-receipt') return 'Payment due on receipt';
+  if(v==='7') return 'Net 7 days';
+  if(v==='14') return 'Net 14 days';
+  if(v==='30') return 'Net 30 days';
+  if(v==='50pct') return '50% deposit required before work commences, balance due on completion';
+  if(v==='stage') return 'Stage payments as agreed';
+  if(v==='custom'){
+    var cEl=document.getElementById('q-custom-terms');
+    return cEl ? cEl.value : '';
+  }
+  return '';
+}
+
+function updateQuote(){
+  // Show/hide custom terms
+  var termsEl=document.getElementById('q-terms');
+  var ctGroup=document.getElementById('custom-terms-group');
+  if(termsEl && ctGroup) ctGroup.style.display = termsEl.value==='custom' ? 'block' : 'none';
+
+  var vatRate = getVatRate();
+  var sub = quoteItems.reduce(function(s,item){return s+(item.qty*item.rate);},0);
+  var vat = sub * vatRate;
+  var total = sub + vat;
+
+  var subEl=document.getElementById('q-subtotal'); if(subEl) subEl.textContent='€'+sub.toFixed(2);
+  var vatEl=document.getElementById('q-vat');      if(vatEl) vatEl.textContent='€'+vat.toFixed(2);
+  var totEl=document.getElementById('q-total');    if(totEl) totEl.textContent='€'+total.toFixed(2);
+  var vatLbl=document.getElementById('q-vat-label');if(vatLbl) vatLbl.textContent='VAT '+(vatRate*100).toFixed(1)+'%';
+  var vatRow=document.getElementById('q-vat-row'); if(vatRow) vatRow.style.display = vatRate>0 ? 'flex' : 'none';
+
+  renderPreview(sub, vat, total, vatRate);
+}
+
+function renderPreview(sub, vat, total, vatRate){
+  var co = company;
+  var name    = (document.getElementById('q-name')  ||{}).value || '[Customer Name]';
+  var addr    = ((document.getElementById('q-addr')  ||{}).value || '[Address]').replace(/
+/g,'<br>');
+  var email   = (document.getElementById('q-email') ||{}).value || '';
+  var phone   = (document.getElementById('q-phone') ||{}).value || '';
+  var desc    = (document.getElementById('q-desc')  ||{}).value || '';
+  var num     = (document.getElementById('q-num')   ||{}).value || (docType==='invoice'?'INV':'Q')+'2026-001';
+  var date    = (document.getElementById('q-date')  ||{}).value || new Date().toLocaleDateString('en-IE');
+  var duedate = (document.getElementById('q-duedate')||{}).value || '';
+  var footer  = (document.getElementById('q-footer-note')||{}).value || co.footer || '';
+  var terms   = getPaymentTermsText();
+  var isInv   = docType === 'invoice';
+  var docLabel= isInv ? 'INVOICE' : 'QUOTATION';
+  var dueLine = duedate ? (isInv ? 'Payment Due: ' : 'Valid Until: ') + new Date(duedate).toLocaleDateString('en-IE') : '';
+
+  var rows = quoteItems.map(function(item){
+    return '<tr><td style="padding:6px 8px;border-bottom:1px solid #eee;font-size:11px;">'+(item.desc||'—')+'</td>'
+      +'<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:center;font-size:11px;">'+item.qty+'</td>'
+      +'<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:right;font-size:11px;">€'+Number(item.rate).toFixed(2)+'</td>'
+      +'<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:right;font-size:11px;font-weight:600;">€'+(item.qty*item.rate).toFixed(2)+'</td></tr>';
+  }).join('');
+
+  var vatRow2 = vatRate > 0 ? '<tr><td colspan="3" style="padding:4px 8px;text-align:right;font-size:11px;color:#888;">VAT '+(vatRate*100).toFixed(1)+'%</td><td style="padding:4px 8px;text-align:right;font-size:11px;">€'+vat.toFixed(2)+'</td></tr>' : '';
+  var bankSection = isInv && co.bank ? '<div style="margin-top:16px;padding:10px;background:#f9f9f9;border-radius:4px;font-size:10px;color:#555;border-left:3px solid #E8620A;"><strong>Payment Details:</strong><br>'+co.bank.replace(/
+/g,'<br>')+'</div>' : '';
+  var termsSection = terms ? '<div style="margin-top:8px;font-size:10px;color:#666;"><strong>Payment Terms:</strong> '+terms+'</div>' : '';
+  var contactInfo = [email, phone].filter(Boolean).join(' &nbsp;|&nbsp; ');
+
+  document.getElementById('quote-preview').innerHTML =
+    '<div style="border-bottom:3px solid #E8620A;padding-bottom:14px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:flex-start;">'
+      +'<div><div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;line-height:1.1;"><span style="color:#E8620A;">'+co.name.charAt(0)+'</span>'+co.name.slice(1)+'</div>'
+      +(co.addr?'<div style="font-size:10px;color:#666;margin-top:2px;">'+co.addr.replace(/
+/g,', ')+'</div>':'')
+      +(co.phone||co.email?'<div style="font-size:10px;color:#666;">'+(co.phone||'')+(co.phone&&co.email?' &nbsp;|&nbsp; ':'')+(co.email||'')+'</div>':'')
+      +(co.web?'<div style="font-size:10px;color:#E8620A;">'+co.web+'</div>':'')
+      +(co.vat?'<div style="font-size:9px;color:#999;">VAT Reg: '+co.vat+'</div>':'')
+      +(co.reg?'<div style="font-size:9px;color:#999;">Reg: '+co.reg+'</div>':'')
+      +'</div>'
+      +'<div style="text-align:right;">'
+        +'<div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:'+(isInv?'#E8620A':'#333')+';">'+docLabel+'</div>'
+        +'<div style="font-size:11px;color:#888;margin-top:2px;">#'+num+'</div>'
+        +'<div style="font-size:10px;color:#aaa;">Date: '+new Date(date).toLocaleDateString('en-IE')+'</div>'
+        +(dueLine?'<div style="font-size:10px;color:'+(isInv?'#e74c3c':'#888')+';">'+dueLine+'</div>':'')
+      +'</div>'
+    +'</div>'
+    +'<div style="display:flex;justify-content:space-between;margin-bottom:16px;gap:20px;">'
+      +'<div style="font-size:11px;"><div style="font-weight:700;color:#333;margin-bottom:3px;text-transform:uppercase;font-size:10px;letter-spacing:0.5px;">Bill To</div><strong>'+name+'</strong><br><span style="color:#666;">'+addr+'</span>'+(contactInfo?'<br><span style="color:#888;font-size:10px;">'+contactInfo+'</span>':'')+'</div>'
+    +'</div>'
+    +(desc?'<div style="margin-bottom:12px;font-size:11px;color:#444;background:#f9f9f9;padding:8px 10px;border-radius:4px;"><strong>Scope of Works:</strong><br>'+desc+'</div>':'')
+    +'<table style="width:100%;border-collapse:collapse;">'
+      +'<thead><tr style="background:#2B2D2F;">'
+        +'<th style="padding:7px 8px;text-align:left;font-size:10px;text-transform:uppercase;color:#ccc;letter-spacing:0.5px;">Description</th>'
+        +'<th style="padding:7px 8px;text-align:center;font-size:10px;text-transform:uppercase;color:#ccc;letter-spacing:0.5px;">Qty</th>'
+        +'<th style="padding:7px 8px;text-align:right;font-size:10px;text-transform:uppercase;color:#ccc;letter-spacing:0.5px;">Rate</th>'
+        +'<th style="padding:7px 8px;text-align:right;font-size:10px;text-transform:uppercase;color:#ccc;letter-spacing:0.5px;">Amount</th>'
+      +'</tr></thead>'
+      +'<tbody>'+rows+'</tbody>'
+      +'<tfoot>'
+        +'<tr><td colspan="3" style="padding:5px 8px;text-align:right;font-size:11px;color:#888;">Subtotal</td><td style="padding:5px 8px;text-align:right;font-size:11px;">€'+sub.toFixed(2)+'</td></tr>'
+        +vatRow2
+        +'<tr style="background:#f5f5f5;"><td colspan="3" style="padding:8px;text-align:right;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:#E8620A;">TOTAL</td><td style="padding:8px;text-align:right;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:#E8620A;">€'+total.toFixed(2)+'</td></tr>'
+      +'</tfoot>'
+    +'</table>'
+    +termsSection
+    +bankSection
+    +(footer?'<div style="margin-top:16px;padding-top:10px;border-top:1px solid #eee;font-size:10px;color:#999;">'+footer+'</div>':'');
+}
+
+// ============================================================
+// SAVE / LOAD DOCS
+// ============================================================
+function saveDoc(){
+  var vatRate = getVatRate();
+  var sub = quoteItems.reduce(function(s,item){return s+(item.qty*item.rate);},0);
+  var vat = sub * vatRate;
+  var total = sub + vat;
+  var doc = {
+    id: Date.now(),
+    type: docType,
+    num:  (document.getElementById('q-num')  ||{}).value || '',
+    name: (document.getElementById('q-name') ||{}).value || 'Unknown',
+    desc: (document.getElementById('q-desc') ||{}).value || '',
+    date: (document.getElementById('q-date') ||{}).value || '',
+    due:  (document.getElementById('q-duedate')||{}).value || '',
+    terms: getPaymentTermsText(),
+    items: JSON.parse(JSON.stringify(quoteItems)),
+    sub: sub, vat: vat, total: total,
+    vatRate: vatRate,
+    status: docType==='quote' ? 'sent' : 'unpaid',
+    preview: document.getElementById('quote-preview').innerHTML
+  };
+  savedDocs.unshift(doc);
+  localStorage.setItem('ecc_docs', JSON.stringify(savedDocs));
+  toast('Document saved!');
+}
+
+function renderSavedDocs(){
+  var filtered = docFilter==='all' ? savedDocs : savedDocs.filter(function(d){
+    if(docFilter==='quote') return d.type==='quote';
+    if(docFilter==='invoice') return d.type==='invoice';
+    if(docFilter==='paid') return d.status==='paid';
+    if(docFilter==='overdue'){
+      if(d.status==='paid') return false;
+      if(!d.due) return false;
+      return new Date(d.due) < new Date();
+    }
+    return true;
+  });
+  var el = document.getElementById('saved-docs-list');
+  if(!filtered.length){el.innerHTML='<div style="color:var(--text-d);font-size:13px;padding:20px;text-align:center;">No documents match this filter.</div>';renderRevSummary();return;}
+  el.innerHTML = filtered.map(function(doc){
+    var isInv = doc.type==='invoice';
+    var isOverdue = !doc.due ? false : (doc.status!=='paid' && new Date(doc.due)<new Date());
+    var statusColor = doc.status==='paid' ? 'var(--green)' : isOverdue ? 'var(--red)' : 'var(--yellow)';
+    var statusLabel = doc.status==='paid' ? 'PAID' : isOverdue ? 'OVERDUE' : isInv ? 'UNPAID' : 'SENT';
+    return '<div class="card" style="padding:14px;margin-bottom:10px;">'
+      +'<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;">'
+        +'<div>'
+          +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">'
+            +'<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;background:'+(isInv?'rgba(232,98,10,0.2)':'rgba(41,128,185,0.2)')+';color:'+(isInv?'var(--orange)':'var(--blue)')+';border:1px solid '+(isInv?'rgba(232,98,10,0.3)':'rgba(41,128,185,0.3)')+';">'+(isInv?'INVOICE':'QUOTE')+'</span>'
+            +'<strong style="font-size:14px;">#'+doc.num+'</strong>'
+            +'<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;background:rgba(0,0,0,0.2);color:'+statusColor+';">'+statusLabel+'</span>'
+          +'</div>'
+          +'<div style="font-size:13px;color:var(--text-m);">'+doc.name+(doc.desc?' — '+doc.desc.substring(0,50)+'...':'')+'</div>'
+          +'<div style="font-size:11px;color:var(--text-d);margin-top:3px;">Date: '+new Date(doc.date).toLocaleDateString('en-IE')+(doc.due?' &nbsp;|&nbsp; Due: '+new Date(doc.due).toLocaleDateString('en-IE'):'')+'</div>'
+        +'</div>'
+        +'<div style="text-align:right;">'
+          +'<div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--orange);">€'+doc.total.toLocaleString('en-IE',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div>'
+          +'<div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;justify-content:flex-end;">'
+            +(isInv && doc.status!=='paid' ? '<button class="btn btn-sm" style="background:rgba(39,174,96,0.2);color:#52be80;border:1px solid rgba(39,174,96,0.4);font-size:10px;" onclick="markPaid('+doc.id+')">Mark Paid</button>' : '')
+            +'<button class="btn btn-ghost btn-sm" onclick="printSaved('+doc.id+')" style="font-size:10px;">Print</button>'
+            +'<button class="btn btn-danger btn-sm" onclick="deleteDoc('+doc.id+')" style="font-size:10px;">Del</button>'
+          +'</div>'
+        +'</div>'
+      +'</div>'
+    +'</div>';
+  }).join('');
+  renderRevSummary();
+}
+
+function filterDocs(f,el){
+  document.querySelectorAll('#qpanel-saved .filter-chip').forEach(function(c){c.classList.remove('active');});
+  el.classList.add('active');
+  docFilter=f;
+  renderSavedDocs();
+}
+
+function markPaid(id){
+  var doc = savedDocs.find(function(d){return d.id===id;});
+  if(doc){ doc.status='paid'; localStorage.setItem('ecc_docs',JSON.stringify(savedDocs)); renderSavedDocs(); toast('Marked as paid!'); }
+}
+
+function deleteDoc(id){
+  if(!confirm('Delete this document?')) return;
+  savedDocs = savedDocs.filter(function(d){return d.id!==id;});
+  localStorage.setItem('ecc_docs',JSON.stringify(savedDocs));
+  renderSavedDocs();
+  toast('Document deleted');
+}
+
+function printSaved(id){
+  var doc = savedDocs.find(function(d){return d.id===id;});
+  if(!doc) return;
+  var w = window.open('','_blank');
+  w.document.write('<!DOCTYPE html><html><head><title>'+(doc.type==='invoice'?'Invoice':'Quote')+' '+doc.num+'</title><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800&family=Barlow:wght@400;600&display=swap" rel="stylesheet"><style>body{font-family:Arial,sans-serif;padding:40px;max-width:750px;margin:0 auto;}@media print{body{padding:20px;margin:0;}}</style></head><body>'+doc.preview+'</body></html>');
+  w.document.close();
+  setTimeout(function(){w.print();},500);
+}
+
+function printQuote(){
+  var preview = document.getElementById('quote-preview').innerHTML;
+  var w = window.open('','_blank');
+  w.document.write('<!DOCTYPE html><html><head><title>'+docType+'</title><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800&family=Barlow:wght@400;600&display=swap" rel="stylesheet"><style>body{font-family:Arial,sans-serif;padding:40px;max-width:750px;margin:0 auto;}@media print{body{padding:20px;margin:0;}button{display:none!important;}}</style></head><body>'+preview+'</body></html>');
+  w.document.close();
+  setTimeout(function(){w.print();},500);
+}
+
+function renderRevSummary(){
+  var quoted=0,invoiced=0,paid=0,outstanding=0;
+  savedDocs.forEach(function(d){
+    if(d.type==='quote') quoted+=d.total;
+    if(d.type==='invoice'){ invoiced+=d.total; if(d.status==='paid') paid+=d.total; else outstanding+=d.total; }
+  });
+  var fmt=function(n){return '€'+Math.round(n).toLocaleString();};
+  var el; 
+  el=document.getElementById('rev-quoted');    if(el) el.textContent=fmt(quoted);
+  el=document.getElementById('rev-invoiced');  if(el) el.textContent=fmt(invoiced);
+  el=document.getElementById('rev-paid');      if(el) el.textContent=fmt(paid);
+  el=document.getElementById('rev-outstanding');if(el) el.textContent=fmt(outstanding);
+}
+
+// ============================================================
+// COMPANY SETTINGS
+// ============================================================
+function loadCompanyForm(){
+  var fields={name:'co-name',addr:'co-addr',phone:'co-phone',email:'co-email',web:'co-web',vat:'co-vat',reg:'co-reg',bank:'co-bank',footer:'co-footer'};
+  Object.keys(fields).forEach(function(k){var el=document.getElementById(fields[k]);if(el)el.value=company[k]||'';});
+}
+function saveCompany(){
+  company={
+    name: (document.getElementById('co-name')  ||{}).value||'EASY Property Services',
+    addr: (document.getElementById('co-addr')  ||{}).value||'',
+    phone:(document.getElementById('co-phone') ||{}).value||'',
+    email:(document.getElementById('co-email') ||{}).value||'',
+    web:  (document.getElementById('co-web')   ||{}).value||'',
+    vat:  (document.getElementById('co-vat')   ||{}).value||'',
+    reg:  (document.getElementById('co-reg')   ||{}).value||'',
+    bank: (document.getElementById('co-bank')  ||{}).value||'',
+    footer:(document.getElementById('co-footer')||{}).value||''
+  };
+  localStorage.setItem('ecc_company',JSON.stringify(company));
+  toast('Company details saved!');
+  updateQuote();
+}
+
+function clearQuote(){
+  quoteItems=[];
+  ['q-name','q-addr','q-email','q-phone','q-desc'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  addQuoteItem();
+  initQuotes();
+}
 
 // ============================================================
 // TOAST
