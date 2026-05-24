@@ -6,74 +6,35 @@
 <title>EASY Command Centre</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --orange: #E8620A;
-  --orange-lt: #FF7A25;
-  --orange-dim: rgba(232,98,10,0.13);
-  --orange-glow: rgba(232,98,10,0.28);
-  --anth: #2B2D2F;
-  --anth-lt: #3A3D40;
-  --anth-ltr: #4A4D51;
-  --grey: #6B6E72;
-  --grey-lt: #9DA0A4;
-  --grey-ltr: #C8CACC;
-  --bg: #191B1C;
-  --bg-card: #222426;
-  --bg-card2: #2A2C2E;
-  --border: rgba(255,255,255,0.07);
-  --border-acc: rgba(232,98,10,0.3);
-  --text: #F0F1F2;
-  --text-m: #9DA0A4;
-  --text-d: #6B6E72;
-  --green: #27AE60;
-  --red: #E74C3C;
-  --blue: #2980B9;
-  --yellow: #F39C12;
-  --purple: #8E44AD;
-}
+:root{--orange:#E8620A;--orange-lt:#FF7A25;--orange-dim:rgba(232,98,10,0.13);--orange-glow:rgba(232,98,10,0.28);--anth:#2B2D2F;--anth-lt:#3A3D40;--bg:#191B1C;--bg-card:#222426;--bg-card2:#2A2C2E;--border:rgba(255,255,255,0.07);--border-acc:rgba(232,98,10,0.3);--text:#F0F1F2;--text-m:#9DA0A4;--text-d:#6B6E72;--green:#27AE60;--red:#E74C3C;--blue:#2980B9;--yellow:#F39C12;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
-
-/* HEADER */
 .header{background:var(--anth);border-bottom:2px solid var(--orange);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;}
 .logo{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;letter-spacing:1px;}
 .logo span.e{color:var(--orange);}
-.logo span.rest{color:var(--text);}
-.logo small{font-size:11px;font-weight:400;color:var(--grey-lt);display:block;letter-spacing:3px;text-transform:uppercase;line-height:1;}
+.logo small{font-size:11px;font-weight:400;color:var(--text-m);display:block;letter-spacing:3px;text-transform:uppercase;line-height:1;}
 .header-right{display:flex;align-items:center;gap:12px;}
-.badge{background:var(--orange);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;padding:3px 9px;border-radius:3px;letter-spacing:1px;text-transform:uppercase;}
-.clock{font-family:'Barlow Condensed',sans-serif;font-size:14px;color:var(--grey-lt);letter-spacing:1px;}
-
-/* TABS */
+.badge{background:var(--orange);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;padding:3px 9px;border-radius:3px;letter-spacing:1px;}
+.clock{font-family:'Barlow Condensed',sans-serif;font-size:14px;color:var(--text-m);letter-spacing:1px;}
 .tabs{display:flex;background:var(--anth);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;}
 .tabs::-webkit-scrollbar{display:none;}
-.tab{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;padding:12px 20px;color:var(--grey-lt);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.2s;}
+.tab{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;padding:12px 20px;color:var(--text-m);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.2s;}
 .tab:hover{color:var(--text);}
 .tab.active{color:var(--orange);border-bottom-color:var(--orange);}
-
-/* PANELS */
 .panel{display:none;padding:20px;}
 .panel.active{display:block;}
-
-/* CARDS */
 .card{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:18px;margin-bottom:16px;}
-.card-title{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--grey-lt);margin-bottom:12px;}
+.card-title{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-d);margin-bottom:12px;}
 .card-accent{border-left:3px solid var(--orange);}
-
-/* GRID */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
-.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
 @media(max-width:900px){.grid4{grid-template-columns:1fr 1fr;}.grid3{grid-template-columns:1fr 1fr;}.grid2{grid-template-columns:1fr;}}
 @media(max-width:600px){.grid4,.grid3{grid-template-columns:1fr;}}
-
-/* STAT CARDS */
 .stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:16px;text-align:center;}
-.stat-card .stat-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-d);margin-bottom:6px;}
-.stat-card .stat-val{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;color:var(--orange);line-height:1;}
-.stat-card .stat-sub{font-size:11px;color:var(--text-m);margin-top:4px;}
-
-/* SOURCE CHIPS */
+.stat-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-d);margin-bottom:6px;}
+.stat-val{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;color:var(--orange);line-height:1;}
+.stat-sub{font-size:11px;color:var(--text-m);margin-top:4px;}
 .source-chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:0.5px;font-family:'Barlow Condensed',sans-serif;}
 .chip-facebook{background:rgba(24,119,242,0.2);color:#4d9bf4;border:1px solid rgba(24,119,242,0.35);}
 .chip-donedeal{background:rgba(232,98,10,0.2);color:#E8620A;border:1px solid rgba(232,98,10,0.35);}
@@ -82,53 +43,36 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
 .chip-instagram{background:rgba(193,53,132,0.18);color:#e87ecb;border:1px solid rgba(193,53,132,0.3);}
 .chip-referral{background:rgba(243,156,18,0.2);color:#f5b53e;border:1px solid rgba(243,156,18,0.35);}
 .chip-adverts{background:rgba(142,68,173,0.2);color:#b87fdf;border:1px solid rgba(142,68,173,0.35);}
-.chip-lovin{background:rgba(231,76,60,0.2);color:#f07060;border:1px solid rgba(231,76,60,0.35);}
 .chip-boards{background:rgba(30,130,76,0.2);color:#56c993;border:1px solid rgba(30,130,76,0.35);}
 .chip-twitter{background:rgba(29,161,242,0.15);color:#5ab9f8;border:1px solid rgba(29,161,242,0.3);}
 .chip-gumtree{background:rgba(0,176,116,0.2);color:#3fd6a3;border:1px solid rgba(0,176,116,0.35);}
 .chip-direct{background:rgba(149,165,166,0.2);color:#b0c4c5;border:1px solid rgba(149,165,166,0.3);}
-
-/* STATUS CHIPS */
 .status-chip{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;}
 .status-new{background:rgba(41,128,185,0.2);color:#5dade2;border:1px solid rgba(41,128,185,0.4);}
 .status-quoted{background:rgba(243,156,18,0.2);color:#f5b53e;border:1px solid rgba(243,156,18,0.4);}
 .status-won{background:rgba(39,174,96,0.2);color:#52be80;border:1px solid rgba(39,174,96,0.4);}
 .status-lost{background:rgba(231,76,60,0.2);color:#f1948a;border:1px solid rgba(231,76,60,0.4);}
 .status-follow{background:rgba(142,68,173,0.2);color:#bb8fce;border:1px solid rgba(142,68,173,0.4);}
-
-/* PRIORITY */
-.priority-high{border-left:3px solid var(--red);}
-.priority-med{border-left:3px solid var(--yellow);}
-.priority-low{border-left:3px solid var(--green);}
-
-/* BUTTONS */
 .btn{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;padding:8px 18px;border-radius:4px;border:none;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px;}
 .btn-primary{background:var(--orange);color:#fff;}
 .btn-primary:hover{background:var(--orange-lt);}
 .btn-outline{background:transparent;color:var(--orange);border:1px solid var(--orange);}
 .btn-outline:hover{background:var(--orange-dim);}
 .btn-ghost{background:transparent;color:var(--text-m);border:1px solid var(--border);}
-.btn-ghost:hover{color:var(--text);border-color:var(--grey-lt);}
+.btn-ghost:hover{color:var(--text);border-color:#9DA0A4;}
 .btn-sm{font-size:11px;padding:5px 12px;}
 .btn-danger{background:rgba(231,76,60,0.15);color:#f1948a;border:1px solid rgba(231,76,60,0.3);}
-.btn-danger:hover{background:rgba(231,76,60,0.25);}
-
-/* INPUTS */
 .form-group{margin-bottom:14px;}
 .form-group label{display:block;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-m);margin-bottom:5px;}
 .form-group input,.form-group select,.form-group textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:9px 12px;color:var(--text);font-family:'Barlow',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--orange);}
 .form-group select option{background:var(--bg-card);}
 .form-group textarea{resize:vertical;min-height:80px;}
-
-/* LEAD TABLE */
 .lead-table{width:100%;border-collapse:collapse;}
 .lead-table th{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-d);text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);}
 .lead-table td{padding:10px 10px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle;}
 .lead-table tr:hover td{background:rgba(255,255,255,0.02);}
 .lead-table .actions{display:flex;gap:6px;flex-wrap:wrap;}
-
-/* AI BOX */
 .ai-box{background:var(--bg);border:1px solid var(--border-acc);border-radius:6px;padding:14px 16px;position:relative;}
 .ai-box::before{content:'AI';position:absolute;top:-9px;left:12px;background:var(--orange);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;padding:1px 7px;border-radius:3px;letter-spacing:1px;}
 .ai-result{font-size:13px;line-height:1.7;color:var(--text);white-space:pre-wrap;}
@@ -137,8 +81,6 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
 .ai-loading .dot:nth-child(2){animation-delay:0.2s;}
 .ai-loading .dot:nth-child(3){animation-delay:0.4s;}
 @keyframes blink{0%,80%,100%{opacity:0;}40%{opacity:1;}}
-
-/* PLANNING SECTION */
 .planning-item{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:10px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
 .planning-item .pi-left{flex:1;}
 .planning-item .pi-addr{font-weight:600;font-size:14px;margin-bottom:4px;}
@@ -149,168 +91,99 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
 .pc-pending{background:rgba(243,156,18,0.2);color:#f5b53e;border:1px solid rgba(243,156,18,0.35);}
 .pc-refused{background:rgba(231,76,60,0.2);color:#f1948a;border:1px solid rgba(231,76,60,0.35);}
 .pc-appeal{background:rgba(142,68,173,0.2);color:#bb8fce;border:1px solid rgba(142,68,173,0.35);}
-.pc-ext{background:rgba(41,128,185,0.2);color:#5dade2;border:1px solid rgba(41,128,185,0.35);}
 .pi-value{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--orange);white-space:nowrap;}
-
-/* OUTREACH TEMPLATES */
-.template-card{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:16px;margin-bottom:12px;cursor:pointer;transition:border-color 0.2s;}
-.template-card:hover{border-color:var(--orange);}
+.template-card{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:16px;margin-bottom:12px;}
 .template-card.expanded{border-color:var(--orange);}
-.tc-header{display:flex;align-items:center;justify-content:space-between;}
-.tc-title{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--text);}
+.tc-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;}
+.tc-title{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;}
 .tc-tag{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--orange);}
+.tc-preview{font-size:12px;color:var(--text-m);margin-top:4px;}
 .tc-body{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);}
 .template-card.expanded .tc-body{display:block;}
-.tc-preview{font-size:12px;color:var(--text-m);margin-top:6px;}
-.tc-text{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px;font-size:13px;line-height:1.7;color:var(--text);font-family:'Barlow',sans-serif;white-space:pre-wrap;}
+.tc-text{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px;font-size:13px;line-height:1.7;color:var(--text);white-space:pre-wrap;}
 .tc-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
-
-/* PRICE RESULT */
 .price-result{background:var(--bg);border:1px solid var(--border-acc);border-radius:6px;padding:18px;margin-top:14px;}
 .price-tag{font-family:'Barlow Condensed',sans-serif;font-size:42px;font-weight:800;color:var(--orange);line-height:1;}
-.price-range{font-family:'Barlow Condensed',sans-serif;font-size:16px;color:var(--grey-lt);margin-top:2px;}
+.price-range{font-family:'Barlow Condensed',sans-serif;font-size:16px;color:#9DA0A4;margin-top:2px;}
 .price-breakdown{margin-top:14px;border-top:1px solid var(--border);padding-top:12px;}
 .pb-row{display:flex;justify-content:space-between;padding:4px 0;font-size:13px;}
 .pb-row .pb-key{color:var(--text-m);}
 .pb-row .pb-val{font-family:'Barlow Condensed',sans-serif;font-weight:600;}
-
-/* SECTION HEADER */
 .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
 .section-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;letter-spacing:0.5px;}
 .section-actions{display:flex;gap:8px;flex-wrap:wrap;}
-
-/* FILTERS */
 .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center;}
 .filter-chip{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.5px;padding:5px 12px;border-radius:20px;border:1px solid var(--border);cursor:pointer;color:var(--text-m);transition:all 0.2s;}
 .filter-chip:hover,.filter-chip.active{background:var(--orange-dim);border-color:var(--border-acc);color:var(--orange);}
-
-/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;justify-content:center;align-items:flex-start;padding:40px 20px;overflow-y:auto;}
 .modal-overlay.open{display:flex;}
 .modal{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;width:100%;max-width:640px;padding:24px;}
 .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
 .modal-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;}
 .modal-close{background:none;border:none;color:var(--text-m);font-size:20px;cursor:pointer;padding:4px 8px;}
-
-/* DIVIDER */
 .divider{height:1px;background:var(--border);margin:16px 0;}
-
-/* TIMELINE */
-.timeline{padding-left:20px;border-left:2px solid var(--border);}
-.timeline-item{position:relative;padding:0 0 16px 20px;}
-.timeline-item::before{content:'';position:absolute;left:-6px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--orange);border:2px solid var(--bg);}
-.timeline-date{font-family:'Barlow Condensed',sans-serif;font-size:11px;color:var(--text-d);letter-spacing:0.5px;margin-bottom:3px;}
-.timeline-text{font-size:13px;line-height:1.5;}
-
-/* RATES TABLE */
 .rates-table{width:100%;border-collapse:collapse;}
 .rates-table th{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-d);padding:8px 12px;border-bottom:1px solid var(--border);text-align:left;}
-.rates-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:13px;}
-.rates-table .rate-input{width:90px;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:5px 8px;color:var(--text);font-size:13px;text-align:right;}
-.rates-table .rate-input:focus{border-color:var(--orange);outline:none;}
-
-/* NOTIFICATION */
+.rates-table td{padding:8px 12px;border-bottom:1px solid var(--border);font-size:12px;}
+.rate-input{width:80px;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:4px 6px;color:var(--text);font-size:12px;text-align:right;}
+.rate-input:focus{border-color:var(--orange);outline:none;}
+.calc-box{background:var(--bg);border:1px solid var(--border-acc);border-radius:6px;padding:14px;margin-bottom:14px;}
+.calc-title{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:10px;}
+.calc-result{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--orange);}
+.calc-note{font-size:11px;color:var(--text-m);margin-top:2px;}
+.calc-check-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px;font-size:12px;}
+.calc-check-grid label{display:flex;align-items:center;gap:5px;cursor:pointer;}
 .toast{position:fixed;bottom:20px;right:20px;background:var(--anth);border:1px solid var(--orange);color:var(--text);padding:12px 18px;border-radius:6px;font-size:13px;z-index:999;transform:translateY(100px);opacity:0;transition:all 0.3s;font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:0.5px;}
 .toast.show{transform:translateY(0);opacity:1;}
-
-/* RESPONSIVE */
-@media(max-width:700px){
-  .header{padding:0 14px;}
-  .panel{padding:14px;}
-  .lead-table{display:none;}
-  .tabs{padding-bottom:0;}
-}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
-  <div class="logo">
-    <div><span class="e">E</span><span class="rest">ASY</span></div>
-    <small>Command Centre</small>
-  </div>
+  <div class="logo"><div><span class="e">E</span>ASY</div><small>Command Centre</small></div>
   <div class="header-right">
     <div class="badge">IE</div>
     <div class="clock" id="clock"></div>
   </div>
 </div>
 
-<!-- TABS -->
 <div class="tabs">
-  <div class="tab active" onclick="switchTab('dashboard')">Dashboard</div>
-  <div class="tab" onclick="switchTab('leads')">Leads</div>
-  <div class="tab" onclick="switchTab('pricer')">AI Pricer</div>
-  <div class="tab" onclick="switchTab('planning')">Planning</div>
-  <div class="tab" onclick="switchTab('outreach')">Outreach</div>
-  <div class="tab" onclick="switchTab('rates')">Rates</div>
-  <div class="tab" onclick="switchTab('quotes')">Quotes</div>
+  <div class="tab active" onclick="switchTab('dashboard',this)">Dashboard</div>
+  <div class="tab" onclick="switchTab('leads',this)">Leads</div>
+  <div class="tab" onclick="switchTab('pricer',this)">AI Pricer</div>
+  <div class="tab" onclick="switchTab('planning',this)">Planning</div>
+  <div class="tab" onclick="switchTab('outreach',this)">Outreach</div>
+  <div class="tab" onclick="switchTab('rates',this)">Rates</div>
+  <div class="tab" onclick="switchTab('quotes',this)">Quotes</div>
 </div>
 
 <!-- DASHBOARD -->
 <div class="panel active" id="panel-dashboard">
   <div class="section-header">
     <div class="section-title">Mission Control</div>
-    <div class="section-actions">
-      <button class="btn btn-primary btn-sm" onclick="openAddLead()">+ New Lead</button>
-    </div>
+    <div class="section-actions"><button class="btn btn-primary btn-sm" onclick="openAddLead()">+ New Lead</button></div>
   </div>
-
   <div class="grid4" style="margin-bottom:16px;">
-    <div class="stat-card">
-      <div class="stat-label">Total Leads</div>
-      <div class="stat-val" id="stat-total">0</div>
-      <div class="stat-sub">All time</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Active</div>
-      <div class="stat-val" id="stat-active" style="color:var(--blue);">0</div>
-      <div class="stat-sub">New + Quoted</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Won</div>
-      <div class="stat-val" id="stat-won" style="color:var(--green);">0</div>
-      <div class="stat-sub">Jobs confirmed</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Pipeline</div>
-      <div class="stat-val" id="stat-pipeline" style="color:var(--orange);">€0</div>
-      <div class="stat-sub">Quoted value</div>
-    </div>
+    <div class="stat-card"><div class="stat-label">Total Leads</div><div class="stat-val" id="stat-total">0</div><div class="stat-sub">All time</div></div>
+    <div class="stat-card"><div class="stat-label">Active</div><div class="stat-val" id="stat-active" style="color:var(--blue);">0</div><div class="stat-sub">New + Quoted</div></div>
+    <div class="stat-card"><div class="stat-label">Won</div><div class="stat-val" id="stat-won" style="color:var(--green);">0</div><div class="stat-sub">Jobs confirmed</div></div>
+    <div class="stat-card"><div class="stat-label">Pipeline</div><div class="stat-val" id="stat-pipeline" style="color:var(--orange);">€0</div><div class="stat-sub">Quoted value</div></div>
   </div>
-
   <div class="grid2">
-    <div class="card card-accent">
-      <div class="card-title">Hot Leads — Action Needed</div>
-      <div id="hot-leads-list">
-        <div style="color:var(--text-d);font-size:13px;">No hot leads yet.</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-title">Source Breakdown</div>
-      <div id="source-breakdown">
-        <div style="color:var(--text-d);font-size:13px;">Add leads to see source data.</div>
-      </div>
-    </div>
+    <div class="card card-accent"><div class="card-title">Hot Leads</div><div id="hot-leads-list"><div style="color:var(--text-d);font-size:13px;">No hot leads yet.</div></div></div>
+    <div class="card"><div class="card-title">Source Breakdown</div><div id="source-breakdown"><div style="color:var(--text-d);font-size:13px;">Add leads to see data.</div></div></div>
   </div>
-
-  <div class="card">
-    <div class="card-title">Planning Alerts — Dublin &amp; Surrounding</div>
-    <div id="dashboard-planning"></div>
-  </div>
+  <div class="card"><div class="card-title">Recent Planning — Granted</div><div id="dashboard-planning"></div></div>
 </div>
 
 <!-- LEADS -->
 <div class="panel" id="panel-leads">
   <div class="section-header">
     <div class="section-title">Lead Management</div>
-    <div class="section-actions">
-      <button class="btn btn-primary btn-sm" onclick="openAddLead()">+ Add Lead</button>
-    </div>
+    <div class="section-actions"><button class="btn btn-primary btn-sm" onclick="openAddLead()">+ Add Lead</button></div>
   </div>
-
   <div class="filter-row">
-    <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--text-d);font-weight:700;letter-spacing:1px;text-transform:uppercase;">Filter:</span>
+    <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:var(--text-d);font-weight:700;letter-spacing:1px;text-transform:uppercase;">Filter:</span>
     <span class="filter-chip active" onclick="filterLeads('all',this)">All</span>
     <span class="filter-chip" onclick="filterLeads('new',this)">New</span>
     <span class="filter-chip" onclick="filterLeads('quoted',this)">Quoted</span>
@@ -318,95 +191,73 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
     <span class="filter-chip" onclick="filterLeads('lost',this)">Lost</span>
     <span class="filter-chip" onclick="filterLeads('follow-up',this)">Follow-Up</span>
   </div>
-
   <div class="card" style="overflow-x:auto;">
-    <table class="lead-table" id="leads-table">
-      <thead>
-        <tr>
-          <th>Source</th>
-          <th>Name</th>
-          <th>Job Type</th>
-          <th>Location</th>
-          <th>Quote</th>
-          <th>Status</th>
-          <th>Date</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="leads-tbody">
-        <tr><td colspan="8" style="color:var(--text-d);text-align:center;padding:30px;font-size:13px;">No leads yet. Click "+ Add Lead" to get started.</td></tr>
-      </tbody>
+    <table class="lead-table">
+      <thead><tr><th>Source</th><th>Name</th><th>Job</th><th>Location</th><th>Quote</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+      <tbody id="leads-tbody"></tbody>
     </table>
-  </div>
-
-  <!-- Mobile lead cards -->
-  <div id="lead-cards-mobile" style="display:none;">
-    <div style="color:var(--text-d);text-align:center;padding:30px;font-size:13px;">No leads yet.</div>
   </div>
 </div>
 
 <!-- AI PRICER -->
 <div class="panel" id="panel-pricer">
-  <div class="section-header">
-    <div class="section-title">AI Job Pricer</div>
-  </div>
-
+  <div class="section-header"><div class="section-title">AI Job Pricer</div></div>
   <div class="grid2">
     <div>
       <div class="card">
         <div class="card-title">Job Details</div>
         <div class="form-group">
           <label>Job Type</label>
-          <select id="pricer-jobtype" onchange="togglePricerMode()">
+          <select id="pricer-jobtype" onchange="toggleCalcPanels()">
             <option value="">-- Select job type --</option>
-            <optgroup label="🏠 Roofing — Pitched">
+            <optgroup label="Roofing — Pitched">
               <option value="roof-replace">Roof Replacement (pitched, slate)</option>
               <option value="roof-slates">Roof — Price by Slate Count ↗</option>
               <option value="roof-repair">Roof Repair / Patch</option>
               <option value="leadwork">Lead Flashing / Valley Lead</option>
-              <option value="ridging">Ridge Tiles / Capping (full run)</option>
+              <option value="ridging">Ridge Tiles / Capping</option>
               <option value="chimney-clean">Chimney Sweep / Clean</option>
               <option value="chimney-repair">Chimney Repointing / Flashing</option>
               <option value="chimney-rebuild">Chimney Rebuild (full)</option>
               <option value="skylight">Velux / Skylight Installation</option>
             </optgroup>
-            <optgroup label="🏠 Roofing — Flat">
+            <optgroup label="Roofing — Flat">
               <option value="flat-roof-sqm">Flat Roof — Price by sqm ↗</option>
-              <option value="flat-roof-torch">Flat Roof — Torch-On Felt (job price)</option>
-              <option value="flat-roof-epdm">Flat Roof — EPDM Rubber (job price)</option>
+              <option value="flat-roof-torch">Flat Roof — Torch-On Felt (job)</option>
+              <option value="flat-roof-epdm">Flat Roof — EPDM Rubber (job)</option>
             </optgroup>
-            <optgroup label="🪟 Gutters, Fascia &amp; Soffit">
+            <optgroup label="Gutters, Fascia &amp; Soffit">
               <option value="gutters-clean">Gutters — Clean &amp; Minor Repair</option>
-              <option value="gutters-replace">Gutters — Full Replacement (uPVC)</option>
+              <option value="gutters-replace">Gutters — Full Replacement</option>
               <option value="fascia-soffit">Fascia &amp; Soffit Replacement</option>
               <option value="gutters-fascia">Gutters + Fascia + Soffit (full set)</option>
             </optgroup>
-            <optgroup label="🏗️ Extensions &amp; Building">
+            <optgroup label="Extensions &amp; Building">
               <option value="extension-single">Single Storey Extension</option>
               <option value="extension-double">Double Storey Extension</option>
               <option value="garage-conversion">Garage Conversion</option>
-              <option value="attic-conversion">Attic Conversion — Standard</option>
+              <option value="attic-conversion">Attic Conversion</option>
               <option value="attic-dormer">Attic + Dormer Extension</option>
             </optgroup>
-            <optgroup label="🏡 Garden Buildings — Solid Block">
+            <optgroup label="Garden Buildings — Solid Block">
               <option value="garden-block-sm">Garden Building — Block (small ~12sqm)</option>
               <option value="garden-block-med">Garden Building — Block (medium ~25sqm)</option>
               <option value="garden-block-lg">Garden Building — Block (large ~40sqm)</option>
               <option value="garden-block-sqm">Garden Building — Block (custom sqm) ↗</option>
             </optgroup>
-            <optgroup label="🏡 Garden Buildings — Timber Stud + Render">
+            <optgroup label="Garden Buildings — Timber Stud + Render">
               <option value="garden-timber-sm">Garden Building — Timber+Render (small ~12sqm)</option>
               <option value="garden-timber-med">Garden Building — Timber+Render (medium ~25sqm)</option>
               <option value="garden-timber-lg">Garden Building — Timber+Render (large ~40sqm)</option>
               <option value="garden-timber-sqm">Garden Building — Timber+Render (custom sqm) ↗</option>
             </optgroup>
-            <optgroup label="🧱 Blockwork">
+            <optgroup label="Blockwork">
               <option value="blockwork-found">Blockwork — Foundations / Footings</option>
               <option value="blockwork-walls">Blockwork — External Cavity Walls</option>
               <option value="blockwork-internal">Blockwork — Internal Partition Walls</option>
               <option value="blockwork-garden">Blockwork — Garden / Boundary Walls</option>
             </optgroup>
-            <optgroup label="🚗 Driveways &amp; Outdoor">
+            <optgroup label="Driveways &amp; Outdoor">
               <option value="driveway-tarmac">Driveway — Tarmac</option>
               <option value="driveway-block">Driveway — Block Paving</option>
               <option value="driveway-resin">Driveway — Resin Bound</option>
@@ -417,7 +268,7 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
               <option value="garden-clearance">Garden Clearance</option>
               <option value="landscaping">Landscaping (full)</option>
             </optgroup>
-            <optgroup label="🎨 Interior">
+            <optgroup label="Interior">
               <option value="painting-interior">Interior Painting — Full House</option>
               <option value="painting-room">Interior Painting — Per Room</option>
               <option value="bathroom">Bathroom Renovation</option>
@@ -436,7 +287,7 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
               <option value="door-external">External Door (supply &amp; fit)</option>
               <option value="windows-replace">Window Replacement (per window)</option>
             </optgroup>
-            <optgroup label="🔧 Maintenance &amp; General">
+            <optgroup label="Maintenance &amp; General">
               <option value="painting-exterior">Exterior Painting</option>
               <option value="render-exterior">External Render / Pebbledash</option>
               <option value="power-wash">Power Washing</option>
@@ -445,20 +296,92 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
               <option value="skip-hire">Skip Hire (standard, 7 days)</option>
               <option value="scaffolding">Scaffolding (per week)</option>
             </optgroup>
-            <optgroup label="👷 Labour Day Rates">
-              <option value="day-tradesman">Tradesman Day Rate</option>
-              <option value="day-labourer">Labourer Day Rate</option>
-              <option value="day-mixed">Mixed Crew (1 tradesman + 1 labourer)</option>
+            <optgroup label="Labour Day Rates">
+              <option value="day-tradesman">Tradesman Day Rate ↗</option>
+              <option value="day-labourer">Labourer Day Rate ↗</option>
+              <option value="day-mixed">Mixed Crew Day Rate ↗</option>
             </optgroup>
           </select>
         </div>
+
+        <!-- SLATE CALCULATOR -->
+        <div class="calc-box" id="calc-slates" style="display:none;">
+          <div class="calc-title">Slate Calculator</div>
+          <div class="grid2" style="gap:8px;">
+            <div class="form-group" style="margin:0;"><label>No. of Slates</label><input type="number" id="slate-count" value="500" min="1" oninput="calcSlates()"></div>
+            <div class="form-group" style="margin:0;"><label>Price / Slate (€)</label><input type="number" id="slate-price" value="1.30" step="0.05" oninput="calcSlates()"></div>
+          </div>
+          <div style="margin-top:10px;background:var(--bg-card);padding:10px;border-radius:4px;">
+            <div class="calc-result">€<span id="slate-total">650</span></div>
+            <div class="calc-note">Slates only — tick extras below</div>
+          </div>
+          <div class="calc-check-grid">
+            <label><input type="checkbox" id="add-ridging" onchange="calcSlates()"> Ridge/Hip Tiles (+€1,100)</label>
+            <label><input type="checkbox" id="add-lead" onchange="calcSlates()"> Lead/Flashing (+€650)</label>
+            <label><input type="checkbox" id="add-trims" onchange="calcSlates()"> Verge Trims (+€200)</label>
+          </div>
+        </div>
+
+        <!-- FLAT ROOF SQM -->
+        <div class="calc-box" id="calc-flat-sqm" style="display:none;">
+          <div class="calc-title">Flat Roof — sqm Calculator</div>
+          <div class="grid2" style="gap:8px;">
+            <div class="form-group" style="margin:0;"><label>Area (sqm)</label><input type="number" id="flat-sqm" value="20" min="1" oninput="calcFlatRoof()"></div>
+            <div class="form-group" style="margin:0;"><label>Rate / sqm (€)</label><input type="number" id="flat-rate" value="130" oninput="calcFlatRoof()"></div>
+          </div>
+          <div style="margin-top:10px;background:var(--bg-card);padding:10px;border-radius:4px;">
+            <div class="calc-result">€<span id="flat-total">2600</span></div>
+            <div class="calc-note">Base cost — tick extras below</div>
+          </div>
+          <div class="calc-check-grid">
+            <label><input type="checkbox" id="flat-lead" onchange="calcFlatRoof()"> Lead Upstands (+€450)</label>
+            <label><input type="checkbox" id="flat-trims" onchange="calcFlatRoof()"> Drip Trims (+€180)</label>
+          </div>
+        </div>
+
+        <!-- GARDEN BUILDING SQM -->
+        <div class="calc-box" id="calc-garden-sqm" style="display:none;">
+          <div class="calc-title">Garden Building — Custom sqm</div>
+          <div class="grid2" style="gap:8px;">
+            <div class="form-group" style="margin:0;"><label>Floor Area (sqm)</label><input type="number" id="garden-sqm" value="20" min="1" oninput="calcGarden()"></div>
+            <div class="form-group" style="margin:0;"><label>Build Type</label>
+              <select id="garden-type" onchange="calcGarden()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:9px 12px;color:var(--text);font-size:13px;outline:none;width:100%;">
+                <option value="block">Solid Block (~€650/sqm)</option>
+                <option value="timber">Timber+Render (~€420/sqm)</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-top:10px;background:var(--bg-card);padding:10px;border-radius:4px;">
+            <div class="calc-result">€<span id="garden-total">13000</span></div>
+            <div class="calc-note" id="garden-note">Block build: €650/sqm avg</div>
+          </div>
+          <div class="calc-check-grid">
+            <label><input type="checkbox" id="gb-electric" onchange="calcGarden()"> Electrics (+€1,500)</label>
+            <label><input type="checkbox" id="gb-plumbing" onchange="calcGarden()"> Plumbing (+€2,000)</label>
+            <label><input type="checkbox" id="gb-insulate" onchange="calcGarden()"> Insulation (+€800)</label>
+          </div>
+        </div>
+
+        <!-- DAY RATE CALCULATOR -->
+        <div class="calc-box" id="calc-dayrate" style="display:none;">
+          <div class="calc-title">Day Rate Calculator — Tradesman €400 · Labourer €250</div>
+          <div class="grid3" style="gap:8px;">
+            <div class="form-group" style="margin:0;"><label>Tradesman Days</label><input type="number" id="dr-trades" value="1" min="0" oninput="calcDayRate()"></div>
+            <div class="form-group" style="margin:0;"><label>Labourer Days</label><input type="number" id="dr-labour" value="0" min="0" oninput="calcDayRate()"></div>
+            <div class="form-group" style="margin:0;"><label>No. Workers</label><input type="number" id="dr-workers" value="1" min="1" oninput="calcDayRate()"></div>
+          </div>
+          <div style="margin-top:10px;background:var(--bg-card);padding:10px;border-radius:4px;">
+            <div class="calc-result">€<span id="dr-total">400</span></div>
+            <div class="calc-note" id="dr-note">1 tradesman × 1 day</div>
+          </div>
+        </div>
+
         <div class="form-group">
           <label>Property Size</label>
           <select id="pricer-size">
             <option value="small">Small (1-2 bed / apartment)</option>
             <option value="medium" selected>Medium (3 bed semi-D)</option>
             <option value="large">Large (4+ bed / detached)</option>
-            <option value="commercial">Commercial / Industrial</option>
           </select>
         </div>
         <div class="form-group">
@@ -468,132 +391,47 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
             <option value="dublin-sub">Dublin Suburbs</option>
             <option value="meath">Meath / Kildare</option>
             <option value="wicklow">Wicklow</option>
-            <option value="louth">Louth</option>
             <option value="other">Rest of Ireland</option>
           </select>
         </div>
-        <!-- DYNAMIC CALCULATOR INPUTS (shown/hidden by job type) -->
-        <div id="calc-slates" style="display:none;background:var(--bg);border:1px solid var(--border-acc);border-radius:6px;padding:14px;margin-bottom:14px;">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:10px;">Slate Calculator</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div class="form-group" style="margin:0;"><label>Number of Slates</label><input type="number" id="slate-count" value="500" min="1" oninput="calcSlates()"></div>
-            <div class="form-group" style="margin:0;"><label>Price per Slate (€)</label><input type="number" id="slate-price" value="1.30" step="0.05" oninput="calcSlates()"></div>
-          </div>
-          <div style="margin-top:10px;padding:10px;background:var(--bg-card);border-radius:4px;font-family:'Barlow Condensed',sans-serif;">
-            <div style="font-size:22px;font-weight:800;color:var(--orange);">€<span id="slate-total">650</span></div>
-            <div style="font-size:11px;color:var(--text-m);margin-top:2px;">Slates only — add trims, ridging &amp; lead work below</div>
-          </div>
-          <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:12px;">
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="add-ridging" onchange="calcSlates()"> Ridge/Hip Tiles</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="add-lead" onchange="calcSlates()"> Lead/Flashing</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="add-trims" onchange="calcSlates()"> Verge Trims</label>
-          </div>
-          <div id="slate-extras-total" style="margin-top:8px;font-size:12px;color:var(--text-m);"></div>
-        </div>
-
-        <div id="calc-flat-sqm" style="display:none;background:var(--bg);border:1px solid var(--border-acc);border-radius:6px;padding:14px;margin-bottom:14px;">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:10px;">Flat Roof — sqm Calculator</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div class="form-group" style="margin:0;"><label>Area (sqm)</label><input type="number" id="flat-sqm" value="20" min="1" oninput="calcFlatRoof()"></div>
-            <div class="form-group" style="margin:0;"><label>Rate per sqm (€)</label><input type="number" id="flat-rate" value="130" oninput="calcFlatRoof()"></div>
-          </div>
-          <div style="margin-top:10px;padding:10px;background:var(--bg-card);border-radius:4px;font-family:'Barlow Condensed',sans-serif;">
-            <div style="font-size:22px;font-weight:800;color:var(--orange);">€<span id="flat-total">2600</span></div>
-            <div style="font-size:11px;color:var(--text-m);margin-top:2px;">Base flat roof cost — add trims &amp; lead work below</div>
-          </div>
-          <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;">
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="flat-lead" onchange="calcFlatRoof()"> Lead Upstands / Flashings</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="flat-trims" onchange="calcFlatRoof()"> Drip Trims / Edging</label>
-          </div>
-          <div id="flat-extras-total" style="margin-top:8px;font-size:12px;color:var(--text-m);"></div>
-        </div>
-
-        <div id="calc-garden-sqm" style="display:none;background:var(--bg);border:1px solid var(--border-acc);border-radius:6px;padding:14px;margin-bottom:14px;">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:10px;">Garden Building — Custom sqm</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div class="form-group" style="margin:0;"><label>Floor Area (sqm)</label><input type="number" id="garden-sqm" value="20" min="1" oninput="calcGardenBuilding()"></div>
-            <div class="form-group" style="margin:0;"><label>Build Type</label>
-              <select id="garden-type" onchange="calcGardenBuilding()">
-                <option value="block">Solid Block</option>
-                <option value="timber">Timber Stud + Render</option>
-              </select>
-            </div>
-          </div>
-          <div style="margin-top:10px;padding:10px;background:var(--bg-card);border-radius:4px;font-family:'Barlow Condensed',sans-serif;">
-            <div style="font-size:22px;font-weight:800;color:var(--orange);">€<span id="garden-total">0</span></div>
-            <div style="font-size:11px;color:var(--text-m);margin-top:2px;"><span id="garden-rate-label">Block: ~€650/sqm avg</span></div>
-          </div>
-          <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;">
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="gb-roof" onchange="calcGardenBuilding()"> Flat Roof (incl)</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="gb-electric" onchange="calcGardenBuilding()"> Electrics (add €1,500)</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="gb-plumbing" onchange="calcGardenBuilding()"> Plumbing (add €2,000)</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="gb-insulate" onchange="calcGardenBuilding()"> Insulation (add €800)</label>
-          </div>
-        </div>
-
-        <div id="calc-dayrate" style="display:none;background:var(--bg);border:1px solid var(--border-acc);border-radius:6px;padding:14px;margin-bottom:14px;">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:10px;">Day Rate Calculator</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
-            <div class="form-group" style="margin:0;"><label>Tradesman Days</label><input type="number" id="dr-trades" value="1" min="0" oninput="calcDayRate()"></div>
-            <div class="form-group" style="margin:0;"><label>Labourer Days</label><input type="number" id="dr-labour" value="1" min="0" oninput="calcDayRate()"></div>
-            <div class="form-group" style="margin:0;"><label>No. of Workers</label><input type="number" id="dr-workers" value="1" min="1" oninput="calcDayRate()"></div>
-          </div>
-          <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;color:var(--text-m);">
-            <div>Tradesman: <strong style="color:var(--orange);">€400/day</strong></div>
-            <div>Labourer: <strong style="color:var(--orange);">€250/day</strong></div>
-          </div>
-          <div style="margin-top:10px;padding:10px;background:var(--bg-card);border-radius:4px;font-family:'Barlow Condensed',sans-serif;">
-            <div style="font-size:22px;font-weight:800;color:var(--orange);">€<span id="dr-total">650</span></div>
-            <div style="font-size:11px;color:var(--text-m);margin-top:2px;"><span id="dr-breakdown">1 tradesman × 1 day + 1 labourer × 1 day</span></div>
-          </div>
-        </div>
 
         <!-- EXTRAS / ADD-ONS -->
-        <div id="extras-section" style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:14px;">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--grey-lt);margin-bottom:10px;">Add-Ons &amp; Extras</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px;" id="extras-checkboxes">
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="280" onchange="calcExtras()"> Skip hire (€280)</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="800" onchange="calcExtras()"> Scaffolding 1wk (€800)</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="1400" onchange="calcExtras()"> Scaffolding 2wks (€1,400)</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="400" onchange="calcExtras()"> 1 tradesman day (€400)</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="250" onchange="calcExtras()"> 1 labourer day (€250)</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="500" onchange="calcExtras()"> Waste disposal (€500)</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="350" onchange="calcExtras()"> Lead flashing (€350)</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="600" onchange="calcExtras()"> Ridge tiles (€600)</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="200" onchange="calcExtras()"> Verge trims (€200)</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="1500" onchange="calcExtras()"> Electrics (€1,500)</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="2000" onchange="calcExtras()"> Plumbing (€2,000)</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="800" onchange="calcExtras()"> Insulation (€800)</label>
+        <div class="card" style="margin-bottom:14px;padding:14px;">
+          <div class="card-title">Add-Ons &amp; Extras</div>
+          <div class="calc-check-grid" id="extras-checks">
+            <label><input type="checkbox" value="280" onchange="calcExtras()"> Skip hire (€280)</label>
+            <label><input type="checkbox" value="800" onchange="calcExtras()"> Scaffolding 1wk (€800)</label>
+            <label><input type="checkbox" value="1400" onchange="calcExtras()"> Scaffolding 2wks (€1,400)</label>
+            <label><input type="checkbox" value="400" onchange="calcExtras()"> Extra tradesman day (€400)</label>
+            <label><input type="checkbox" value="250" onchange="calcExtras()"> Extra labourer day (€250)</label>
+            <label><input type="checkbox" value="500" onchange="calcExtras()"> Waste disposal (€500)</label>
+            <label><input type="checkbox" value="350" onchange="calcExtras()"> Lead flashing (€350)</label>
+            <label><input type="checkbox" value="600" onchange="calcExtras()"> Ridge tiles (€600)</label>
+            <label><input type="checkbox" value="1500" onchange="calcExtras()"> Electrics (€1,500)</label>
+            <label><input type="checkbox" value="2000" onchange="calcExtras()"> Plumbing (€2,000)</label>
+            <label><input type="checkbox" value="800" onchange="calcExtras()"> Insulation (€800)</label>
+            <label><input type="checkbox" value="200" onchange="calcExtras()"> Verge trims (€200)</label>
           </div>
-          <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:center;">
-            <div class="form-group" style="margin:0;">
-              <label>Custom Extra (€)</label>
-              <input type="number" id="custom-extra" placeholder="0" oninput="calcExtras()">
-            </div>
-            <div class="form-group" style="margin:0;">
-              <label>Custom Label</label>
-              <input type="text" id="custom-extra-label" placeholder="e.g. Permit fee">
-            </div>
+          <div class="grid2" style="gap:8px;margin-top:10px;">
+            <div class="form-group" style="margin:0;"><label>Custom Extra (€)</label><input type="number" id="custom-extra" placeholder="0" oninput="calcExtras()"></div>
+            <div class="form-group" style="margin:0;"><label>Custom Label</label><input type="text" id="custom-extra-label" placeholder="e.g. Permit fee"></div>
           </div>
-          <div style="margin-top:10px;">
-            <label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;">
-              <input type="checkbox" id="contingency-check" onchange="calcExtras()" checked>
-              <span>Add 10% contingency for unseen extras</span>
-            </label>
-          </div>
-          <div id="extras-total-row" style="margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-size:14px;color:var(--orange);font-weight:700;display:none;">
-            Add-ons total: €<span id="extras-total">0</span>
+          <label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;margin-top:10px;">
+            <input type="checkbox" id="contingency-check" onchange="calcExtras()" checked>
+            <span>Add 10% contingency for unseen extras</span>
+          </label>
+          <div id="extras-total-row" style="margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--orange);font-weight:700;display:none;">
+            Add-ons: €<span id="extras-total">0</span>
           </div>
         </div>
 
         <div class="form-group">
-          <label>Job Notes / Description (paste lead here)</label>
-          <textarea id="pricer-notes" placeholder="Paste the full post or describe the job... e.g. 'Looking for someone to replace gutters on 3 bed semi-D in Swords, full front and back, some fascia damage too'"></textarea>
+          <label>Notes / Paste Lead Here</label>
+          <textarea id="pricer-notes" placeholder="Paste the original post or describe the job..."></textarea>
         </div>
         <button class="btn btn-primary" onclick="runAIPricer()" style="width:100%;">Get AI Price Estimate</button>
       </div>
     </div>
-
     <div>
       <div class="ai-box" id="pricer-result-box">
         <div style="color:var(--text-d);font-size:13px;padding:10px 0;">Select a job type and click "Get AI Price Estimate".</div>
@@ -606,38 +444,28 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
 <div class="panel" id="panel-planning">
   <div class="section-header">
     <div class="section-title">Planning Permissions</div>
-    <div class="section-actions">
-      <button class="btn btn-outline btn-sm" onclick="refreshPlanning()">↻ Refresh</button>
-    </div>
+    <div class="section-actions"><button class="btn btn-outline btn-sm" onclick="renderPlanning()">↻ Refresh</button></div>
   </div>
-
   <div class="filter-row">
-    <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--text-d);font-weight:700;letter-spacing:1px;text-transform:uppercase;">Area:</span>
     <span class="filter-chip active" onclick="filterPlanning('all',this)">All Areas</span>
     <span class="filter-chip" onclick="filterPlanning('dublin',this)">Dublin</span>
     <span class="filter-chip" onclick="filterPlanning('meath',this)">Meath</span>
     <span class="filter-chip" onclick="filterPlanning('kildare',this)">Kildare</span>
     <span class="filter-chip" onclick="filterPlanning('wicklow',this)">Wicklow</span>
   </div>
-
   <div class="filter-row">
-    <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--text-d);font-weight:700;letter-spacing:1px;text-transform:uppercase;">Type:</span>
     <span class="filter-chip active" onclick="filterPlanType('all',this)">All Types</span>
     <span class="filter-chip" onclick="filterPlanType('extension',this)">Extension</span>
     <span class="filter-chip" onclick="filterPlanType('renovation',this)">Renovation</span>
     <span class="filter-chip" onclick="filterPlanType('new-build',this)">New Build</span>
     <span class="filter-chip" onclick="filterPlanType('commercial',this)">Commercial</span>
   </div>
-
   <div id="planning-list"></div>
 </div>
 
 <!-- OUTREACH -->
 <div class="panel" id="panel-outreach">
-  <div class="section-header">
-    <div class="section-title">Outreach Templates</div>
-  </div>
-
+  <div class="section-header"><div class="section-title">Outreach Templates</div></div>
   <div class="filter-row">
     <span class="filter-chip active" onclick="filterTemplates('all',this)">All</span>
     <span class="filter-chip" onclick="filterTemplates('facebook',this)">Facebook</span>
@@ -645,9 +473,8 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
     <span class="filter-chip" onclick="filterTemplates('donedeal',this)">Done Deal</span>
     <span class="filter-chip" onclick="filterTemplates('follow-up',this)">Follow-Up</span>
     <span class="filter-chip" onclick="filterTemplates('won',this)">Job Won</span>
-    <span class="filter-chip" onclick="filterTemplates('review',this)">Review Request</span>
+    <span class="filter-chip" onclick="filterTemplates('review',this)">Review</span>
   </div>
-
   <div id="templates-list"></div>
 </div>
 
@@ -655,24 +482,9 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
 <div class="panel" id="panel-rates">
   <div class="section-header">
     <div class="section-title">Your Rates</div>
-    <div class="section-actions">
-      <button class="btn btn-primary btn-sm" onclick="saveRates()">Save Rates</button>
-    </div>
+    <div class="section-actions"><button class="btn btn-primary btn-sm" onclick="saveRates()">Save Rates</button></div>
   </div>
-  <div class="card">
-    <div class="card-title">Edit Pricing — Updates AI Pricer Automatically</div>
-    <table class="rates-table">
-      <thead>
-        <tr>
-          <th>Job Type</th>
-          <th>Small (€)</th>
-          <th>Medium (€)</th>
-          <th>Large (€)</th>
-        </tr>
-      </thead>
-      <tbody id="rates-tbody"></tbody>
-    </table>
-  </div>
+  <div class="card"><div class="card-title">Edit Pricing — Updates AI Pricer</div><table class="rates-table"><thead><tr><th>Job Type</th><th>Small (€)</th><th>Medium (€)</th><th>Large (€)</th></tr></thead><tbody id="rates-tbody"></tbody></table></div>
 </div>
 
 <!-- QUOTES -->
@@ -684,15 +496,16 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
       <button class="btn btn-primary btn-sm" onclick="printQuote()">Print / PDF</button>
     </div>
   </div>
-
   <div class="grid2">
     <div class="card">
       <div class="card-title">Quote Details</div>
       <div class="form-group"><label>Customer Name</label><input type="text" id="q-name" placeholder="John Murphy"></div>
-      <div class="form-group"><label>Customer Address</label><textarea id="q-addr" placeholder="12 Main Street, Swords, Co. Dublin" style="min-height:60px;"></textarea></div>
+      <div class="form-group"><label>Address</label><textarea id="q-addr" placeholder="12 Main St, Swords, Co. Dublin" style="min-height:60px;"></textarea></div>
       <div class="form-group"><label>Job Description</label><textarea id="q-desc" placeholder="Describe the work..."></textarea></div>
-      <div class="form-group"><label>Quote / Invoice Number</label><input type="text" id="q-num" placeholder="Q2026-001"></div>
-      <div class="form-group"><label>Date</label><input type="date" id="q-date"></div>
+      <div class="grid2" style="gap:8px;">
+        <div class="form-group" style="margin:0;"><label>Quote / Inv No.</label><input type="text" id="q-num"></div>
+        <div class="form-group" style="margin:0;"><label>Date</label><input type="date" id="q-date"></div>
+      </div>
       <div class="divider"></div>
       <div class="card-title">Line Items</div>
       <div id="q-items"></div>
@@ -704,22 +517,15 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--orange);">Total: <span id="q-total">€0</span></div>
       </div>
     </div>
-    <div class="card" style="background:var(--bg);">
-      <div class="card-title">Preview</div>
-      <div id="quote-preview" style="background:#fff;color:#111;border-radius:4px;padding:24px;font-size:12px;line-height:1.7;"></div>
-    </div>
+    <div class="card" style="background:var(--bg);"><div class="card-title">Preview</div><div id="quote-preview" style="background:#fff;color:#111;border-radius:4px;padding:20px;font-size:12px;line-height:1.7;"></div></div>
   </div>
 </div>
 
 <!-- ADD LEAD MODAL -->
 <div class="modal-overlay" id="modal-add-lead">
   <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">Add New Lead</div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
-    </div>
-    <div class="form-group">
-      <label>Source</label>
+    <div class="modal-header"><div class="modal-title">Add New Lead</div><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="form-group"><label>Source</label>
       <select id="new-source">
         <option value="facebook">Facebook Group</option>
         <option value="marketplace">Facebook Marketplace</option>
@@ -731,7 +537,6 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
         <option value="boards">Boards.ie</option>
         <option value="gumtree">Gumtree</option>
         <option value="twitter">Twitter/X</option>
-        <option value="lovin">Lovin Dublin</option>
         <option value="referral">Referral</option>
         <option value="direct">Direct / Walk-In</option>
       </select>
@@ -740,30 +545,11 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
       <div class="form-group"><label>Customer Name</label><input type="text" id="new-name" placeholder="John Murphy"></div>
       <div class="form-group"><label>Phone / Contact</label><input type="text" id="new-phone" placeholder="086 123 4567"></div>
     </div>
-    <div class="form-group">
-      <label>Job Type</label>
-      <input type="text" id="new-jobtype" placeholder="e.g. Roof Repair, Gutter Clean, Extension...">
-    </div>
-    <div class="form-group">
-      <label>Location</label>
-      <input type="text" id="new-location" placeholder="e.g. Swords, Co. Dublin">
-    </div>
-    <div class="form-group">
-      <label>Quote Amount (€)</label>
-      <input type="number" id="new-quote" placeholder="0">
-    </div>
-    <div class="form-group">
-      <label>Notes / Original Post</label>
-      <textarea id="new-notes" placeholder="Paste original post or add notes..."></textarea>
-    </div>
-    <div class="form-group">
-      <label>Priority</label>
-      <select id="new-priority">
-        <option value="high">High</option>
-        <option value="med" selected>Medium</option>
-        <option value="low">Low</option>
-      </select>
-    </div>
+    <div class="form-group"><label>Job Type</label><input type="text" id="new-jobtype" placeholder="e.g. Roof Repair, Gutter Clean..."></div>
+    <div class="form-group"><label>Location</label><input type="text" id="new-location" placeholder="e.g. Swords, Co. Dublin"></div>
+    <div class="form-group"><label>Quote Amount (€)</label><input type="number" id="new-quote" placeholder="0"></div>
+    <div class="form-group"><label>Notes / Original Post</label><textarea id="new-notes" placeholder="Paste original post or add notes..."></textarea></div>
+    <div class="form-group"><label>Priority</label><select id="new-priority"><option value="high">High</option><option value="med" selected>Medium</option><option value="low">Low</option></select></div>
     <div style="display:flex;gap:8px;justify-content:flex-end;">
       <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
       <button class="btn btn-primary" onclick="saveLead()">Save Lead</button>
@@ -771,43 +557,41 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<div id="print-quote-area" style="display:none;"></div>
-
 <script>
-// ============================
+// ============================================================
 // STATE
-// ============================
-let leads = JSON.parse(localStorage.getItem('ecc_leads') || '[]');
-let rates = JSON.parse(localStorage.getItem('ecc_rates') || 'null') || getDefaultRates();
-const API_KEY = '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';
-let currentFilter = 'all';
-let planFilter = 'all';
-let planTypeFilter = 'all';
-let templateFilter = 'all';
-let quoteItems = [];
+// ============================================================
+var leads = JSON.parse(localStorage.getItem('ecc_leads') || '[]');
+var rates = JSON.parse(localStorage.getItem('ecc_rates') || 'null') || getDefaultRates();
+var API_KEY = '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';
+var currentFilter = 'all';
+var planFilter = 'all';
+var planTypeFilter = 'all';
+var templateFilter = 'all';
+var quoteItems = [];
+var extrasAmt = 0;
 
-// ============================
+// ============================================================
 // CLOCK
-// ============================
+// ============================================================
 function updateClock(){
-  const now = new Date();
-  const t = now.toLocaleTimeString('en-IE',{hour:'2-digit',minute:'2-digit'});
-  document.getElementById('clock').textContent = t;
+  var now = new Date();
+  document.getElementById('clock').textContent = now.toLocaleTimeString('en-IE',{hour:'2-digit',minute:'2-digit'});
 }
 updateClock();
 setInterval(updateClock, 1000);
 
-// ============================
+// ============================================================
 // TABS
-// ============================
-function switchTab(tab){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  event.target.classList.add('active');
-  document.getElementById('panel-'+tab).classList.add('active');
+// ============================================================
+function switchTab(tab, el){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  if(el) el.classList.add('active');
+  var pEl = document.getElementById('panel-'+tab);
+  if(pEl) pEl.classList.add('active');
   if(tab==='dashboard') renderDashboard();
   if(tab==='leads') renderLeads();
   if(tab==='planning') renderPlanning();
@@ -816,473 +600,454 @@ function switchTab(tab){
   if(tab==='quotes') initQuotes();
 }
 
-// ============================
+// ============================================================
 // DEFAULT RATES
-// ============================
+// ============================================================
 function getDefaultRates(){
   return {
-    // ROOFING
-    'roof-replace':      {label:'Roof Replacement (pitched, slate)',          small:9500,  medium:16000, large:26000},
-    'roof-repair':       {label:'Roof Repair / Patch (pitched)',               small:450,   medium:900,   large:1600},
-    'flat-roof-torch':   {label:'Flat Roof — Torch-On Felt (job price)',       small:1800,  medium:3200,  large:5500},
-    'flat-roof-epdm':    {label:'Flat Roof — EPDM Rubber (job price)',         small:2200,  medium:4000,  large:7000},
-    'gutters-clean':     {label:'Gutters — Clean & Minor Repair',              small:160,   medium:240,   large:380},
-    'gutters-replace':   {label:'Gutters — Full Replacement (uPVC)',            small:900,   medium:1500,  large:2600},
-    'gutters-fascia':    {label:'Gutters + Fascia + Soffit (full set)',        small:2200,  medium:3500,  large:5500},
-    'fascia-soffit':     {label:'Fascia & Soffit Replacement only',            small:1400,  medium:2400,  large:3800},
-    'chimney-clean':     {label:'Chimney Sweep / Clean',                       small:80,    medium:80,    large:80},
-    'chimney-repair':    {label:'Chimney Repointing / Flashing',               small:350,   medium:650,   large:1000},
-    'chimney-rebuild':   {label:'Chimney Rebuild (full)',                      small:2200,  medium:3500,  large:5500},
-    'skylight':          {label:'Velux / Skylight Installation',               small:900,   medium:1400,  large:2000},
-    'leadwork':          {label:'Lead Flashing / Valley Lead',                 small:350,   medium:650,   large:1200},
-    'ridging':           {label:'Ridge Tiles / Capping (full run)',            small:600,   medium:1100,  large:1900},
-    'fascia-only':       {label:'Fascia & Soffit Replacement',                 small:1400,  medium:2400,  large:3800},
-    // EXTENSIONS & BUILDING
-    'extension-single':  {label:'Single Storey Extension',                    small:65000, medium:95000, large:140000},
-    'extension-double':  {label:'Double Storey Extension',                    small:100000,medium:145000,large:210000},
-    'garage-conversion': {label:'Garage Conversion — Basic',                  small:14000, medium:20000, large:30000},
-    'attic-conversion':  {label:'Attic Conversion — Standard',                small:30000, medium:42000, large:60000},
-    'attic-dormer':      {label:'Attic + Dormer Extension',                   small:42000, medium:58000, large:80000},
-    // GARDEN BUILDINGS — SOLID BLOCK
-    'garden-block-sm':   {label:'Garden Building — Block (small ~12sqm)',      small:8500,  medium:8500,  large:8500},
-    'garden-block-med':  {label:'Garden Building — Block (medium ~25sqm)',     small:16500, medium:16500, large:16500},
-    'garden-block-lg':   {label:'Garden Building — Block (large ~40sqm)',      small:26000, medium:26000, large:26000},
-    // GARDEN BUILDINGS — TIMBER STUD WITH RENDER
-    'garden-timber-sm':  {label:'Garden Building — Timber Stud+Render (small ~12sqm)', small:5500, medium:5500, large:5500},
-    'garden-timber-med': {label:'Garden Building — Timber Stud+Render (medium ~25sqm)',small:10500,medium:10500,large:10500},
-    'garden-timber-lg':  {label:'Garden Building — Timber Stud+Render (large ~40sqm)', small:16000,medium:16000,large:16000},
-    // BLOCKWORK
-    'blockwork-found':   {label:'Blockwork — Foundations / Footings',         small:2800,  medium:5500,  large:9500},
-    'blockwork-walls':   {label:'Blockwork — External Cavity Walls (job)',     small:3500,  medium:7000,  large:14000},
-    'blockwork-internal':{label:'Blockwork — Internal Partition Walls',        small:1800,  medium:3500,  large:6500},
-    'blockwork-garden':  {label:'Blockwork — Garden / Boundary Walls',        small:1200,  medium:2800,  large:5000},
-    // DRIVEWAYS & OUTDOOR
-    'driveway-tarmac':   {label:'Driveway — Tarmac',                          small:3200,  medium:5500,  large:9000},
-    'driveway-block':    {label:'Driveway — Block Paving',                    small:5000,  medium:9000,  large:15000},
-    'driveway-resin':    {label:'Driveway — Resin Bound',                     small:4500,  medium:7500,  large:13000},
-    'patio-paving':      {label:'Patio — Natural Stone / Paving',             small:2500,  medium:5000,  large:9000},
-    'patio-decking':     {label:'Patio — Timber Decking',                     small:2000,  medium:4000,  large:7000},
-    'fencing-timber':    {label:'Fencing — Timber Panel',                     small:900,   medium:1800,  large:3500},
-    'fencing-block':     {label:'Fencing — Block/Brick Pillars & Panel',      small:2200,  medium:4500,  large:8000},
-    'garden-clearance':  {label:'Garden Clearance',                           small:300,   medium:500,   large:850},
-    'landscaping':       {label:'Landscaping (full)',                          small:3500,  medium:7500,  large:18000},
-    // INTERIOR
-    'painting-interior': {label:'Interior Painting — Full House',             small:3200,  medium:5500,  large:9000},
-    'painting-room':     {label:'Interior Painting — Per Room',               small:380,   medium:480,   large:650},
-    'bathroom':          {label:'Bathroom Renovation',                        small:7500,  medium:14000, large:24000},
-    'ensuite':           {label:'Ensuite / Wet Room',                         small:5500,  medium:9500,  large:16000},
-    'kitchen':           {label:'Kitchen Renovation',                         small:9000,  medium:18000, large:35000},
-    'flooring-laminate': {label:'Flooring — Laminate / LVT',                 small:2200,  medium:4000,  large:7000},
-    'flooring-tile':     {label:'Flooring — Tile',                            small:2800,  medium:5500,  large:9500},
-    'plastering-full':   {label:'Plastering — Full House Skim',               small:3500,  medium:6000,  large:10000},
-    'plastering-room':   {label:'Plastering — Per Room',                      small:450,   medium:600,   large:900},
-    'tiling':            {label:'Tiling (walls / floor)',                     small:1400,  medium:2800,  large:5000},
-    'insulation-wall':   {label:'Insulation — Wall Cavity / Board',           small:2800,  medium:5000,  large:8500},
-    'insulation-attic':  {label:'Insulation — Attic / Roof',                  small:900,   medium:1500,  large:2500},
-    'dry-lining':        {label:'Dry Lining / IWI (internal)',                small:3500,  medium:6500,  large:11000},
-    'stud-partition':    {label:'Stud Partition Wall',                        small:600,   medium:1000,  large:1800},
-    'door-internal':     {label:'Internal Doors (supply & fit, per door)',    small:350,   medium:350,   large:350},
-    'door-external':     {label:'External Door (supply & fit)',               small:1200,  medium:1600,  large:2500},
-    'windows-replace':   {label:'Windows — Replacement (per window)',         small:650,   medium:700,   large:900},
-    // MAINTENANCE & GENERAL
-    'painting-exterior': {label:'Exterior Painting',                          small:3500,  medium:6000,  large:10000},
-    'render-exterior':   {label:'External Render / Pebbledash',               small:4500,  medium:8000,  large:14000},
-    'power-wash':        {label:'Power Washing',                              small:180,   medium:300,   large:480},
-    'window-clean':      {label:'Window Cleaning (one-off)',                  small:80,    medium:130,   large:200},
-    'handyman':          {label:'Handyman / Odd Jobs (per day)',               small:400,   medium:400,   large:400},
-    'skip-hire':         {label:'Skip Hire (standard, 7 days)',               small:280,   medium:380,   large:480},
-    'scaffolding':       {label:'Scaffolding (per week)',                     small:800,   medium:1400,  large:2200},
+    'roof-replace':     {label:'Roof Replacement (pitched, slate)', small:9500, medium:16000, large:26000},
+    'roof-repair':      {label:'Roof Repair / Patch',               small:450,  medium:900,   large:1600},
+    'flat-roof-torch':  {label:'Flat Roof — Torch-On Felt',         small:1800, medium:3200,  large:5500},
+    'flat-roof-epdm':   {label:'Flat Roof — EPDM Rubber',           small:2200, medium:4000,  large:7000},
+    'gutters-clean':    {label:'Gutters — Clean & Repair',          small:160,  medium:240,   large:380},
+    'gutters-replace':  {label:'Gutters — Full Replace (uPVC)',      small:900,  medium:1500,  large:2600},
+    'fascia-soffit':    {label:'Fascia & Soffit Replacement',       small:1400, medium:2400,  large:3800},
+    'gutters-fascia':   {label:'Gutters + Fascia + Soffit (full)',  small:2200, medium:3500,  large:5500},
+    'chimney-clean':    {label:'Chimney Sweep / Clean',             small:80,   medium:80,    large:80},
+    'chimney-repair':   {label:'Chimney Repointing / Flashing',     small:350,  medium:650,   large:1000},
+    'chimney-rebuild':  {label:'Chimney Rebuild (full)',            small:2200, medium:3500,  large:5500},
+    'skylight':         {label:'Velux / Skylight Installation',     small:900,  medium:1400,  large:2000},
+    'leadwork':         {label:'Lead Flashing / Valley Lead',       small:350,  medium:650,   large:1200},
+    'ridging':          {label:'Ridge Tiles / Capping (full run)',  small:600,  medium:1100,  large:1900},
+    'extension-single': {label:'Single Storey Extension',          small:65000,medium:95000, large:140000},
+    'extension-double': {label:'Double Storey Extension',          small:100000,medium:145000,large:210000},
+    'garage-conversion':{label:'Garage Conversion',                small:14000,medium:20000, large:30000},
+    'attic-conversion': {label:'Attic Conversion',                 small:30000,medium:42000, large:60000},
+    'attic-dormer':     {label:'Attic + Dormer Extension',         small:42000,medium:58000, large:80000},
+    'garden-block-sm':  {label:'Garden Building — Block (small ~12sqm)',  small:8500, medium:8500, large:8500},
+    'garden-block-med': {label:'Garden Building — Block (medium ~25sqm)', small:16500,medium:16500,large:16500},
+    'garden-block-lg':  {label:'Garden Building — Block (large ~40sqm)',  small:26000,medium:26000,large:26000},
+    'garden-timber-sm': {label:'Garden Building — Timber+Render (small ~12sqm)', small:5500, medium:5500, large:5500},
+    'garden-timber-med':{label:'Garden Building — Timber+Render (medium ~25sqm)',small:10500,medium:10500,large:10500},
+    'garden-timber-lg': {label:'Garden Building — Timber+Render (large ~40sqm)', small:16000,medium:16000,large:16000},
+    'blockwork-found':  {label:'Blockwork — Foundations / Footings',  small:2800, medium:5500, large:9500},
+    'blockwork-walls':  {label:'Blockwork — External Cavity Walls',   small:3500, medium:7000, large:14000},
+    'blockwork-internal':{label:'Blockwork — Internal Partition Walls',small:1800,medium:3500, large:6500},
+    'blockwork-garden': {label:'Blockwork — Garden / Boundary Walls', small:1200, medium:2800, large:5000},
+    'driveway-tarmac':  {label:'Driveway — Tarmac',                   small:3200, medium:5500, large:9000},
+    'driveway-block':   {label:'Driveway — Block Paving',             small:5000, medium:9000, large:15000},
+    'driveway-resin':   {label:'Driveway — Resin Bound',              small:4500, medium:7500, large:13000},
+    'patio-paving':     {label:'Patio — Natural Stone / Paving',      small:2500, medium:5000, large:9000},
+    'patio-decking':    {label:'Patio — Timber Decking',              small:2000, medium:4000, large:7000},
+    'fencing-timber':   {label:'Fencing — Timber Panel',              small:900,  medium:1800, large:3500},
+    'fencing-block':    {label:'Fencing — Block/Brick Pillars',       small:2200, medium:4500, large:8000},
+    'garden-clearance': {label:'Garden Clearance',                    small:300,  medium:500,  large:850},
+    'landscaping':      {label:'Landscaping (full)',                   small:3500, medium:7500, large:18000},
+    'painting-interior':{label:'Interior Painting — Full House',      small:3200, medium:5500, large:9000},
+    'painting-room':    {label:'Interior Painting — Per Room',        small:380,  medium:480,  large:650},
+    'bathroom':         {label:'Bathroom Renovation',                 small:7500, medium:14000,large:24000},
+    'ensuite':          {label:'Ensuite / Wet Room',                  small:5500, medium:9500, large:16000},
+    'kitchen':          {label:'Kitchen Renovation',                  small:9000, medium:18000,large:35000},
+    'flooring-laminate':{label:'Flooring — Laminate / LVT',          small:2200, medium:4000, large:7000},
+    'flooring-tile':    {label:'Flooring — Tile',                     small:2800, medium:5500, large:9500},
+    'plastering-full':  {label:'Plastering — Full House Skim',        small:3500, medium:6000, large:10000},
+    'plastering-room':  {label:'Plastering — Per Room',               small:450,  medium:600,  large:900},
+    'tiling':           {label:'Tiling (walls / floor)',              small:1400, medium:2800, large:5000},
+    'insulation-wall':  {label:'Insulation — Wall Cavity / Board',   small:2800, medium:5000, large:8500},
+    'insulation-attic': {label:'Insulation — Attic / Roof',           small:900,  medium:1500, large:2500},
+    'dry-lining':       {label:'Dry Lining / IWI (internal)',         small:3500, medium:6500, large:11000},
+    'stud-partition':   {label:'Stud Partition Wall',                 small:600,  medium:1000, large:1800},
+    'door-internal':    {label:'Internal Door (supply & fit)',        small:350,  medium:350,  large:350},
+    'door-external':    {label:'External Door (supply & fit)',        small:1200, medium:1600, large:2500},
+    'windows-replace':  {label:'Window Replacement (per window)',     small:650,  medium:700,  large:900},
+    'painting-exterior':{label:'Exterior Painting',                   small:3500, medium:6000, large:10000},
+    'render-exterior':  {label:'External Render / Pebbledash',        small:4500, medium:8000, large:14000},
+    'power-wash':       {label:'Power Washing',                       small:180,  medium:300,  large:480},
+    'window-clean':     {label:'Window Cleaning (one-off)',           small:80,   medium:130,  large:200},
+    'handyman':         {label:'Handyman / Odd Jobs (per day)',        small:400,  medium:400,  large:400},
+    'skip-hire':        {label:'Skip Hire (standard, 7 days)',        small:280,  medium:380,  large:480},
+    'scaffolding':      {label:'Scaffolding (per week)',              small:800,  medium:1400, large:2200},
+    'day-tradesman':    {label:'Tradesman Day Rate',                  small:400,  medium:400,  large:400},
+    'day-labourer':     {label:'Labourer Day Rate',                   small:250,  medium:250,  large:250},
+    'day-mixed':        {label:'Mixed Crew (tradesman + labourer)',   small:650,  medium:650,  large:650}
   };
 }
 
-// ============================
-// SOURCES
-// ============================
+// ============================================================
+// SOURCE / STATUS CHIPS
+// ============================================================
 function sourceChip(src){
-  const map = {
-    facebook:    ['chip-facebook','Facebook'],
-    marketplace: ['chip-facebook','Marketplace'],
-    donedeal:    ['chip-donedeal','Done Deal'],
-    myhome:      ['chip-myhome','MyHome'],
-    instagram:   ['chip-instagram','Instagram'],
-    tiktok:      ['chip-tiktok','TikTok'],
-    adverts:     ['chip-adverts','Adverts'],
-    boards:      ['chip-boards','Boards.ie'],
-    gumtree:     ['chip-gumtree','Gumtree'],
-    twitter:     ['chip-twitter','Twitter/X'],
-    lovin:       ['chip-lovin','Lovin'],
-    referral:    ['chip-referral','Referral'],
-    direct:      ['chip-direct','Direct'],
-  };
-  const info = map[src] || ['chip-direct', src];
-  return `<span class="source-chip ${info[0]}">${info[1]}</span>`;
+  var map={facebook:['chip-facebook','Facebook'],marketplace:['chip-facebook','Marketplace'],donedeal:['chip-donedeal','Done Deal'],myhome:['chip-myhome','MyHome'],instagram:['chip-instagram','Instagram'],tiktok:['chip-tiktok','TikTok'],adverts:['chip-adverts','Adverts'],boards:['chip-boards','Boards.ie'],gumtree:['chip-gumtree','Gumtree'],twitter:['chip-twitter','Twitter/X'],referral:['chip-referral','Referral'],direct:['chip-direct','Direct']};
+  var info=map[src]||['chip-direct',src];
+  return '<span class="source-chip '+info[0]+'">'+info[1]+'</span>';
+}
+function statusChip(s){
+  var map={new:['status-new','New'],quoted:['status-quoted','Quoted'],won:['status-won','Won'],lost:['status-lost','Lost'],'follow-up':['status-follow','Follow-Up']};
+  var info=map[s]||['status-new',s];
+  return '<span class="status-chip '+info[0]+'">'+info[1]+'</span>';
 }
 
-function statusChip(status){
-  const map = {
-    new:         ['status-new','New'],
-    quoted:      ['status-quoted','Quoted'],
-    won:         ['status-won','Won'],
-    lost:        ['status-lost','Lost'],
-    'follow-up': ['status-follow','Follow-Up'],
-  };
-  const info = map[status] || ['status-new', status];
-  return `<span class="status-chip ${info[0]}">${info[1]}</span>`;
-}
-
-// ============================
+// ============================================================
 // LEADS
-// ============================
-function renderLeads(filter){
-  if(filter) currentFilter = filter;
-  const filtered = currentFilter === 'all' ? leads : leads.filter(l=>l.status===currentFilter);
-  const tbody = document.getElementById('leads-tbody');
-  if(!filtered.length){
-    tbody.innerHTML = `<tr><td colspan="8" style="color:var(--text-d);text-align:center;padding:30px;font-size:13px;">No leads match this filter.</td></tr>`;
-    return;
-  }
-  tbody.innerHTML = filtered.map((l,idx) => {
-    const i = leads.indexOf(l);
-    return `<tr class="${l.priority === 'high' ? 'priority-high' : l.priority === 'low' ? 'priority-low' : ''}">
-      <td>${sourceChip(l.source)}</td>
-      <td><strong>${l.name}</strong><br><span style="font-size:11px;color:var(--text-m);">${l.phone||''}</span></td>
-      <td>${l.jobtype}</td>
-      <td>${l.location}</td>
-      <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--orange);">${l.quote ? '€'+Number(l.quote).toLocaleString() : '—'}</td>
-      <td>${statusChip(l.status)}</td>
-      <td style="color:var(--text-m);font-size:12px;">${l.date}</td>
-      <td>
-        <div class="actions">
-          <select onchange="changeStatus(${i},this.value)" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:4px 6px;color:var(--text);font-size:11px;font-family:'Barlow Condensed',sans-serif;">
-            <option value="">Status...</option>
-            <option value="new">New</option>
-            <option value="quoted">Quoted</option>
-            <option value="won">Won</option>
-            <option value="lost">Lost</option>
-            <option value="follow-up">Follow-Up</option>
-          </select>
-          <button class="btn btn-ghost btn-sm" onclick="viewLead(${i})">View</button>
-          <button class="btn btn-danger btn-sm" onclick="deleteLead(${i})">Del</button>
-        </div>
-      </td>
-    </tr>`;
+// ============================================================
+function renderLeads(){
+  var filtered = currentFilter==='all' ? leads : leads.filter(function(l){return l.status===currentFilter;});
+  var tbody = document.getElementById('leads-tbody');
+  if(!filtered.length){tbody.innerHTML='<tr><td colspan="8" style="color:var(--text-d);text-align:center;padding:30px;font-size:13px;">No leads match this filter.</td></tr>';return;}
+  tbody.innerHTML = filtered.map(function(l){
+    var i=leads.indexOf(l);
+    return '<tr><td>'+sourceChip(l.source)+'</td><td><strong>'+l.name+'</strong><br><span style="font-size:11px;color:var(--text-m);">'+( l.phone||'')+'</span></td><td>'+l.jobtype+'</td><td>'+l.location+'</td><td style="font-family:\'Barlow Condensed\',sans-serif;font-weight:700;color:var(--orange);">'+(l.quote?'€'+Number(l.quote).toLocaleString():'—')+'</td><td>'+statusChip(l.status)+'</td><td style="color:var(--text-m);font-size:12px;">'+l.date+'</td><td><div class="actions"><select onchange="changeStatus('+i+',this.value)" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:4px 6px;color:var(--text);font-size:11px;"><option value="">Status...</option><option value="new">New</option><option value="quoted">Quoted</option><option value="won">Won</option><option value="lost">Lost</option><option value="follow-up">Follow-Up</option></select><button class="btn btn-danger btn-sm" onclick="deleteLead('+i+')">Del</button></div></td></tr>';
   }).join('');
-  renderDashboard();
 }
+function filterLeads(f,el){document.querySelectorAll('#panel-leads .filter-chip').forEach(function(c){c.classList.remove('active');});el.classList.add('active');currentFilter=f;renderLeads();}
+function changeStatus(i,s){if(!s)return;leads[i].status=s;saveLeads();renderLeads();renderDashboard();toast('Status updated');}
+function deleteLead(i){if(!confirm('Delete this lead?'))return;leads.splice(i,1);saveLeads();renderLeads();renderDashboard();toast('Lead deleted');}
+function saveLeads(){localStorage.setItem('ecc_leads',JSON.stringify(leads));}
 
-function filterLeads(f, el){
-  document.querySelectorAll('#panel-leads .filter-chip').forEach(c=>c.classList.remove('active'));
-  el.classList.add('active');
-  currentFilter = f;
-  renderLeads();
-}
-
-function changeStatus(i, status){
-  if(!status) return;
-  leads[i].status = status;
-  saveLeads();
-  renderLeads();
-  toast('Status updated');
-}
-
-function deleteLead(i){
-  if(!confirm('Delete this lead?')) return;
-  leads.splice(i,1);
-  saveLeads();
-  renderLeads();
-  toast('Lead deleted');
-}
-
-function viewLead(i){
-  const l = leads[i];
-  alert(`Name: ${l.name}\nPhone: ${l.phone||'—'}\nJob: ${l.jobtype}\nLocation: ${l.location}\nSource: ${l.source}\nQuote: €${l.quote||0}\nNotes: ${l.notes||'—'}`);
-}
-
-function saveLeads(){
-  localStorage.setItem('ecc_leads', JSON.stringify(leads));
-}
-
-// ============================
+// ============================================================
 // ADD LEAD MODAL
-// ============================
-function openAddLead(){
-  document.getElementById('modal-add-lead').classList.add('open');
-}
-function closeModal(){
-  document.getElementById('modal-add-lead').classList.remove('open');
-}
+// ============================================================
+function openAddLead(){document.getElementById('modal-add-lead').classList.add('open');}
+function closeModal(){document.getElementById('modal-add-lead').classList.remove('open');}
 function saveLead(){
-  const lead = {
-    source: document.getElementById('new-source').value,
-    name: document.getElementById('new-name').value || 'Unknown',
-    phone: document.getElementById('new-phone').value,
-    jobtype: document.getElementById('new-jobtype').value || 'General',
-    location: document.getElementById('new-location').value || 'Dublin',
-    quote: document.getElementById('new-quote').value || 0,
-    notes: document.getElementById('new-notes').value,
-    priority: document.getElementById('new-priority').value,
-    status: 'new',
-    date: new Date().toLocaleDateString('en-IE'),
-  };
-  leads.unshift(lead);
-  saveLeads();
-  closeModal();
-  renderLeads();
-  renderDashboard();
-  toast('Lead added!');
-  // clear
-  ['new-name','new-phone','new-jobtype','new-location','new-quote','new-notes'].forEach(id=>document.getElementById(id).value='');
+  var lead={source:document.getElementById('new-source').value,name:document.getElementById('new-name').value||'Unknown',phone:document.getElementById('new-phone').value,jobtype:document.getElementById('new-jobtype').value||'General',location:document.getElementById('new-location').value||'Dublin',quote:document.getElementById('new-quote').value||0,notes:document.getElementById('new-notes').value,priority:document.getElementById('new-priority').value,status:'new',date:new Date().toLocaleDateString('en-IE')};
+  leads.unshift(lead);saveLeads();closeModal();renderLeads();renderDashboard();toast('Lead added!');
+  ['new-name','new-phone','new-jobtype','new-location','new-quote','new-notes'].forEach(function(id){document.getElementById(id).value='';});
 }
 
-// ============================
+// ============================================================
 // DASHBOARD
-// ============================
+// ============================================================
 function renderDashboard(){
-  const total = leads.length;
-  const active = leads.filter(l=>l.status==='new'||l.status==='quoted').length;
-  const won = leads.filter(l=>l.status==='won').length;
-  const pipeline = leads.filter(l=>l.status==='quoted').reduce((s,l)=>s+Number(l.quote||0),0);
-  document.getElementById('stat-total').textContent = total;
-  document.getElementById('stat-active').textContent = active;
-  document.getElementById('stat-won').textContent = won;
-  document.getElementById('stat-pipeline').textContent = '€'+pipeline.toLocaleString();
-
-  // Hot leads
-  const hot = leads.filter(l=>l.priority==='high'&&(l.status==='new'||l.status==='follow-up'));
-  const hotEl = document.getElementById('hot-leads-list');
-  if(!hot.length){ hotEl.innerHTML = `<div style="color:var(--text-d);font-size:13px;">No hot leads.</div>`; }
-  else {
-    hotEl.innerHTML = hot.slice(0,5).map(l=>`
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);">
-        <div>${sourceChip(l.source)} <strong style="margin-left:6px;">${l.name}</strong> <span style="color:var(--text-m);font-size:12px;">— ${l.jobtype}, ${l.location}</span></div>
-        ${statusChip(l.status)}
-      </div>`).join('');
-  }
-
-  // Source breakdown
-  const sources = {};
-  leads.forEach(l=>{ sources[l.source] = (sources[l.source]||0)+1; });
-  const srcEl = document.getElementById('source-breakdown');
-  if(!Object.keys(sources).length){ srcEl.innerHTML = `<div style="color:var(--text-d);font-size:13px;">No data yet.</div>`; }
-  else {
-    srcEl.innerHTML = Object.entries(sources).sort((a,b)=>b[1]-a[1]).map(([src,cnt])=>`
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);">
-        ${sourceChip(src)}
-        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--orange);">${cnt}</span>
-      </div>`).join('');
-  }
-
-  // Planning mini-list
-  renderDashboardPlanning();
+  document.getElementById('stat-total').textContent=leads.length;
+  document.getElementById('stat-active').textContent=leads.filter(function(l){return l.status==='new'||l.status==='quoted';}).length;
+  document.getElementById('stat-won').textContent=leads.filter(function(l){return l.status==='won';}).length;
+  var pipeline=leads.filter(function(l){return l.status==='quoted';}).reduce(function(s,l){return s+Number(l.quote||0);},0);
+  document.getElementById('stat-pipeline').textContent='€'+pipeline.toLocaleString();
+  var hot=leads.filter(function(l){return l.priority==='high'&&(l.status==='new'||l.status==='follow-up');});
+  var hotEl=document.getElementById('hot-leads-list');
+  if(!hot.length){hotEl.innerHTML='<div style="color:var(--text-d);font-size:13px;">No hot leads.</div>';}
+  else{hotEl.innerHTML=hot.slice(0,5).map(function(l){return '<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);">'+sourceChip(l.source)+' <strong style="margin-left:6px;">'+l.name+'</strong> <span style="color:var(--text-m);font-size:12px;">— '+l.jobtype+', '+l.location+'</span>'+statusChip(l.status)+'</div>';}).join('');}
+  var sources={};
+  leads.forEach(function(l){sources[l.source]=(sources[l.source]||0)+1;});
+  var srcEl=document.getElementById('source-breakdown');
+  var srcKeys=Object.keys(sources);
+  if(!srcKeys.length){srcEl.innerHTML='<div style="color:var(--text-d);font-size:13px;">No data yet.</div>';}
+  else{srcEl.innerHTML=srcKeys.sort(function(a,b){return sources[b]-sources[a];}).map(function(s){return '<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);">'+sourceChip(s)+'<span style="font-family:\'Barlow Condensed\',sans-serif;font-weight:700;color:var(--orange);">'+sources[s]+'</span></div>';}).join('');}
+  var recent=planningData.filter(function(p){return p.status==='granted';}).slice(0,4);
+  document.getElementById('dashboard-planning').innerHTML=recent.map(function(p){return '<div style="display:flex;align-items:flex-start;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);gap:12px;"><div><span class="planning-chip pc-granted">GRANTED</span> <strong style="font-size:13px;margin-left:4px;">'+p.addr+'</strong><div style="font-size:11px;color:var(--text-m);margin-top:2px;">'+p.desc.substring(0,80)+'...</div></div><div style="font-family:\'Barlow Condensed\',sans-serif;font-weight:700;color:var(--orange);font-size:16px;white-space:nowrap;">€'+(p.est/1000).toFixed(0)+'k</div></div>';}).join('');
 }
 
-// ============================
-// CALCULATOR HELPERS
-// ============================
-const RATE_TRADESMAN = 400;
-const RATE_LABOURER = 250;
-const BLOCK_PER_SQM = 650;   // avg block garden building
-const TIMBER_PER_SQM = 420;  // avg timber stud + render
+// ============================================================
+// CALC HELPERS
+// ============================================================
+var RATE_TRADES=400, RATE_LABOUR=250, BLOCK_SQM=650, TIMBER_SQM=420;
 
-function togglePricerMode(){
-  const v = document.getElementById('pricer-jobtype').value;
-  document.getElementById('calc-slates').style.display    = v === 'roof-slates' ? 'block' : 'none';
-  document.getElementById('calc-flat-sqm').style.display  = v === 'flat-roof-sqm' ? 'block' : 'none';
-  document.getElementById('calc-garden-sqm').style.display = (v==='garden-block-sqm'||v==='garden-timber-sqm') ? 'block' : 'none';
-  document.getElementById('calc-dayrate').style.display   = (v==='day-tradesman'||v==='day-labourer'||v==='day-mixed') ? 'block' : 'none';
-  if(v==='garden-block-sqm') document.getElementById('garden-type').value = 'block';
-  if(v==='garden-timber-sqm') document.getElementById('garden-type').value = 'timber';
-  calcSlates(); calcFlatRoof(); calcGardenBuilding(); calcDayRate(); calcExtras();
+function toggleCalcPanels(){
+  var v=document.getElementById('pricer-jobtype').value;
+  document.getElementById('calc-slates').style.display    = v==='roof-slates'?'block':'none';
+  document.getElementById('calc-flat-sqm').style.display  = v==='flat-roof-sqm'?'block':'none';
+  document.getElementById('calc-garden-sqm').style.display= (v==='garden-block-sqm'||v==='garden-timber-sqm')?'block':'none';
+  document.getElementById('calc-dayrate').style.display   = (v==='day-tradesman'||v==='day-labourer'||v==='day-mixed')?'block':'none';
+  if(v==='garden-timber-sqm') document.getElementById('garden-type').value='timber';
+  if(v==='garden-block-sqm')  document.getElementById('garden-type').value='block';
+  calcSlates(); calcFlatRoof(); calcGarden(); calcDayRate();
 }
 
 function calcSlates(){
-  const n = Number(document.getElementById('slate-count').value)||0;
-  const p = Number(document.getElementById('slate-price').value)||1.30;
-  let total = n * p;
-  let extrasText = '';
-  if(document.getElementById('add-ridging').checked){ total += 1100; extrasText += '+ Ridge tiles €1,100  '; }
-  if(document.getElementById('add-lead').checked)   { total += 650;  extrasText += '+ Lead/flashing €650  '; }
-  if(document.getElementById('add-trims').checked)  { total += 200;  extrasText += '+ Verge trims €200  '; }
-  document.getElementById('slate-total').textContent = Math.round(total).toLocaleString();
-  document.getElementById('slate-extras-total').textContent = extrasText ? 'Extras: ' + extrasText.trim() : '';
+  var n=Number(document.getElementById('slate-count').value)||0;
+  var p=Number(document.getElementById('slate-price').value)||1.30;
+  var t=n*p;
+  if(document.getElementById('add-ridging').checked) t+=1100;
+  if(document.getElementById('add-lead').checked) t+=650;
+  if(document.getElementById('add-trims').checked) t+=200;
+  document.getElementById('slate-total').textContent=Math.round(t).toLocaleString();
 }
 
 function calcFlatRoof(){
-  const sqm = Number(document.getElementById('flat-sqm').value)||0;
-  const rate = Number(document.getElementById('flat-rate').value)||130;
-  let total = sqm * rate;
-  let extrasText = '';
-  if(document.getElementById('flat-lead').checked)  { total += 450; extrasText += '+ Lead upstands €450  '; }
-  if(document.getElementById('flat-trims').checked) { total += 180; extrasText += '+ Drip trims €180  '; }
-  document.getElementById('flat-total').textContent = Math.round(total).toLocaleString();
-  document.getElementById('flat-extras-total').textContent = extrasText ? 'Extras: ' + extrasText.trim() : '';
+  var sqm=Number(document.getElementById('flat-sqm').value)||0;
+  var rate=Number(document.getElementById('flat-rate').value)||130;
+  var t=sqm*rate;
+  if(document.getElementById('flat-lead').checked) t+=450;
+  if(document.getElementById('flat-trims').checked) t+=180;
+  document.getElementById('flat-total').textContent=Math.round(t).toLocaleString();
 }
 
-function calcGardenBuilding(){
-  const sqm = Number(document.getElementById('garden-sqm').value)||0;
-  const type = document.getElementById('garden-type').value;
-  const ratePerSqm = type === 'block' ? BLOCK_PER_SQM : TIMBER_PER_SQM;
-  let total = sqm * ratePerSqm;
-  if(document.getElementById('gb-electric').checked) total += 1500;
-  if(document.getElementById('gb-plumbing').checked) total += 2000;
-  if(document.getElementById('gb-insulate').checked) total += 800;
-  document.getElementById('garden-total').textContent = Math.round(total).toLocaleString();
-  document.getElementById('garden-rate-label').textContent = type === 'block'
-    ? 'Block build: €'+BLOCK_PER_SQM+'/sqm avg'
-    : 'Timber stud + render: €'+TIMBER_PER_SQM+'/sqm avg';
+function calcGarden(){
+  var sqm=Number(document.getElementById('garden-sqm').value)||0;
+  var type=document.getElementById('garden-type').value;
+  var rRate=type==='block'?BLOCK_SQM:TIMBER_SQM;
+  var t=sqm*rRate;
+  if(document.getElementById('gb-electric').checked) t+=1500;
+  if(document.getElementById('gb-plumbing').checked) t+=2000;
+  if(document.getElementById('gb-insulate').checked) t+=800;
+  document.getElementById('garden-total').textContent=Math.round(t).toLocaleString();
+  document.getElementById('garden-note').textContent=type==='block'?'Block build: €'+BLOCK_SQM+'/sqm avg':'Timber stud + render: €'+TIMBER_SQM+'/sqm avg';
 }
 
 function calcDayRate(){
-  const trades  = Number(document.getElementById('dr-trades').value)||0;
-  const labour  = Number(document.getElementById('dr-labour').value)||0;
-  const workers = Number(document.getElementById('dr-workers').value)||1;
-  const v = document.getElementById('pricer-jobtype').value;
-  let total, breakdown;
-  if(v === 'day-tradesman'){
-    total = trades * RATE_TRADESMAN * workers;
-    breakdown = workers+' tradesman × '+trades+' day(s) @ €'+RATE_TRADESMAN+'/day';
-  } else if(v === 'day-labourer'){
-    total = labour * RATE_LABOURER * workers;
-    breakdown = workers+' labourer × '+labour+' day(s) @ €'+RATE_LABOURER+'/day';
-  } else {
-    total = (trades * RATE_TRADESMAN + labour * RATE_LABOURER) * workers;
-    breakdown = workers+'× crew: '+trades+'d trades (€'+RATE_TRADESMAN+') + '+labour+'d labour (€'+RATE_LABOURER+')';
-  }
-  document.getElementById('dr-total').textContent = Math.round(total).toLocaleString();
-  document.getElementById('dr-breakdown').textContent = breakdown;
+  var trades=Number(document.getElementById('dr-trades').value)||0;
+  var labour=Number(document.getElementById('dr-labour').value)||0;
+  var workers=Number(document.getElementById('dr-workers').value)||1;
+  var t=(trades*RATE_TRADES+labour*RATE_LABOUR)*workers;
+  document.getElementById('dr-total').textContent=Math.round(t).toLocaleString();
+  document.getElementById('dr-note').textContent=workers+'× crew: '+trades+'d tradesman + '+labour+'d labourer';
 }
 
-let _extrasAmount = 0;
 function calcExtras(){
-  let total = 0;
-  document.querySelectorAll('#extras-checkboxes input[type=checkbox]:checked').forEach(cb=>{
-    total += Number(cb.value)||0;
-  });
-  const custom = Number(document.getElementById('custom-extra').value)||0;
-  total += custom;
-  _extrasAmount = total;
-  const el = document.getElementById('extras-total-row');
-  if(total > 0){ el.style.display='block'; document.getElementById('extras-total').textContent = total.toLocaleString(); }
-  else { el.style.display='none'; }
+  var total=0;
+  document.querySelectorAll('#extras-checks input[type=checkbox]:checked').forEach(function(cb){total+=Number(cb.value)||0;});
+  total+=Number(document.getElementById('custom-extra').value)||0;
+  extrasAmt=total;
+  var el=document.getElementById('extras-total-row');
+  if(total>0){el.style.display='block';document.getElementById('extras-total').textContent=total.toLocaleString();}
+  else{el.style.display='none';}
 }
 
-function getCalcBasePrice(){
-  const v = document.getElementById('pricer-jobtype').value;
-  if(v === 'roof-slates'){
-    const n = Number(document.getElementById('slate-count').value)||0;
-    const p = Number(document.getElementById('slate-price').value)||1.30;
-    let t = n * p;
-    if(document.getElementById('add-ridging').checked) t += 1100;
-    if(document.getElementById('add-lead').checked) t += 650;
-    if(document.getElementById('add-trims').checked) t += 200;
+function getCalcPrice(){
+  var v=document.getElementById('pricer-jobtype').value;
+  if(v==='roof-slates'){
+    var n=Number(document.getElementById('slate-count').value)||0;
+    var p=Number(document.getElementById('slate-price').value)||1.30;
+    var t=n*p;
+    if(document.getElementById('add-ridging').checked) t+=1100;
+    if(document.getElementById('add-lead').checked) t+=650;
+    if(document.getElementById('add-trims').checked) t+=200;
     return Math.round(t);
   }
-  if(v === 'flat-roof-sqm'){
-    const sqm = Number(document.getElementById('flat-sqm').value)||0;
-    const rate = Number(document.getElementById('flat-rate').value)||130;
-    let t = sqm * rate;
-    if(document.getElementById('flat-lead').checked) t += 450;
-    if(document.getElementById('flat-trims').checked) t += 180;
+  if(v==='flat-roof-sqm'){
+    var sqm=Number(document.getElementById('flat-sqm').value)||0;
+    var rate=Number(document.getElementById('flat-rate').value)||130;
+    var t=sqm*rate;
+    if(document.getElementById('flat-lead').checked) t+=450;
+    if(document.getElementById('flat-trims').checked) t+=180;
     return Math.round(t);
   }
-  if(v === 'garden-block-sqm' || v === 'garden-timber-sqm'){
-    const sqm = Number(document.getElementById('garden-sqm').value)||0;
-    const type = document.getElementById('garden-type').value;
-    let t = sqm * (type==='block' ? BLOCK_PER_SQM : TIMBER_PER_SQM);
-    if(document.getElementById('gb-electric').checked) t += 1500;
-    if(document.getElementById('gb-plumbing').checked) t += 2000;
-    if(document.getElementById('gb-insulate').checked) t += 800;
+  if(v==='garden-block-sqm'||v==='garden-timber-sqm'){
+    var sqm=Number(document.getElementById('garden-sqm').value)||0;
+    var type=document.getElementById('garden-type').value;
+    var t=sqm*(type==='block'?BLOCK_SQM:TIMBER_SQM);
+    if(document.getElementById('gb-electric').checked) t+=1500;
+    if(document.getElementById('gb-plumbing').checked) t+=2000;
+    if(document.getElementById('gb-insulate').checked) t+=800;
     return Math.round(t);
   }
-  if(v === 'day-tradesman' || v === 'day-labourer' || v === 'day-mixed'){
-    const trades  = Number(document.getElementById('dr-trades').value)||0;
-    const labour  = Number(document.getElementById('dr-labour').value)||0;
-    const workers = Number(document.getElementById('dr-workers').value)||1;
-    if(v==='day-tradesman') return trades * RATE_TRADESMAN * workers;
-    if(v==='day-labourer')  return labour * RATE_LABOURER * workers;
-    return (trades * RATE_TRADESMAN + labour * RATE_LABOURER) * workers;
+  if(v==='day-tradesman'||v==='day-labourer'||v==='day-mixed'){
+    var trades=Number(document.getElementById('dr-trades').value)||0;
+    var labour=Number(document.getElementById('dr-labour').value)||0;
+    var workers=Number(document.getElementById('dr-workers').value)||1;
+    return Math.round((trades*RATE_TRADES+labour*RATE_LABOUR)*workers);
   }
-  return null; // use rate card
+  return null;
 }
 
-// ============================
+// ============================================================
 // AI PRICER
-// ============================
+// ============================================================
 async function runAIPricer(){
-  const jobtype = document.getElementById('pricer-jobtype').value;
-  const size = document.getElementById('pricer-size').value;
-  const location = document.getElementById('pricer-location').value;
-  const notes = document.getElementById('pricer-notes').value;
-  const box = document.getElementById('pricer-result-box');
-
-  if(!jobtype){ toast('Please select a job type'); return; }
-
-  // Check for calculator-based price first
-  let calcBase = getCalcBasePrice();
-  let adjusted, low, high, label;
-
-  const r = rates[jobtype];
-  if(calcBase !== null){
-    // Use calculator result
-    adjusted = calcBase;
-    label = document.getElementById('pricer-jobtype').options[document.getElementById('pricer-jobtype').selectedIndex].text;
+  var jobtype=document.getElementById('pricer-jobtype').value;
+  var size=document.getElementById('pricer-size').value;
+  var location=document.getElementById('pricer-location').value;
+  var notes=document.getElementById('pricer-notes').value;
+  var box=document.getElementById('pricer-result-box');
+  if(!jobtype){toast('Please select a job type');return;}
+  var calcBase=getCalcPrice();
+  var adjusted,label;
+  var r=rates[jobtype];
+  if(calcBase!==null){
+    adjusted=calcBase;
+    var sel=document.getElementById('pricer-jobtype');
+    label=sel.options[sel.selectedIndex].text.replace(' ↗','');
   } else if(r){
-    const locationMult = location === 'dublin' ? 1.15 : location === 'dublin-sub' ? 1.08 : 1.0;
-    adjusted = Math.round(r[size] * locationMult);
-    label = r.label;
-  } else {
-    toast('No rate found for this job type'); return;
-  }
-
-  // Add extras
-  const extras = _extrasAmount || 0;
-  let total = adjusted + extras;
-
-  // Contingency
-  const addContingency = document.getElementById('contingency-check').checked;
-  const contingencyAmt = addContingency ? Math.round(total * 0.10) : 0;
-  const grandTotal = total + contingencyAmt;
-
-  low = Math.round(grandTotal * 0.92);
-  high = Math.round(grandTotal * 1.08);
-
-  box.innerHTML = '<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Getting AI estimate...</span></div>';
-
-  const prompt = 'You are a property maintenance pricing expert in Ireland with 20+ years experience.\nJob: '+label+'\nSize: '+size+' property\nLocation: '+location+'\nBase price: €'+adjusted+'\nExtras/add-ons: €'+extras+(addContingency?'\nContingency (10%): €'+contingencyAmt:'')+'\nTotal: €'+grandTotal+'\nRange: €'+low+' – €'+high+'\nNotes from lead: '+(notes||'No additional notes')+'\n\nProvide a CONCISE pricing recommendation (under 150 words):\n1. Is this price competitive for Ireland 2026?\n2. Any key cost risks or upsells?\n3. One-line tip to win the job\nUse euro amounts. Be direct and practical.';
-
-  try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body: JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:350,messages:[{role:'user',content:prompt}]})
-    });
-    const data = await resp.json();
-    const text = data.content && data.content[0] ? data.content[0].text : 'Could not get estimate.';
-
-    box.innerHTML = buildPriceResult(label, adjusted, extras, contingencyAmt, grandTotal, low, high, size, location, text, true);
+    var locMult=location==='dublin'?1.15:location==='dublin-sub'?1.08:1.0;
+    adjusted=Math.round(r[size]*locMult);
+    label=r.label;
+  } else {toast('No rate for this job');return;}
+  var extras=extrasAmt||0;
+  var total=adjusted+extras;
+  var contingency=document.getElementById('contingency-check').checked?Math.round(total*0.10):0;
+  var grand=total+contingency;
+  var low=Math.round(grand*0.92);
+  var high=Math.round(grand*1.08);
+  box.innerHTML='<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Getting AI estimate...</span></div>';
+  var prompt='You are a property maintenance pricing expert in Ireland.\nJob: '+label+'\nSize: '+size+' | Location: '+location+'\nBase: \u20ac'+adjusted+(extras?'\nExtras: \u20ac'+extras:'')+(contingency?'\nContingency (10%): \u20ac'+contingency:'')+'\nTotal: \u20ac'+grand+'\nRange: \u20ac'+low+' \u2013 \u20ac'+high+'\nNotes: '+(notes||'none')+'\n\nIn under 150 words:\n1. Is this competitive for Ireland 2026?\n2. Key cost risks or upsells?\n3. One tip to win the job';
+  try{
+    var resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:350,messages:[{role:'user',content:prompt}]})});
+    var data=await resp.json();
+    var txt=data.content&&data.content[0]?data.content[0].text:'Could not get estimate.';
+    box.innerHTML=buildResult(label,adjusted,extras,contingency,grand,low,high,size,location,txt);
   } catch(e){
-    box.innerHTML = buildPriceResult(label, adjusted, extras, contingencyAmt, grandTotal, low, high, size, location, '', false);
+    box.innerHTML=buildResult(label,adjusted,extras,contingency,grand,low,high,size,location,'');
   }
 }
 
-function buildPriceResult(label, base, extras, contingency, grandTotal, low, high, size, location, aiText, hasAI){
-  const extrasRow = extras > 0 ? '<div class="pb-row"><span class="pb-key">Add-ons</span><span class="pb-val" style="color:var(--yellow);">+€'+extras.toLocaleString()+'</span></div>' : '';
-  const contRow = contingency > 0 ? '<div class="pb-row"><span class="pb-key">Contingency (10%)</span><span class="pb-val" style="color:var(--grey-lt);">+€'+contingency.toLocaleString()+'</span></div>' : '';
-  const aiSection = hasAI && aiText ? '<div style="margin-top:14px;"><div class="ai-result">'+aiText+'</div></div>' : '<div style="margin-top:10px;font-size:12px;color:var(--text-m);">Base rate shown — AI commentary unavailable.</div>';
-  return '<div class="price-result">'
-    +'<div class="price-tag">€'+grandTotal.toLocaleString()+'</div>'
-    +'<div class="price-range">Range: €'+low.toLocaleString()+' – €'+high.toLocaleString()+'</div>'
-    +'<div class="price-breakdown">'
-    +'<div class="pb-row"><span class="pb-key">Job Type</span><span class="pb-val">'+label+'</span></div>'
-    +'<div class="pb-row"><span class="pb-key">Base Price</span><span class="pb-val">€'+base.toLocaleString()+'</span></div>'
-    +extrasRow+contRow
-    +'<div class="pb-row"><span class="pb-key">Size / Location</span><span class="pb-val">'+size+' · '+location.replace('-',' ')+'</span></div>'
-    +'</div>'
-    +'</div>'
-    +aiSection
-    +'<div style="margin-top:14px;display:flex;gap:8px;">'
-    +'<button class="btn btn-primary btn-sm" onclick="priceToLead('+grandTotal+')">Add as Lead</button>'
-    +'<button class="btn btn-outline btn-sm" onclick="priceToQuote('+grandTotal+')">Create Quote</button>'
-    +'</div>';
+function buildResult(label,base,extras,contingency,grand,low,high,size,loc,aiText){
+  var extRow=extras>0?'<div class="pb-row"><span class="pb-key">Add-ons</span><span class="pb-val" style="color:var(--yellow);">+\u20ac'+extras.toLocaleString()+'</span></div>':'';
+  var conRow=contingency>0?'<div class="pb-row"><span class="pb-key">Contingency (10%)</span><span class="pb-val">+\u20ac'+contingency.toLocaleString()+'</span></div>':'';
+  var aiSec=aiText?'<div style="margin-top:14px;"><div class="ai-result">'+aiText+'</div></div>':'<div style="margin-top:10px;font-size:12px;color:var(--text-m);">AI commentary unavailable — base rate shown.</div>';
+  return '<div class="price-result"><div class="price-tag">\u20ac'+grand.toLocaleString()+'</div><div class="price-range">Range: \u20ac'+low.toLocaleString()+' \u2013 \u20ac'+high.toLocaleString()+'</div><div class="price-breakdown"><div class="pb-row"><span class="pb-key">Job</span><span class="pb-val">'+label+'</span></div><div class="pb-row"><span class="pb-key">Base</span><span class="pb-val">\u20ac'+base.toLocaleString()+'</span></div>'+extRow+conRow+'<div class="pb-row"><span class="pb-key">Size / Location</span><span class="pb-val">'+size+' \u00b7 '+loc.replace('-',' ')+'</span></div></div></div>'+aiSec+'<div style="margin-top:14px;display:flex;gap:8px;"><button class="btn btn-primary btn-sm" onclick="priceToLead('+grand+')">Add as Lead</button><button class="btn btn-outline btn-sm" onclick="priceToQuote('+grand+')">Create Quote</button></div>';
 }
 
+function priceToLead(price){
+  document.getElementById('new-quote').value=price;
+  var sel=document.getElementById('pricer-jobtype');
+  document.getElementById('new-jobtype').value=sel.options[sel.selectedIndex].text.replace(' \u2197','');
+  openAddLead();
+}
+function priceToQuote(price){
+  switchTab('quotes',document.querySelectorAll('.tab')[6]);
+  addQuoteItemWithPrice(document.getElementById('pricer-jobtype').options[document.getElementById('pricer-jobtype').selectedIndex].text.replace(' \u2197',''),price);
+  updateQuote();
+}
+
+// ============================================================
+// PLANNING DATA
+// ============================================================
+var planningData=[
+  {id:1,addr:'14 Rowan Park, Swords, Co. Dublin',desc:'Single storey rear extension (48sqm), new kitchen and utility area.',area:'dublin',type:'extension',status:'granted',ref:'FW26D/0124',date:'12 May 2026',est:65000},
+  {id:2,addr:'8 The Pines, Malahide, Co. Dublin',desc:'Two storey side and rear extension. Dormer attic conversion. New windows throughout.',area:'dublin',type:'extension',status:'pending',ref:'FW26D/0298',date:'3 May 2026',est:145000},
+  {id:3,addr:'22 Castleknock Grange, Dublin 15',desc:'Loft conversion to habitable room, velux to rear. Garage conversion to home office.',area:'dublin',type:'renovation',status:'granted',ref:'FW26D/0341',date:'18 Apr 2026',est:42000},
+  {id:4,addr:'Hillcrest, Ashbourne, Co. Meath',desc:'New build 4-bed detached dwelling. Septic tank and percolation area.',area:'meath',type:'new-build',status:'granted',ref:'ME26/0187',date:'27 Apr 2026',est:280000},
+  {id:5,addr:'3 Hazel Walk, Naas, Co. Kildare',desc:'Single storey rear extension, conversion of integral garage.',area:'kildare',type:'extension',status:'pending',ref:'KE26/0422',date:'10 May 2026',est:58000},
+  {id:6,addr:'47 Palmerstown Heights, Dublin 20',desc:'Demolition of existing shed. New two-storey rear extension.',area:'dublin',type:'extension',status:'granted',ref:'FW26D/0517',date:'6 May 2026',est:89000},
+  {id:7,addr:'19 Bray Seafront Apts, Co. Wicklow',desc:'Change of use: ground floor retail to 2 residential units.',area:'wicklow',type:'commercial',status:'pending',ref:'WW26/0088',date:'8 May 2026',est:95000},
+  {id:8,addr:'Woodland House, Dunboyne, Co. Meath',desc:'Extension and renovation of existing dwelling.',area:'meath',type:'renovation',status:'appeal',ref:'ME26/0204',date:'1 May 2026',est:72000},
+  {id:9,addr:'Unit 4 Swords Business Park',desc:'Change of use from warehouse to gym. New mezzanine level, changing rooms.',area:'dublin',type:'commercial',status:'pending',ref:'FW26D/0599',date:'14 May 2026',est:180000},
+  {id:10,addr:'31 Lucan Heights, Co. Dublin',desc:'Single storey front porch. New vehicular entrance. Block wall to boundary.',area:'dublin',type:'extension',status:'granted',ref:'FW26D/0612',date:'15 May 2026',est:18000},
+  {id:11,addr:'72 Rathoath Road, Mulhuddart, Dublin 15',desc:'Attic conversion with dormer to rear. Two velux to front.',area:'dublin',type:'renovation',status:'refused',ref:'FW26D/0391',date:'2 May 2026',est:38000},
+  {id:12,addr:'Clonee Retail Park Phase 2, Co. Meath',desc:'New commercial development: 3 retail units, car parking for 85 vehicles.',area:'meath',type:'commercial',status:'granted',ref:'ME26/0231',date:'20 Apr 2026',est:420000}
+];
+var planFilter='all',planTypeFilter='all';
+
+function renderPlanning(){
+  var filtered=planningData.filter(function(p){return(planFilter==='all'||p.area===planFilter)&&(planTypeFilter==='all'||p.type===planTypeFilter);});
+  var el=document.getElementById('planning-list');
+  if(!filtered.length){el.innerHTML='<div style="color:var(--text-d);font-size:13px;padding:20px;">No results.</div>';return;}
+  el.innerHTML=filtered.map(function(p){
+    var sc={granted:'pc-granted',pending:'pc-pending',refused:'pc-refused',appeal:'pc-appeal'}[p.status]||'pc-pending';
+    return '<div class="planning-item"><div class="pi-left"><div class="pi-addr">'+p.addr+'</div><div class="pi-desc">'+p.desc+'</div><div class="pi-meta"><span class="planning-chip '+sc+'">'+p.status.toUpperCase()+'</span><span class="planning-chip" style="background:var(--bg);border:1px solid var(--border);color:var(--text-m);">'+p.type.replace('-',' ').toUpperCase()+'</span><span style="font-size:11px;color:var(--text-d);">'+p.ref+'</span><span style="font-size:11px;color:var(--text-d);">'+p.date+'</span></div><div style="margin-top:8px;display:flex;gap:6px;"><button class="btn btn-primary btn-sm" onclick="planToLead(\''+p.addr+'\',\''+p.type+'\','+p.est+')">+ Add as Lead</button></div></div><div class="pi-value">\u20ac'+(p.est/1000).toFixed(0)+'k</div></div>';
+  }).join('');
+}
+
+function filterPlanning(f,el){document.querySelectorAll('#panel-planning .filter-row:first-of-type .filter-chip').forEach(function(c){c.classList.remove('active');});el.classList.add('active');planFilter=f;renderPlanning();}
+function filterPlanType(f,el){document.querySelectorAll('#panel-planning .filter-row:last-of-type .filter-chip').forEach(function(c){c.classList.remove('active');});el.classList.add('active');planTypeFilter=f;renderPlanning();}
+function planToLead(addr,type,est){document.getElementById('new-location').value=addr;document.getElementById('new-jobtype').value=type.replace('-',' ');document.getElementById('new-quote').value=est;document.getElementById('new-source').value='myhome';openAddLead();}
+
+// ============================================================
+// OUTREACH TEMPLATES
+// ============================================================
+var templates=[
+  {id:1,title:'Facebook Group — First Response',tag:'FACEBOOK',cat:'facebook',preview:'Quick first contact within minutes of post going live',text:'Hi [Name] 👋\n\nSaw your post — we cover [area] and can sort that out no problem.\n\nBased on what you\'ve described, we\'re looking at €[price] give or take depending on access/condition.\n\nWe\'re a local team, fully insured, and available this week. Happy to pop out for a free look if that suits?\n\nDrop me a DM or text/WhatsApp [your number].\n\nCheers,\n[Your name] — EASY Property Services'},
+  {id:2,title:'Facebook Marketplace — Enquiry Reply',tag:'MARKETPLACE',cat:'marketplace',preview:'Respond to Marketplace listings professionally',text:'Hi [Name],\n\nSaw your listing on Marketplace — happy to help with the [job type].\n\nI\'m based in [area], fully insured, been doing this [X] years locally.\n\nPrice around €[price] all in, including materials and cleanup. Can usually fit jobs in within the week.\n\nWould you be around for a quick look? DM me here or WhatsApp [number].\n\nThanks,\n[Your name]'},
+  {id:3,title:'Done Deal — Professional Response',tag:'DONE DEAL',cat:'donedeal',preview:'Stand out from other responses on Done Deal',text:'Hello,\n\nResponding to your Done Deal ad regarding [job type].\n\nI\'m a local contractor covering [area] — fully insured, all work guaranteed.\n\nLooking at your ad, I\'d estimate around €[price] all in — labour, materials, and tidy-up.\n\nI could come out to view it at your convenience this week if you\'d like an exact quote. No charge for a quote.\n\nFeel free to ring or text: [your number]\n\nKind regards,\n[Your name]\nEASY Property Services'},
+  {id:4,title:'Planning Permission — Cold Outreach',tag:'PLANNING',cat:'facebook',preview:'Reach homeowners with newly granted permissions',text:'Good morning [Name],\n\nI noticed planning permission has recently been granted for your property at [address] for [type of work].\n\nI run a local property maintenance and building company in [area]. We specialise in exactly this type of work.\n\nI\'d love to put forward a quotation when you\'re ready to proceed. Fully insured, experienced crew.\n\nNo pressure — just wanted to reach out early so you have options when the time comes.\n\nFeel free to get in touch at [number] or reply here.\n\nKind regards,\n[Your name]\nEASY Property Services'},
+  {id:5,title:'Follow-Up — No Response (3 days)',tag:'FOLLOW-UP',cat:'follow-up',preview:'Chase leads who haven\'t responded after 3 days',text:'Hi [Name],\n\nJust following up on my message from [day] about the [job type] at [location].\n\nHappy to help if you\'re still looking — or if you\'ve gone with someone else, no worries at all.\n\nIf timing is an issue I can hold a slot into [next week/next month].\n\nBest,\n[Your name] — [number]'},
+  {id:6,title:'Follow-Up — Quote Sent, Awaiting Decision',tag:'FOLLOW-UP',cat:'follow-up',preview:'Check in after sending a formal quote',text:'Hi [Name],\n\nHope you\'re well. Just checking in on the quote I sent over on [date] for the [job type].\n\nLet me know if you have any questions or want to adjust anything.\n\nI do have a slot opening up [date range] which would work well for this job.\n\nJust give me a shout either way.\n\nCheers,\n[Your name]'},
+  {id:7,title:'Job Won — Confirmation Message',tag:'JOB WON',cat:'won',preview:'Confirm details when you win a job',text:'Hi [Name],\n\nBrilliant — looking forward to getting this done for you!\n\nJust to confirm:\n• Job: [description]\n• Start date: [date]\n• Estimated duration: [X days]\n• Agreed price: €[amount]\n• Payment: [e.g. 50% deposit, balance on completion]\n\nI\'ll be in touch the day before to confirm start time.\n\nSee you [date]!\n\n[Your name] — [number]'},
+  {id:8,title:'Review Request — After Job Completion',tag:'REVIEW',cat:'review',preview:'Ask happy customers for a Google review',text:'Hi [Name],\n\nReally glad you\'re happy with how the [job type] turned out!\n\nIf you get a moment, I\'d really appreciate a quick Google review — it makes a huge difference for a small local business. Takes less than 2 minutes:\n\n👉 [Your Google Review Link]\n\nAnd if you know anyone looking for similar work, feel free to pass on my number.\n\nThanks again,\n[Your name]\nEASY Property Services\n[number]'},
+  {id:9,title:'Instagram / TikTok DM',tag:'SOCIAL',cat:'facebook',preview:'Casual tone for social media leads',text:'Hey! 👋\n\nSpotted your post about needing [job] done. We cover [area] and do this all the time.\n\nCan give you a rough price now if you tell me more, or come out for a free look.\n\nDM me here or WhatsApp [number] 📱'},
+  {id:10,title:'Seasonal Promotion',tag:'PROMO',cat:'facebook',preview:'Fill quiet periods with a seasonal offer',text:'Hi [Name],\n\nHope all is well! Just reaching out as we have some availability coming up over the next few weeks.\n\nIf you\'ve been putting off any maintenance work — roofing, painting, gutters, repairs — now\'s a great time.\n\nWe\'re doing [X% off / free X] for jobs booked before [date].\n\nGive me a shout if anything springs to mind.\n\n[Your name] — [number]\nEASY Property Services'}
+];
+
+function renderTemplates(){
+  var filtered=templateFilter==='all'?templates:templates.filter(function(t){return t.cat===templateFilter;});
+  document.getElementById('templates-list').innerHTML=filtered.map(function(t){
+    return '<div class="template-card" id="tc-'+t.id+'"><div class="tc-header" onclick="toggleTc('+t.id+')"><div><div class="tc-title">'+t.title+'</div><div class="tc-preview">'+t.preview+'</div></div><div class="tc-tag">'+t.tag+'</div></div><div class="tc-body"><div class="tc-text">'+t.text+'</div><div class="tc-actions"><button class="btn btn-primary btn-sm" onclick="copyTc('+t.id+',event)">Copy Text</button><button class="btn btn-ghost btn-sm" onclick="aiTc('+t.id+',event)">AI Personalise</button></div><div class="ai-box" id="ai-tc-'+t.id+'" style="display:none;margin-top:12px;"></div></div></div>';
+  }).join('');
+}
+
+function filterTemplates(f,el){document.querySelectorAll('#panel-outreach .filter-chip').forEach(function(c){c.classList.remove('active');});el.classList.add('active');templateFilter=f;renderTemplates();}
+function toggleTc(id){var el=document.getElementById('tc-'+id);el.classList.toggle('expanded');}
+function copyTc(id,e){e.stopPropagation();var t=templates.find(function(x){return x.id===id;});if(!t)return;navigator.clipboard.writeText(t.text).then(function(){toast('Copied!');}).catch(function(){toast('Select text manually');});}
+async function aiTc(id,e){
+  e.stopPropagation();
+  var t=templates.find(function(x){return x.id===id;});
+  if(!t)return;
+  var aib=document.getElementById('ai-tc-'+id);
+  aib.style.display='block';
+  aib.innerHTML='<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Personalising...</span></div>';
+  var job=prompt('Job type? (e.g. Gutter cleaning, Roof repair)')||'property maintenance';
+  var loc=prompt('Customer location? (e.g. Swords, Lucan)')||'Dublin';
+  try{
+    var resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,messages:[{role:'user',content:'Personalise this outreach template for job: '+job+', location: '+loc+'. Keep it natural Irish tone, not salesy. Return ONLY the message:\n\n'+t.text}]})});
+    var data=await resp.json();
+    var txt=data.content&&data.content[0]?data.content[0].text:'Could not personalise.';
+    aib.innerHTML='<div class="ai-result">'+txt+'</div><div style="margin-top:8px;"><button class="btn btn-primary btn-sm" onclick="copyEl(this)">Copy</button></div>';
+  }catch(err){aib.innerHTML='<div style="color:var(--red);font-size:12px;">AI unavailable. Use template as-is.</div>';}
+}
+function copyEl(btn){navigator.clipboard.writeText(btn.parentElement.previousElementSibling.textContent).then(function(){toast('Copied!');});}
+
+// ============================================================
+// RATES
+// ============================================================
+function renderRates(){
+  document.getElementById('rates-tbody').innerHTML=Object.entries(rates).map(function(entry){var k=entry[0];var r=entry[1];return '<tr><td>'+r.label+'</td><td><input class="rate-input" type="number" value="'+r.small+'" onchange="updateRate(\''+k+'\',\'small\',this.value)"></td><td><input class="rate-input" type="number" value="'+r.medium+'" onchange="updateRate(\''+k+'\',\'medium\',this.value)"></td><td><input class="rate-input" type="number" value="'+r.large+'" onchange="updateRate(\''+k+'\',\'large\',this.value)"></td></tr>';}).join('');
+}
+function updateRate(k,s,v){rates[k][s]=Number(v);}
+function saveRates(){localStorage.setItem('ecc_rates',JSON.stringify(rates));toast('Rates saved!');}
+
+// ============================================================
+// QUOTES
+// ============================================================
+function initQuotes(){
+  if(!quoteItems.length) addQuoteItem();
+  document.getElementById('q-date').value=new Date().toISOString().split('T')[0];
+  if(!document.getElementById('q-num').value) document.getElementById('q-num').value='Q'+new Date().getFullYear()+'-'+String(Math.floor(Math.random()*900)+100);
+  updateQuote();
+}
+function addQuoteItem(){quoteItems.push({desc:'',qty:1,rate:0});renderQItems();}
+function addQuoteItemWithPrice(desc,price){quoteItems.push({desc:desc,qty:1,rate:price});renderQItems();}
+function removeQItem(i){quoteItems.splice(i,1);renderQItems();updateQuote();}
+function renderQItems(){
+  document.getElementById('q-items').innerHTML=quoteItems.map(function(item,i){
+    return '<div style="display:grid;grid-template-columns:1fr 55px 85px 28px;gap:6px;margin-bottom:6px;align-items:center;"><input type="text" value="'+item.desc+'" placeholder="Description" onchange="quoteItems['+i+'].desc=this.value;updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:7px 10px;color:var(--text);font-size:13px;outline:none;"><input type="number" value="'+item.qty+'" min="1" onchange="quoteItems['+i+'].qty=Number(this.value);updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:7px 6px;color:var(--text);font-size:13px;outline:none;text-align:center;"><input type="number" value="'+item.rate+'" placeholder="Rate" onchange="quoteItems['+i+'].rate=Number(this.value);updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:7px 8px;color:var(--text);font-size:13px;outline:none;text-align:right;"><button onclick="removeQItem('+i+')" style="background:none;border:none;color:var(--text-m);font-size:16px;cursor:pointer;">\xd7</button></div>';
+  }).join('');
+}
+function updateQuote(){
+  var sub=quoteItems.reduce(function(s,item){return s+(item.qty*item.rate);},0);
+  var vat=sub*0.135;
+  var total=sub+vat;
+  document.getElementById('q-subtotal').textContent='\u20ac'+sub.toFixed(2);
+  document.getElementById('q-vat').textContent='\u20ac'+vat.toFixed(2);
+  document.getElementById('q-total').textContent='\u20ac'+total.toFixed(2);
+  var name=document.getElementById('q-name').value||'[Customer Name]';
+  var addr=(document.getElementById('q-addr').value||'[Address]').replace(/\n/g,'<br>');
+  var desc=document.getElementById('q-desc').value||'';
+  var num=document.getElementById('q-num').value||'Q2026-001';
+  var date=document.getElementById('q-date').value||new Date().toLocaleDateString('en-IE');
+  var rows=quoteItems.map(function(item){return '<tr><td style="padding:6px 8px;border-bottom:1px solid #eee;">'+( item.desc||'—')+'</td><td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:center;">'+item.qty+'</td><td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:right;">\u20ac'+item.rate.toFixed(2)+'</td><td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:right;">\u20ac'+(item.qty*item.rate).toFixed(2)+'</td></tr>';}).join('');
+  document.getElementById('quote-preview').innerHTML='<div style="border-bottom:3px solid #E8620A;padding-bottom:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:flex-start;"><div><div style="font-family:\'Barlow Condensed\',sans-serif;font-size:22px;font-weight:800;"><span style="color:#E8620A;">E</span>ASY Property Services</div><div style="font-size:11px;color:#666;">Dublin, Ireland</div></div><div style="text-align:right;"><div style="font-family:\'Barlow Condensed\',sans-serif;font-size:18px;font-weight:700;">QUOTATION</div><div style="font-size:11px;color:#888;">'+num+' | '+date+'</div></div></div><div style="margin-bottom:14px;font-size:12px;"><strong>To:</strong> '+name+'<br><span style="color:#555;">'+addr+'</span></div>'+(desc?'<div style="margin-bottom:14px;font-size:11px;color:#444;background:#f9f9f9;padding:8px;border-radius:4px;"><strong>Re:</strong> '+desc+'</div>':'')+'<table style="width:100%;border-collapse:collapse;font-size:11px;"><thead><tr style="background:#f5f5f5;"><th style="padding:6px 8px;text-align:left;">Description</th><th style="padding:6px 8px;text-align:center;">Qty</th><th style="padding:6px 8px;text-align:right;">Rate</th><th style="padding:6px 8px;text-align:right;">Total</th></tr></thead><tbody>'+rows+'</tbody></table><div style="margin-top:12px;text-align:right;border-top:1px solid #eee;padding-top:10px;"><div style="font-size:11px;color:#666;">Subtotal: <strong>\u20ac'+sub.toFixed(2)+'</strong></div><div style="font-size:11px;color:#666;">VAT @ 13.5%: <strong>\u20ac'+vat.toFixed(2)+'</strong></div><div style="font-family:\'Barlow Condensed\',sans-serif;font-size:18px;font-weight:800;color:#E8620A;margin-top:4px;">Total: \u20ac'+total.toFixed(2)+'</div></div><div style="margin-top:14px;font-size:10px;color:#888;border-top:1px solid #eee;padding-top:10px;">This quotation is valid for 30 days. All work carried out by EASY Property Services, fully insured.</div>';
+}
+function clearQuote(){quoteItems=[];document.getElementById('q-name').value='';document.getElementById('q-addr').value='';document.getElementById('q-desc').value='';addQuoteItem();updateQuote();}
+function printQuote(){var w=window.open('','_blank');w.document.write('<!DOCTYPE html><html><head><title>Quote</title><style>body{font-family:Arial,sans-serif;padding:40px;max-width:700px;margin:0 auto;}@media print{body{padding:0;}}</style></head><body>'+document.getElementById('quote-preview').innerHTML+'</body></html>');w.document.close();w.print();}
+
+// ============================================================
+// TOAST
+// ============================================================
+function toast(msg){var el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(function(){el.classList.remove('show');},2500);}
+
+// ============================================================
+// INIT
+// ============================================================
+function init(){
+  if(!leads.length){
+    leads=[
+      {source:'facebook',name:'Mary O\'Brien',phone:'087 234 5678',jobtype:'Gutter Clean & Repair',location:'Swords, Dublin',quote:280,notes:'3 bed semi-D',priority:'high',status:'new',date:new Date().toLocaleDateString('en-IE')},
+      {source:'donedeal',name:'Tom Kelly',phone:'086 987 6543',jobtype:'Roof Repair',location:'Naas, Kildare',quote:650,notes:'Missing tiles after storm',priority:'high',status:'quoted',date:new Date().toLocaleDateString('en-IE')},
+      {source:'myhome',name:'Sarah Murphy',phone:'085 111 2222',jobtype:'Attic Conversion',location:'Castleknock, D15',quote:38000,notes:'Standard attic with dormer',priority:'med',status:'follow-up',date:new Date().toLocaleDateString('en-IE')},
+      {source:'referral',name:'Jim Byrne',phone:'089 444 5555',jobtype:'Driveway — Tarmac',location:'Malahide, Dublin',quote:4500,notes:'Referred by previous customer',priority:'med',status:'won',date:new Date().toLocaleDateString('en-IE')},
+      {source:'instagram',name:'Lisa O\'Connor',phone:'087 999 0000',jobtype:'Interior Painting',location:'Lucan, Dublin',quote:4200,notes:'4 bed house',priority:'low',status:'new',date:new Date().toLocaleDateString('en-IE')}
+    ];
+    saveLeads();
+  }
+  renderDashboard();
+  renderLeads();
+  renderPlanning();
+  renderTemplates();
+  renderRates();
+}
+
+init();
+</script>
+</body>
+</html>
