@@ -391,7 +391,7 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
           <select id="pricer-size">
             <option value="medium">-- Not applicable / General job --</option>
             <option value="small">Small (1-2 bed / apartment)</option>
-            <option value="medium" selected>Medium (3 bed semi-D)</option>
+            <option value="medium">Medium (3 bed semi-D)</option>
             <option value="large">Large (4+ bed / detached)</option>
           </select>
         </div>
@@ -700,10 +700,19 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
 // STATE
 // ============================================================
 var leads = JSON.parse(localStorage.getItem('ecc_leads') || '[]');
-var _savedRates = JSON.parse(localStorage.getItem('ecc_rates') || 'null');
 var _defaultRates = getDefaultRates();
+var _savedRates = JSON.parse(localStorage.getItem('ecc_rates') || 'null');
+var _rateVersion = 'v5';
+if(localStorage.getItem('ecc_rate_ver') !== _rateVersion){ 
+  _savedRates = null; 
+  localStorage.removeItem('ecc_rates');
+  localStorage.setItem('ecc_rate_ver', _rateVersion);
+}
 var rates = _defaultRates;
-if(_savedRates){ Object.keys(_defaultRates).forEach(function(k){ if(!_savedRates[k]) _savedRates[k]=_defaultRates[k]; }); rates=_savedRates; }
+if(_savedRates){ 
+  Object.keys(_defaultRates).forEach(function(k){ if(!_savedRates[k]) _savedRates[k]=_defaultRates[k]; }); 
+  rates=_savedRates; 
+}
 var API_KEY = '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';
 var currentFilter = 'all';
 var planFilter = 'all';
