@@ -389,6 +389,7 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
         <div class="form-group">
           <label>Property Size</label>
           <select id="pricer-size">
+            <option value="medium">-- Not applicable / General job --</option>
             <option value="small">Small (1-2 bed / apartment)</option>
             <option value="medium" selected>Medium (3 bed semi-D)</option>
             <option value="large">Large (4+ bed / detached)</option>
@@ -807,7 +808,15 @@ function getDefaultRates(){
     'scaffolding':      {label:'Scaffolding (per week)',              small:800,  medium:1400, large:2200},
     'day-tradesman':    {label:'Tradesman Day Rate',                  small:400,  medium:400,  large:400},
     'day-labourer':     {label:'Labourer Day Rate',                   small:250,  medium:250,  large:250},
-    'day-mixed':        {label:'Mixed Crew (tradesman + labourer)',   small:650,  medium:650,  large:650}
+    'day-mixed':        {label:'Mixed Crew (tradesman + labourer)',   small:650,  medium:650,  large:650},
+    'demo-chimney':     {label:'Demolition — Chimney Stack',           small:800,  medium:1400, large:2200},
+    'demo-wall-int':    {label:'Demolition — Internal Wall',           small:400,  medium:700,  large:1100},
+    'demo-wall-str':    {label:'Demolition — Structural Wall (RSJ)',   small:1800, medium:3000, large:5000},
+    'demo-bathroom':    {label:'Strip Out — Full Bathroom',            small:600,  medium:900,  large:1400},
+    'demo-kitchen':     {label:'Strip Out — Full Kitchen',             small:500,  medium:800,  large:1200},
+    'demo-garage':      {label:'Demolition — Garage / Shed',           small:1200, medium:2000, large:3500},
+    'demo-extension':   {label:'Demolition — Full Extension',          small:3000, medium:5500, large:9000},
+    'demo-full':        {label:'Full House Strip Out',                 small:4000, medium:7000, large:12000}
   };
 }
 
@@ -987,8 +996,48 @@ async function runAIPricer(){
   var size=document.getElementById('pricer-size').value;
   var location=document.getElementById('pricer-location').value;
   var notes=document.getElementById('pricer-notes').value;
+  var scope=document.getElementById('pricer-scope')?document.getElementById('pricer-scope').value:'';
+  var allText=(notes+' '+scope).toLowerCase();
   var box=document.getElementById('pricer-result-box');
   if(!jobtype){toast('Please select a job type');return;}
+
+  // Auto-detect machinery / special costs from description
+  var machineryBonus=0;
+  var machineryNotes=[];
+  var machineKW=[
+    // Machinery & plant hire
+    {words:['mini digger','digger','excavator','jcb'],cost:300,label:'Mini digger hire'},
+    {words:['dumper','dumper truck','skip lorry'],cost:200,label:'Dumper hire'},
+    {words:['crane','hiab','telehandler'],cost:600,label:'Crane / Hiab hire'},
+    {words:['scaffolding','scaffold'],cost:800,label:'Scaffolding (detected)'},
+    {words:['man power','manpower','extra men','extra hands','labour only','day rate','gang'],cost:400,label:'Extra labour'},
+    {words:['skip','waste removal','rubbish removal','rubble removal'],cost:280,label:'Skip hire'},
+    {words:['asbestos','hazardous','specialist disposal'],cost:800,label:'Specialist disposal'},
+    {words:['pump','concrete pump'],cost:350,label:'Concrete pump hire'},
+    {words:['generator','power supply'],cost:200,label:'Generator hire'},
+    {words:['cherry picker','access platform','boom lift'],cost:400,label:'Cherry picker hire'},
+    // Materials
+    {words:['cement','concrete','ready mix','readymix'],cost:350,label:'Cement / Concrete materials'},
+    {words:['timber','lumber','joists','rafters','decking boards'],cost:400,label:'Timber / Structural timber'},
+    {words:['block','breeze block','blockwork','masonry'],cost:500,label:'Block / Masonry materials'},
+    {words:['steel','rsj','beam','lintel','steel frame'],cost:600,label:'Steel / Structural steel'},
+    {words:['insulation','kingspan','rockwool','cavity board'],cost:300,label:'Insulation materials'},
+    {words:['tiles','tiling','floor tiles','wall tiles','porcelain','ceramic'],cost:400,label:'Tiles / Tiling materials'},
+    {words:['slate','slates','roof slates','natural slate'],cost:500,label:'Roof slates'},
+    {words:['pvc','upvc','fascia board','soffit board'],cost:250,label:'uPVC / Fascia materials'},
+    {words:['sand','gravel','hardcore','stone','ballast','mot'],cost:200,label:'Aggregates / Sand & gravel'},
+    {words:['plasterboard','drywall','plaster','multifinish'],cost:250,label:'Plaster / Plasterboard'},
+    {words:['paint','primer','undercoat','emulsion','gloss'],cost:180,label:'Paint & decorating materials'},
+    {words:['flooring','laminate','lvt','vinyl','engineered wood'],cost:350,label:'Flooring materials'},
+    {words:['pipe','copper pipe','pvc pipe','soil pipe','drainage'],cost:200,label:'Pipework / Drainage materials'},
+    {words:['wire','cable','conduit','electrical materials'],cost:200,label:'Electrical materials'},
+    {words:['window','windows','upvc window','double glazing'],cost:600,label:'Windows / Glazing'},
+    {words:['door','doors','external door','internal door'],cost:300,label:'Door / Door materials'},
+  ];
+  machineKW.forEach(function(m){
+    var found=m.words.some(function(w){return allText.indexOf(w)>=0;});
+    if(found){machineryBonus+=m.cost;machineryNotes.push(m.label+' (+€'+m.cost+')');}
+  });
   var calcBase=getCalcPrice();
   var adjusted,label;
   var r=rates[jobtype];
@@ -1001,7 +1050,7 @@ async function runAIPricer(){
     adjusted=Math.round(r[size]*locMult);
     label=r.label;
   } else {toast('No rate for this job');return;}
-  var extras=extrasAmt||0;
+  var extras=(extrasAmt||0)+machineryBonus;
   var total=adjusted+extras;
   var contingency=document.getElementById('contingency-check').checked?Math.round(total*0.10):0;
   var grand=total+contingency;
@@ -1013,17 +1062,20 @@ async function runAIPricer(){
     var resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:350,messages:[{role:'user',content:prompt}]})});
     var data=await resp.json();
     var txt=data.content&&data.content[0]?data.content[0].text:'Could not get estimate.';
-    box.innerHTML=buildResult(label,adjusted,extras,contingency,grand,low,high,size,location,txt);
+    box.innerHTML=buildResult(label,adjusted,extras,contingency,grand,low,high,size,location,txt,machineryNotes);
   } catch(e){
-    box.innerHTML=buildResult(label,adjusted,extras,contingency,grand,low,high,size,location,'');
+    box.innerHTML=buildResult(label,adjusted,extras,contingency,grand,low,high,size,location,'',machineryNotes);
   }
 }
 
-function buildResult(label,base,extras,contingency,grand,low,high,size,loc,aiText){
+function buildResult(label,base,extras,contingency,grand,low,high,size,loc,aiText,machNotes){
+  machNotes=machNotes||[];
   var extRow=extras>0?'<div class="pb-row"><span class="pb-key">Add-ons</span><span class="pb-val" style="color:var(--yellow);">+\u20ac'+extras.toLocaleString()+'</span></div>':'';
   var conRow=contingency>0?'<div class="pb-row"><span class="pb-key">Contingency (10%)</span><span class="pb-val">+\u20ac'+contingency.toLocaleString()+'</span></div>':'';
+  var machSec='';
+  if(machNotes.length){machSec='<div style="margin-top:10px;background:rgba(243,156,18,0.08);border:1px solid rgba(243,156,18,0.25);border-radius:4px;padding:10px 12px;"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--yellow);margin-bottom:6px;">Auto-detected from description</div>'+machNotes.map(function(n){return'<div style="font-size:12px;color:var(--text-m);padding:2px 0;">⚠ '+n+'</div>';}).join('')+'</div>';}
   var aiSec=aiText?'<div style="margin-top:14px;"><div class="ai-result">'+aiText+'</div></div>':'<div style="margin-top:10px;font-size:12px;color:var(--text-m);">AI commentary unavailable — base rate shown.</div>';
-  return '<div class="price-result"><div class="price-tag">\u20ac'+grand.toLocaleString()+'</div><div class="price-range">Range: \u20ac'+low.toLocaleString()+' \u2013 \u20ac'+high.toLocaleString()+'</div><div class="price-breakdown"><div class="pb-row"><span class="pb-key">Job</span><span class="pb-val">'+label+'</span></div><div class="pb-row"><span class="pb-key">Base</span><span class="pb-val">\u20ac'+base.toLocaleString()+'</span></div>'+extRow+conRow+'<div class="pb-row"><span class="pb-key">Size / Location</span><span class="pb-val">'+size+' \u00b7 '+loc.replace('-',' ')+'</span></div></div></div>'+aiSec+'<div style="margin-top:14px;display:flex;gap:8px;"><button class="btn btn-primary btn-sm" onclick="priceToLead('+grand+')">Add as Lead</button><button class="btn btn-outline btn-sm" onclick="priceToQuote('+grand+')">Create Quote</button></div>';
+  return machSec+'<div class="price-result"><div class="price-tag">\u20ac'+grand.toLocaleString()+'</div><div class="price-range">Range: \u20ac'+low.toLocaleString()+' \u2013 \u20ac'+high.toLocaleString()+'</div><div class="price-breakdown"><div class="pb-row"><span class="pb-key">Job</span><span class="pb-val">'+label+'</span></div><div class="pb-row"><span class="pb-key">Base</span><span class="pb-val">\u20ac'+base.toLocaleString()+'</span></div>'+extRow+conRow+'<div class="pb-row"><span class="pb-key">Size / Location</span><span class="pb-val">'+size+' \u00b7 '+loc.replace('-',' ')+'</span></div></div></div>'+aiSec+'<div style="margin-top:14px;display:flex;gap:8px;"><button class="btn btn-primary btn-sm" onclick="priceToLead('+grand+')">Add as Lead</button><button class="btn btn-outline btn-sm" onclick="priceToQuote('+grand+')">Create Quote</button></div>';
 }
 
 function priceToLead(price){
