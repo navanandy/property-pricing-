@@ -357,47 +357,98 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
         <div class="card-title">Job Details</div>
         <div class="form-group">
           <label>Job Type</label>
-          <select id="pricer-jobtype">
+          <select id="pricer-jobtype" onchange="togglePricerMode()">
             <option value="">-- Select job type --</option>
-            <optgroup label="Roofing">
-              <option value="roof-replace">Full Roof Replacement</option>
+            <optgroup label="🏠 Roofing — Pitched">
+              <option value="roof-replace">Roof Replacement (pitched, slate)</option>
+              <option value="roof-slates">Roof — Price by Slate Count ↗</option>
               <option value="roof-repair">Roof Repair / Patch</option>
-              <option value="gutters">Gutters — Clean &amp; Repair</option>
-              <option value="gutters-replace">Gutters — Full Replacement</option>
-              <option value="flat-roof">Flat Roof</option>
-              <option value="skylight">Skylight Installation</option>
+              <option value="leadwork">Lead Flashing / Valley Lead</option>
+              <option value="ridging">Ridge Tiles / Capping (full run)</option>
+              <option value="chimney-clean">Chimney Sweep / Clean</option>
+              <option value="chimney-repair">Chimney Repointing / Flashing</option>
+              <option value="chimney-rebuild">Chimney Rebuild (full)</option>
+              <option value="skylight">Velux / Skylight Installation</option>
             </optgroup>
-            <optgroup label="Extensions &amp; Building">
+            <optgroup label="🏠 Roofing — Flat">
+              <option value="flat-roof-sqm">Flat Roof — Price by sqm ↗</option>
+              <option value="flat-roof-torch">Flat Roof — Torch-On Felt (job price)</option>
+              <option value="flat-roof-epdm">Flat Roof — EPDM Rubber (job price)</option>
+            </optgroup>
+            <optgroup label="🪟 Gutters, Fascia &amp; Soffit">
+              <option value="gutters-clean">Gutters — Clean &amp; Minor Repair</option>
+              <option value="gutters-replace">Gutters — Full Replacement (uPVC)</option>
+              <option value="fascia-soffit">Fascia &amp; Soffit Replacement</option>
+              <option value="gutters-fascia">Gutters + Fascia + Soffit (full set)</option>
+            </optgroup>
+            <optgroup label="🏗️ Extensions &amp; Building">
               <option value="extension-single">Single Storey Extension</option>
               <option value="extension-double">Double Storey Extension</option>
               <option value="garage-conversion">Garage Conversion</option>
-              <option value="attic-conversion">Attic Conversion</option>
+              <option value="attic-conversion">Attic Conversion — Standard</option>
+              <option value="attic-dormer">Attic + Dormer Extension</option>
             </optgroup>
-            <optgroup label="Driveway &amp; Outdoor">
+            <optgroup label="🏡 Garden Buildings — Solid Block">
+              <option value="garden-block-sm">Garden Building — Block (small ~12sqm)</option>
+              <option value="garden-block-med">Garden Building — Block (medium ~25sqm)</option>
+              <option value="garden-block-lg">Garden Building — Block (large ~40sqm)</option>
+              <option value="garden-block-sqm">Garden Building — Block (custom sqm) ↗</option>
+            </optgroup>
+            <optgroup label="🏡 Garden Buildings — Timber Stud + Render">
+              <option value="garden-timber-sm">Garden Building — Timber+Render (small ~12sqm)</option>
+              <option value="garden-timber-med">Garden Building — Timber+Render (medium ~25sqm)</option>
+              <option value="garden-timber-lg">Garden Building — Timber+Render (large ~40sqm)</option>
+              <option value="garden-timber-sqm">Garden Building — Timber+Render (custom sqm) ↗</option>
+            </optgroup>
+            <optgroup label="🧱 Blockwork">
+              <option value="blockwork-found">Blockwork — Foundations / Footings</option>
+              <option value="blockwork-walls">Blockwork — External Cavity Walls</option>
+              <option value="blockwork-internal">Blockwork — Internal Partition Walls</option>
+              <option value="blockwork-garden">Blockwork — Garden / Boundary Walls</option>
+            </optgroup>
+            <optgroup label="🚗 Driveways &amp; Outdoor">
               <option value="driveway-tarmac">Driveway — Tarmac</option>
               <option value="driveway-block">Driveway — Block Paving</option>
-              <option value="patio">Patio / Decking</option>
-              <option value="fencing">Fencing</option>
+              <option value="driveway-resin">Driveway — Resin Bound</option>
+              <option value="patio-paving">Patio — Natural Stone / Paving</option>
+              <option value="patio-decking">Patio — Timber Decking</option>
+              <option value="fencing-timber">Fencing — Timber Panel</option>
+              <option value="fencing-block">Fencing — Block/Brick Pillars</option>
               <option value="garden-clearance">Garden Clearance</option>
-              <option value="landscaping">Landscaping</option>
+              <option value="landscaping">Landscaping (full)</option>
             </optgroup>
-            <optgroup label="Interior">
+            <optgroup label="🎨 Interior">
               <option value="painting-interior">Interior Painting — Full House</option>
               <option value="painting-room">Interior Painting — Per Room</option>
               <option value="bathroom">Bathroom Renovation</option>
+              <option value="ensuite">Ensuite / Wet Room</option>
               <option value="kitchen">Kitchen Renovation</option>
-              <option value="flooring">Flooring</option>
-              <option value="plastering">Plastering</option>
-              <option value="tiling">Tiling</option>
+              <option value="flooring-laminate">Flooring — Laminate / LVT</option>
+              <option value="flooring-tile">Flooring — Tile</option>
+              <option value="plastering-full">Plastering — Full House Skim</option>
+              <option value="plastering-room">Plastering — Per Room</option>
+              <option value="tiling">Tiling (walls / floor)</option>
+              <option value="insulation-wall">Insulation — Wall Cavity / Board</option>
+              <option value="insulation-attic">Insulation — Attic / Roof</option>
+              <option value="dry-lining">Dry Lining / IWI (internal)</option>
+              <option value="stud-partition">Stud Partition Wall</option>
+              <option value="door-internal">Internal Door (supply &amp; fit)</option>
+              <option value="door-external">External Door (supply &amp; fit)</option>
+              <option value="windows-replace">Window Replacement (per window)</option>
             </optgroup>
-            <optgroup label="Maintenance">
-              <option value="chimney">Chimney Cleaning / Repair</option>
-              <option value="fascia">Fascia &amp; Soffit Replacement</option>
-              <option value="window-clean">Window Cleaning</option>
-              <option value="power-wash">Power Washing</option>
+            <optgroup label="🔧 Maintenance &amp; General">
               <option value="painting-exterior">Exterior Painting</option>
-              <option value="insulation">Insulation</option>
-              <option value="handyman">Handyman / Odd Jobs</option>
+              <option value="render-exterior">External Render / Pebbledash</option>
+              <option value="power-wash">Power Washing</option>
+              <option value="window-clean">Window Cleaning (one-off)</option>
+              <option value="handyman">Handyman / Odd Jobs (day rate)</option>
+              <option value="skip-hire">Skip Hire (standard, 7 days)</option>
+              <option value="scaffolding">Scaffolding (per week)</option>
+            </optgroup>
+            <optgroup label="👷 Labour Day Rates">
+              <option value="day-tradesman">Tradesman Day Rate</option>
+              <option value="day-labourer">Labourer Day Rate</option>
+              <option value="day-mixed">Mixed Crew (1 tradesman + 1 labourer)</option>
             </optgroup>
           </select>
         </div>
@@ -421,6 +472,120 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
             <option value="other">Rest of Ireland</option>
           </select>
         </div>
+        <!-- DYNAMIC CALCULATOR INPUTS (shown/hidden by job type) -->
+        <div id="calc-slates" style="display:none;background:var(--bg);border:1px solid var(--border-acc);border-radius:6px;padding:14px;margin-bottom:14px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:10px;">Slate Calculator</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div class="form-group" style="margin:0;"><label>Number of Slates</label><input type="number" id="slate-count" value="500" min="1" oninput="calcSlates()"></div>
+            <div class="form-group" style="margin:0;"><label>Price per Slate (€)</label><input type="number" id="slate-price" value="1.30" step="0.05" oninput="calcSlates()"></div>
+          </div>
+          <div style="margin-top:10px;padding:10px;background:var(--bg-card);border-radius:4px;font-family:'Barlow Condensed',sans-serif;">
+            <div style="font-size:22px;font-weight:800;color:var(--orange);">€<span id="slate-total">650</span></div>
+            <div style="font-size:11px;color:var(--text-m);margin-top:2px;">Slates only — add trims, ridging &amp; lead work below</div>
+          </div>
+          <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:12px;">
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="add-ridging" onchange="calcSlates()"> Ridge/Hip Tiles</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="add-lead" onchange="calcSlates()"> Lead/Flashing</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="add-trims" onchange="calcSlates()"> Verge Trims</label>
+          </div>
+          <div id="slate-extras-total" style="margin-top:8px;font-size:12px;color:var(--text-m);"></div>
+        </div>
+
+        <div id="calc-flat-sqm" style="display:none;background:var(--bg);border:1px solid var(--border-acc);border-radius:6px;padding:14px;margin-bottom:14px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:10px;">Flat Roof — sqm Calculator</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div class="form-group" style="margin:0;"><label>Area (sqm)</label><input type="number" id="flat-sqm" value="20" min="1" oninput="calcFlatRoof()"></div>
+            <div class="form-group" style="margin:0;"><label>Rate per sqm (€)</label><input type="number" id="flat-rate" value="130" oninput="calcFlatRoof()"></div>
+          </div>
+          <div style="margin-top:10px;padding:10px;background:var(--bg-card);border-radius:4px;font-family:'Barlow Condensed',sans-serif;">
+            <div style="font-size:22px;font-weight:800;color:var(--orange);">€<span id="flat-total">2600</span></div>
+            <div style="font-size:11px;color:var(--text-m);margin-top:2px;">Base flat roof cost — add trims &amp; lead work below</div>
+          </div>
+          <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;">
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="flat-lead" onchange="calcFlatRoof()"> Lead Upstands / Flashings</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="flat-trims" onchange="calcFlatRoof()"> Drip Trims / Edging</label>
+          </div>
+          <div id="flat-extras-total" style="margin-top:8px;font-size:12px;color:var(--text-m);"></div>
+        </div>
+
+        <div id="calc-garden-sqm" style="display:none;background:var(--bg);border:1px solid var(--border-acc);border-radius:6px;padding:14px;margin-bottom:14px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:10px;">Garden Building — Custom sqm</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div class="form-group" style="margin:0;"><label>Floor Area (sqm)</label><input type="number" id="garden-sqm" value="20" min="1" oninput="calcGardenBuilding()"></div>
+            <div class="form-group" style="margin:0;"><label>Build Type</label>
+              <select id="garden-type" onchange="calcGardenBuilding()">
+                <option value="block">Solid Block</option>
+                <option value="timber">Timber Stud + Render</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-top:10px;padding:10px;background:var(--bg-card);border-radius:4px;font-family:'Barlow Condensed',sans-serif;">
+            <div style="font-size:22px;font-weight:800;color:var(--orange);">€<span id="garden-total">0</span></div>
+            <div style="font-size:11px;color:var(--text-m);margin-top:2px;"><span id="garden-rate-label">Block: ~€650/sqm avg</span></div>
+          </div>
+          <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;">
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="gb-roof" onchange="calcGardenBuilding()"> Flat Roof (incl)</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="gb-electric" onchange="calcGardenBuilding()"> Electrics (add €1,500)</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="gb-plumbing" onchange="calcGardenBuilding()"> Plumbing (add €2,000)</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" id="gb-insulate" onchange="calcGardenBuilding()"> Insulation (add €800)</label>
+          </div>
+        </div>
+
+        <div id="calc-dayrate" style="display:none;background:var(--bg);border:1px solid var(--border-acc);border-radius:6px;padding:14px;margin-bottom:14px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:10px;">Day Rate Calculator</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+            <div class="form-group" style="margin:0;"><label>Tradesman Days</label><input type="number" id="dr-trades" value="1" min="0" oninput="calcDayRate()"></div>
+            <div class="form-group" style="margin:0;"><label>Labourer Days</label><input type="number" id="dr-labour" value="1" min="0" oninput="calcDayRate()"></div>
+            <div class="form-group" style="margin:0;"><label>No. of Workers</label><input type="number" id="dr-workers" value="1" min="1" oninput="calcDayRate()"></div>
+          </div>
+          <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;color:var(--text-m);">
+            <div>Tradesman: <strong style="color:var(--orange);">€400/day</strong></div>
+            <div>Labourer: <strong style="color:var(--orange);">€250/day</strong></div>
+          </div>
+          <div style="margin-top:10px;padding:10px;background:var(--bg-card);border-radius:4px;font-family:'Barlow Condensed',sans-serif;">
+            <div style="font-size:22px;font-weight:800;color:var(--orange);">€<span id="dr-total">650</span></div>
+            <div style="font-size:11px;color:var(--text-m);margin-top:2px;"><span id="dr-breakdown">1 tradesman × 1 day + 1 labourer × 1 day</span></div>
+          </div>
+        </div>
+
+        <!-- EXTRAS / ADD-ONS -->
+        <div id="extras-section" style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:14px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--grey-lt);margin-bottom:10px;">Add-Ons &amp; Extras</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px;" id="extras-checkboxes">
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="280" onchange="calcExtras()"> Skip hire (€280)</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="800" onchange="calcExtras()"> Scaffolding 1wk (€800)</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="1400" onchange="calcExtras()"> Scaffolding 2wks (€1,400)</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="400" onchange="calcExtras()"> 1 tradesman day (€400)</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="250" onchange="calcExtras()"> 1 labourer day (€250)</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="500" onchange="calcExtras()"> Waste disposal (€500)</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="350" onchange="calcExtras()"> Lead flashing (€350)</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="600" onchange="calcExtras()"> Ridge tiles (€600)</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="200" onchange="calcExtras()"> Verge trims (€200)</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="1500" onchange="calcExtras()"> Electrics (€1,500)</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="2000" onchange="calcExtras()"> Plumbing (€2,000)</label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="checkbox" value="800" onchange="calcExtras()"> Insulation (€800)</label>
+          </div>
+          <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:center;">
+            <div class="form-group" style="margin:0;">
+              <label>Custom Extra (€)</label>
+              <input type="number" id="custom-extra" placeholder="0" oninput="calcExtras()">
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label>Custom Label</label>
+              <input type="text" id="custom-extra-label" placeholder="e.g. Permit fee">
+            </div>
+          </div>
+          <div style="margin-top:10px;">
+            <label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;">
+              <input type="checkbox" id="contingency-check" onchange="calcExtras()" checked>
+              <span>Add 10% contingency for unseen extras</span>
+            </label>
+          </div>
+          <div id="extras-total-row" style="margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-size:14px;color:var(--orange);font-weight:700;display:none;">
+            Add-ons total: €<span id="extras-total">0</span>
+          </div>
+        </div>
+
         <div class="form-group">
           <label>Job Notes / Description (paste lead here)</label>
           <textarea id="pricer-notes" placeholder="Paste the full post or describe the job... e.g. 'Looking for someone to replace gutters on 3 bed semi-D in Swords, full front and back, some fascia damage too'"></textarea>
@@ -656,36 +821,77 @@ function switchTab(tab){
 // ============================
 function getDefaultRates(){
   return {
-    'roof-replace':     {label:'Full Roof Replacement',    small:8500,  medium:12000, large:18000},
-    'roof-repair':      {label:'Roof Repair / Patch',      small:400,   medium:650,   large:1000},
-    'gutters':          {label:'Gutters — Clean & Repair', small:180,   medium:280,   large:420},
-    'gutters-replace':  {label:'Gutters — Full Replace',   small:950,   medium:1400,  large:2200},
-    'flat-roof':        {label:'Flat Roof',                small:2200,  medium:3800,  large:6000},
-    'skylight':         {label:'Skylight Installation',    small:900,   medium:1200,  large:1700},
-    'extension-single': {label:'Single Storey Extension',  small:60000, medium:80000, large:120000},
-    'extension-double': {label:'Double Storey Extension',  small:90000, medium:130000,large:180000},
-    'garage-conversion':{label:'Garage Conversion',        small:15000, medium:22000, large:32000},
-    'attic-conversion': {label:'Attic Conversion',         small:28000, medium:38000, large:55000},
-    'driveway-tarmac':  {label:'Driveway — Tarmac',        small:2800,  medium:4500,  large:7000},
-    'driveway-block':   {label:'Driveway — Block Paving',  small:4500,  medium:7500,  large:12000},
-    'patio':            {label:'Patio / Decking',          small:2200,  medium:4000,  large:7000},
-    'fencing':          {label:'Fencing',                  small:900,   medium:1800,  large:3200},
-    'garden-clearance': {label:'Garden Clearance',         small:350,   medium:550,   large:900},
-    'landscaping':      {label:'Landscaping',              small:3500,  medium:7000,  large:15000},
-    'painting-interior':{label:'Interior Paint — House',   small:2800,  medium:4500,  large:7500},
-    'painting-room':    {label:'Interior Paint — Room',    small:350,   medium:450,   large:600},
-    'bathroom':         {label:'Bathroom Renovation',      small:7000,  medium:12000, large:20000},
-    'kitchen':          {label:'Kitchen Renovation',       small:8000,  medium:15000, large:28000},
-    'flooring':         {label:'Flooring',                 small:2500,  medium:4200,  large:7000},
-    'plastering':       {label:'Plastering',               small:1800,  medium:3200,  large:5500},
-    'tiling':           {label:'Tiling',                   small:1200,  medium:2400,  large:4200},
-    'chimney':          {label:'Chimney Clean / Repair',   small:180,   medium:250,   large:380},
-    'fascia':           {label:'Fascia & Soffit Replace',  small:1400,  medium:2200,  large:3500},
-    'window-clean':     {label:'Window Cleaning',          small:80,    medium:120,   large:180},
-    'power-wash':       {label:'Power Washing',            small:200,   medium:320,   large:500},
-    'painting-exterior':{label:'Exterior Painting',        small:3000,  medium:5000,  large:8500},
-    'insulation':       {label:'Insulation',               small:3500,  medium:5500,  large:9000},
-    'handyman':         {label:'Handyman / Odd Jobs',      small:250,   medium:400,   large:650},
+    // ROOFING
+    'roof-replace':      {label:'Roof Replacement (pitched, slate)',          small:9500,  medium:16000, large:26000},
+    'roof-repair':       {label:'Roof Repair / Patch (pitched)',               small:450,   medium:900,   large:1600},
+    'flat-roof-torch':   {label:'Flat Roof — Torch-On Felt (job price)',       small:1800,  medium:3200,  large:5500},
+    'flat-roof-epdm':    {label:'Flat Roof — EPDM Rubber (job price)',         small:2200,  medium:4000,  large:7000},
+    'gutters-clean':     {label:'Gutters — Clean & Minor Repair',              small:160,   medium:240,   large:380},
+    'gutters-replace':   {label:'Gutters — Full Replacement (uPVC)',            small:900,   medium:1500,  large:2600},
+    'gutters-fascia':    {label:'Gutters + Fascia + Soffit (full set)',        small:2200,  medium:3500,  large:5500},
+    'fascia-soffit':     {label:'Fascia & Soffit Replacement only',            small:1400,  medium:2400,  large:3800},
+    'chimney-clean':     {label:'Chimney Sweep / Clean',                       small:80,    medium:80,    large:80},
+    'chimney-repair':    {label:'Chimney Repointing / Flashing',               small:350,   medium:650,   large:1000},
+    'chimney-rebuild':   {label:'Chimney Rebuild (full)',                      small:2200,  medium:3500,  large:5500},
+    'skylight':          {label:'Velux / Skylight Installation',               small:900,   medium:1400,  large:2000},
+    'leadwork':          {label:'Lead Flashing / Valley Lead',                 small:350,   medium:650,   large:1200},
+    'ridging':           {label:'Ridge Tiles / Capping (full run)',            small:600,   medium:1100,  large:1900},
+    'fascia-only':       {label:'Fascia & Soffit Replacement',                 small:1400,  medium:2400,  large:3800},
+    // EXTENSIONS & BUILDING
+    'extension-single':  {label:'Single Storey Extension',                    small:65000, medium:95000, large:140000},
+    'extension-double':  {label:'Double Storey Extension',                    small:100000,medium:145000,large:210000},
+    'garage-conversion': {label:'Garage Conversion — Basic',                  small:14000, medium:20000, large:30000},
+    'attic-conversion':  {label:'Attic Conversion — Standard',                small:30000, medium:42000, large:60000},
+    'attic-dormer':      {label:'Attic + Dormer Extension',                   small:42000, medium:58000, large:80000},
+    // GARDEN BUILDINGS — SOLID BLOCK
+    'garden-block-sm':   {label:'Garden Building — Block (small ~12sqm)',      small:8500,  medium:8500,  large:8500},
+    'garden-block-med':  {label:'Garden Building — Block (medium ~25sqm)',     small:16500, medium:16500, large:16500},
+    'garden-block-lg':   {label:'Garden Building — Block (large ~40sqm)',      small:26000, medium:26000, large:26000},
+    // GARDEN BUILDINGS — TIMBER STUD WITH RENDER
+    'garden-timber-sm':  {label:'Garden Building — Timber Stud+Render (small ~12sqm)', small:5500, medium:5500, large:5500},
+    'garden-timber-med': {label:'Garden Building — Timber Stud+Render (medium ~25sqm)',small:10500,medium:10500,large:10500},
+    'garden-timber-lg':  {label:'Garden Building — Timber Stud+Render (large ~40sqm)', small:16000,medium:16000,large:16000},
+    // BLOCKWORK
+    'blockwork-found':   {label:'Blockwork — Foundations / Footings',         small:2800,  medium:5500,  large:9500},
+    'blockwork-walls':   {label:'Blockwork — External Cavity Walls (job)',     small:3500,  medium:7000,  large:14000},
+    'blockwork-internal':{label:'Blockwork — Internal Partition Walls',        small:1800,  medium:3500,  large:6500},
+    'blockwork-garden':  {label:'Blockwork — Garden / Boundary Walls',        small:1200,  medium:2800,  large:5000},
+    // DRIVEWAYS & OUTDOOR
+    'driveway-tarmac':   {label:'Driveway — Tarmac',                          small:3200,  medium:5500,  large:9000},
+    'driveway-block':    {label:'Driveway — Block Paving',                    small:5000,  medium:9000,  large:15000},
+    'driveway-resin':    {label:'Driveway — Resin Bound',                     small:4500,  medium:7500,  large:13000},
+    'patio-paving':      {label:'Patio — Natural Stone / Paving',             small:2500,  medium:5000,  large:9000},
+    'patio-decking':     {label:'Patio — Timber Decking',                     small:2000,  medium:4000,  large:7000},
+    'fencing-timber':    {label:'Fencing — Timber Panel',                     small:900,   medium:1800,  large:3500},
+    'fencing-block':     {label:'Fencing — Block/Brick Pillars & Panel',      small:2200,  medium:4500,  large:8000},
+    'garden-clearance':  {label:'Garden Clearance',                           small:300,   medium:500,   large:850},
+    'landscaping':       {label:'Landscaping (full)',                          small:3500,  medium:7500,  large:18000},
+    // INTERIOR
+    'painting-interior': {label:'Interior Painting — Full House',             small:3200,  medium:5500,  large:9000},
+    'painting-room':     {label:'Interior Painting — Per Room',               small:380,   medium:480,   large:650},
+    'bathroom':          {label:'Bathroom Renovation',                        small:7500,  medium:14000, large:24000},
+    'ensuite':           {label:'Ensuite / Wet Room',                         small:5500,  medium:9500,  large:16000},
+    'kitchen':           {label:'Kitchen Renovation',                         small:9000,  medium:18000, large:35000},
+    'flooring-laminate': {label:'Flooring — Laminate / LVT',                 small:2200,  medium:4000,  large:7000},
+    'flooring-tile':     {label:'Flooring — Tile',                            small:2800,  medium:5500,  large:9500},
+    'plastering-full':   {label:'Plastering — Full House Skim',               small:3500,  medium:6000,  large:10000},
+    'plastering-room':   {label:'Plastering — Per Room',                      small:450,   medium:600,   large:900},
+    'tiling':            {label:'Tiling (walls / floor)',                     small:1400,  medium:2800,  large:5000},
+    'insulation-wall':   {label:'Insulation — Wall Cavity / Board',           small:2800,  medium:5000,  large:8500},
+    'insulation-attic':  {label:'Insulation — Attic / Roof',                  small:900,   medium:1500,  large:2500},
+    'dry-lining':        {label:'Dry Lining / IWI (internal)',                small:3500,  medium:6500,  large:11000},
+    'stud-partition':    {label:'Stud Partition Wall',                        small:600,   medium:1000,  large:1800},
+    'door-internal':     {label:'Internal Doors (supply & fit, per door)',    small:350,   medium:350,   large:350},
+    'door-external':     {label:'External Door (supply & fit)',               small:1200,  medium:1600,  large:2500},
+    'windows-replace':   {label:'Windows — Replacement (per window)',         small:650,   medium:700,   large:900},
+    // MAINTENANCE & GENERAL
+    'painting-exterior': {label:'Exterior Painting',                          small:3500,  medium:6000,  large:10000},
+    'render-exterior':   {label:'External Render / Pebbledash',               small:4500,  medium:8000,  large:14000},
+    'power-wash':        {label:'Power Washing',                              small:180,   medium:300,   large:480},
+    'window-clean':      {label:'Window Cleaning (one-off)',                  small:80,    medium:130,   large:200},
+    'handyman':          {label:'Handyman / Odd Jobs (per day)',               small:400,   medium:400,   large:400},
+    'skip-hire':         {label:'Skip Hire (standard, 7 days)',               small:280,   medium:380,   large:480},
+    'scaffolding':       {label:'Scaffolding (per week)',                     small:800,   medium:1400,  large:2200},
   };
 }
 
@@ -871,6 +1077,135 @@ function renderDashboard(){
 }
 
 // ============================
+// CALCULATOR HELPERS
+// ============================
+const RATE_TRADESMAN = 400;
+const RATE_LABOURER = 250;
+const BLOCK_PER_SQM = 650;   // avg block garden building
+const TIMBER_PER_SQM = 420;  // avg timber stud + render
+
+function togglePricerMode(){
+  const v = document.getElementById('pricer-jobtype').value;
+  document.getElementById('calc-slates').style.display    = v === 'roof-slates' ? 'block' : 'none';
+  document.getElementById('calc-flat-sqm').style.display  = v === 'flat-roof-sqm' ? 'block' : 'none';
+  document.getElementById('calc-garden-sqm').style.display = (v==='garden-block-sqm'||v==='garden-timber-sqm') ? 'block' : 'none';
+  document.getElementById('calc-dayrate').style.display   = (v==='day-tradesman'||v==='day-labourer'||v==='day-mixed') ? 'block' : 'none';
+  if(v==='garden-block-sqm') document.getElementById('garden-type').value = 'block';
+  if(v==='garden-timber-sqm') document.getElementById('garden-type').value = 'timber';
+  calcSlates(); calcFlatRoof(); calcGardenBuilding(); calcDayRate(); calcExtras();
+}
+
+function calcSlates(){
+  const n = Number(document.getElementById('slate-count').value)||0;
+  const p = Number(document.getElementById('slate-price').value)||1.30;
+  let total = n * p;
+  let extrasText = '';
+  if(document.getElementById('add-ridging').checked){ total += 1100; extrasText += '+ Ridge tiles €1,100  '; }
+  if(document.getElementById('add-lead').checked)   { total += 650;  extrasText += '+ Lead/flashing €650  '; }
+  if(document.getElementById('add-trims').checked)  { total += 200;  extrasText += '+ Verge trims €200  '; }
+  document.getElementById('slate-total').textContent = Math.round(total).toLocaleString();
+  document.getElementById('slate-extras-total').textContent = extrasText ? 'Extras: ' + extrasText.trim() : '';
+}
+
+function calcFlatRoof(){
+  const sqm = Number(document.getElementById('flat-sqm').value)||0;
+  const rate = Number(document.getElementById('flat-rate').value)||130;
+  let total = sqm * rate;
+  let extrasText = '';
+  if(document.getElementById('flat-lead').checked)  { total += 450; extrasText += '+ Lead upstands €450  '; }
+  if(document.getElementById('flat-trims').checked) { total += 180; extrasText += '+ Drip trims €180  '; }
+  document.getElementById('flat-total').textContent = Math.round(total).toLocaleString();
+  document.getElementById('flat-extras-total').textContent = extrasText ? 'Extras: ' + extrasText.trim() : '';
+}
+
+function calcGardenBuilding(){
+  const sqm = Number(document.getElementById('garden-sqm').value)||0;
+  const type = document.getElementById('garden-type').value;
+  const ratePerSqm = type === 'block' ? BLOCK_PER_SQM : TIMBER_PER_SQM;
+  let total = sqm * ratePerSqm;
+  if(document.getElementById('gb-electric').checked) total += 1500;
+  if(document.getElementById('gb-plumbing').checked) total += 2000;
+  if(document.getElementById('gb-insulate').checked) total += 800;
+  document.getElementById('garden-total').textContent = Math.round(total).toLocaleString();
+  document.getElementById('garden-rate-label').textContent = type === 'block'
+    ? 'Block build: €'+BLOCK_PER_SQM+'/sqm avg'
+    : 'Timber stud + render: €'+TIMBER_PER_SQM+'/sqm avg';
+}
+
+function calcDayRate(){
+  const trades  = Number(document.getElementById('dr-trades').value)||0;
+  const labour  = Number(document.getElementById('dr-labour').value)||0;
+  const workers = Number(document.getElementById('dr-workers').value)||1;
+  const v = document.getElementById('pricer-jobtype').value;
+  let total, breakdown;
+  if(v === 'day-tradesman'){
+    total = trades * RATE_TRADESMAN * workers;
+    breakdown = workers+' tradesman × '+trades+' day(s) @ €'+RATE_TRADESMAN+'/day';
+  } else if(v === 'day-labourer'){
+    total = labour * RATE_LABOURER * workers;
+    breakdown = workers+' labourer × '+labour+' day(s) @ €'+RATE_LABOURER+'/day';
+  } else {
+    total = (trades * RATE_TRADESMAN + labour * RATE_LABOURER) * workers;
+    breakdown = workers+'× crew: '+trades+'d trades (€'+RATE_TRADESMAN+') + '+labour+'d labour (€'+RATE_LABOURER+')';
+  }
+  document.getElementById('dr-total').textContent = Math.round(total).toLocaleString();
+  document.getElementById('dr-breakdown').textContent = breakdown;
+}
+
+let _extrasAmount = 0;
+function calcExtras(){
+  let total = 0;
+  document.querySelectorAll('#extras-checkboxes input[type=checkbox]:checked').forEach(cb=>{
+    total += Number(cb.value)||0;
+  });
+  const custom = Number(document.getElementById('custom-extra').value)||0;
+  total += custom;
+  _extrasAmount = total;
+  const el = document.getElementById('extras-total-row');
+  if(total > 0){ el.style.display='block'; document.getElementById('extras-total').textContent = total.toLocaleString(); }
+  else { el.style.display='none'; }
+}
+
+function getCalcBasePrice(){
+  const v = document.getElementById('pricer-jobtype').value;
+  if(v === 'roof-slates'){
+    const n = Number(document.getElementById('slate-count').value)||0;
+    const p = Number(document.getElementById('slate-price').value)||1.30;
+    let t = n * p;
+    if(document.getElementById('add-ridging').checked) t += 1100;
+    if(document.getElementById('add-lead').checked) t += 650;
+    if(document.getElementById('add-trims').checked) t += 200;
+    return Math.round(t);
+  }
+  if(v === 'flat-roof-sqm'){
+    const sqm = Number(document.getElementById('flat-sqm').value)||0;
+    const rate = Number(document.getElementById('flat-rate').value)||130;
+    let t = sqm * rate;
+    if(document.getElementById('flat-lead').checked) t += 450;
+    if(document.getElementById('flat-trims').checked) t += 180;
+    return Math.round(t);
+  }
+  if(v === 'garden-block-sqm' || v === 'garden-timber-sqm'){
+    const sqm = Number(document.getElementById('garden-sqm').value)||0;
+    const type = document.getElementById('garden-type').value;
+    let t = sqm * (type==='block' ? BLOCK_PER_SQM : TIMBER_PER_SQM);
+    if(document.getElementById('gb-electric').checked) t += 1500;
+    if(document.getElementById('gb-plumbing').checked) t += 2000;
+    if(document.getElementById('gb-insulate').checked) t += 800;
+    return Math.round(t);
+  }
+  if(v === 'day-tradesman' || v === 'day-labourer' || v === 'day-mixed'){
+    const trades  = Number(document.getElementById('dr-trades').value)||0;
+    const labour  = Number(document.getElementById('dr-labour').value)||0;
+    const workers = Number(document.getElementById('dr-workers').value)||1;
+    if(v==='day-tradesman') return trades * RATE_TRADESMAN * workers;
+    if(v==='day-labourer')  return labour * RATE_LABOURER * workers;
+    return (trades * RATE_TRADESMAN + labour * RATE_LABOURER) * workers;
+  }
+  return null; // use rate card
+}
+
+// ============================
 // AI PRICER
 // ============================
 async function runAIPricer(){
@@ -882,644 +1217,72 @@ async function runAIPricer(){
 
   if(!jobtype){ toast('Please select a job type'); return; }
 
-  // Get base rate
+  // Check for calculator-based price first
+  let calcBase = getCalcBasePrice();
+  let adjusted, low, high, label;
+
   const r = rates[jobtype];
-  const basePrice = r ? r[size] : 0;
-  const label = r ? r.label : jobtype;
+  if(calcBase !== null){
+    // Use calculator result
+    adjusted = calcBase;
+    label = document.getElementById('pricer-jobtype').options[document.getElementById('pricer-jobtype').selectedIndex].text;
+  } else if(r){
+    const locationMult = location === 'dublin' ? 1.15 : location === 'dublin-sub' ? 1.08 : 1.0;
+    adjusted = Math.round(r[size] * locationMult);
+    label = r.label;
+  } else {
+    toast('No rate found for this job type'); return;
+  }
 
-  // Dublin premium
-  const locationMult = location === 'dublin' ? 1.15 : location === 'dublin-sub' ? 1.08 : 1.0;
-  const adjusted = Math.round(basePrice * locationMult);
-  const low = Math.round(adjusted * 0.92);
-  const high = Math.round(adjusted * 1.08);
+  // Add extras
+  const extras = _extrasAmount || 0;
+  let total = adjusted + extras;
 
-  box.innerHTML = `<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Getting AI estimate...</span></div>`;
+  // Contingency
+  const addContingency = document.getElementById('contingency-check').checked;
+  const contingencyAmt = addContingency ? Math.round(total * 0.10) : 0;
+  const grandTotal = total + contingencyAmt;
 
-  const prompt = `You are a property maintenance pricing expert in Ireland with 20+ years experience. 
-Job: ${label}
-Size: ${size} property
-Location: ${location}
-Base rate from rate card: €${adjusted}
-Range: €${low} – €${high}
-Notes from lead: ${notes || 'No additional notes'}
+  low = Math.round(grandTotal * 0.92);
+  high = Math.round(grandTotal * 1.08);
 
-Provide a CONCISE pricing recommendation:
-1. Recommended price (single figure, within ±10% of base)
-2. Key factors affecting this price (2-3 bullet points max)
-3. What's included / what to watch for
-4. Suggested materials cost vs labour split
+  box.innerHTML = '<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Getting AI estimate...</span></div>';
 
-Keep it practical, under 200 words. Use euro amounts. Ireland market context.`;
+  const prompt = 'You are a property maintenance pricing expert in Ireland with 20+ years experience.\nJob: '+label+'\nSize: '+size+' property\nLocation: '+location+'\nBase price: €'+adjusted+'\nExtras/add-ons: €'+extras+(addContingency?'\nContingency (10%): €'+contingencyAmt:'')+'\nTotal: €'+grandTotal+'\nRange: €'+low+' – €'+high+'\nNotes from lead: '+(notes||'No additional notes')+'\n\nProvide a CONCISE pricing recommendation (under 150 words):\n1. Is this price competitive for Ireland 2026?\n2. Any key cost risks or upsells?\n3. One-line tip to win the job\nUse euro amounts. Be direct and practical.';
 
   try {
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
       method:'POST',
       headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body: JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,messages:[{role:'user',content:prompt}]})
+      body: JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:350,messages:[{role:'user',content:prompt}]})
     });
     const data = await resp.json();
     const text = data.content && data.content[0] ? data.content[0].text : 'Could not get estimate.';
 
-    box.innerHTML = `
-      <div class="price-result">
-        <div class="price-tag">€${adjusted.toLocaleString()}</div>
-        <div class="price-range">Range: €${low.toLocaleString()} – €${high.toLocaleString()}</div>
-        <div class="price-breakdown">
-          <div class="pb-row"><span class="pb-key">Job Type</span><span class="pb-val">${label}</span></div>
-          <div class="pb-row"><span class="pb-key">Property Size</span><span class="pb-val">${size}</span></div>
-          <div class="pb-row"><span class="pb-key">Location</span><span class="pb-val">${location.replace('-',' ')}</span></div>
-        </div>
-      </div>
-      <div style="margin-top:14px;">
-        <div class="ai-result">${text}</div>
-      </div>
-      <div style="margin-top:14px;display:flex;gap:8px;">
-        <button class="btn btn-primary btn-sm" onclick="priceToLead(${adjusted})">Add as Lead</button>
-        <button class="btn btn-outline btn-sm" onclick="priceToQuote(${adjusted})">Create Quote</button>
-      </div>`;
+    box.innerHTML = buildPriceResult(label, adjusted, extras, contingencyAmt, grandTotal, low, high, size, location, text, true);
   } catch(e){
-    box.innerHTML = `
-      <div class="price-result">
-        <div class="price-tag">€${adjusted.toLocaleString()}</div>
-        <div class="price-range">Range: €${low.toLocaleString()} – €${high.toLocaleString()}</div>
-        <div class="price-breakdown">
-          <div class="pb-row"><span class="pb-key">Job Type</span><span class="pb-val">${label}</span></div>
-          <div class="pb-row"><span class="pb-key">Size</span><span class="pb-val">${size}</span></div>
-          <div class="pb-row"><span class="pb-key">Location</span><span class="pb-val">${location}</span></div>
-        </div>
-      </div>
-      <div style="margin-top:10px;font-size:12px;color:var(--text-m);">AI commentary unavailable — base rate shown.</div>
-      <div style="margin-top:10px;display:flex;gap:8px;">
-        <button class="btn btn-primary btn-sm" onclick="priceToLead(${adjusted})">Add as Lead</button>
-        <button class="btn btn-outline btn-sm" onclick="priceToQuote(${adjusted})">Create Quote</button>
-      </div>`;
+    box.innerHTML = buildPriceResult(label, adjusted, extras, contingencyAmt, grandTotal, low, high, size, location, '', false);
   }
 }
 
-function priceToLead(price){
-  document.getElementById('new-quote').value = price;
-  document.getElementById('new-jobtype').value = document.getElementById('pricer-jobtype').options[document.getElementById('pricer-jobtype').selectedIndex].text;
-  openAddLead();
+function buildPriceResult(label, base, extras, contingency, grandTotal, low, high, size, location, aiText, hasAI){
+  const extrasRow = extras > 0 ? '<div class="pb-row"><span class="pb-key">Add-ons</span><span class="pb-val" style="color:var(--yellow);">+€'+extras.toLocaleString()+'</span></div>' : '';
+  const contRow = contingency > 0 ? '<div class="pb-row"><span class="pb-key">Contingency (10%)</span><span class="pb-val" style="color:var(--grey-lt);">+€'+contingency.toLocaleString()+'</span></div>' : '';
+  const aiSection = hasAI && aiText ? '<div style="margin-top:14px;"><div class="ai-result">'+aiText+'</div></div>' : '<div style="margin-top:10px;font-size:12px;color:var(--text-m);">Base rate shown — AI commentary unavailable.</div>';
+  return '<div class="price-result">'
+    +'<div class="price-tag">€'+grandTotal.toLocaleString()+'</div>'
+    +'<div class="price-range">Range: €'+low.toLocaleString()+' – €'+high.toLocaleString()+'</div>'
+    +'<div class="price-breakdown">'
+    +'<div class="pb-row"><span class="pb-key">Job Type</span><span class="pb-val">'+label+'</span></div>'
+    +'<div class="pb-row"><span class="pb-key">Base Price</span><span class="pb-val">€'+base.toLocaleString()+'</span></div>'
+    +extrasRow+contRow
+    +'<div class="pb-row"><span class="pb-key">Size / Location</span><span class="pb-val">'+size+' · '+location.replace('-',' ')+'</span></div>'
+    +'</div>'
+    +'</div>'
+    +aiSection
+    +'<div style="margin-top:14px;display:flex;gap:8px;">'
+    +'<button class="btn btn-primary btn-sm" onclick="priceToLead('+grandTotal+')">Add as Lead</button>'
+    +'<button class="btn btn-outline btn-sm" onclick="priceToQuote('+grandTotal+')">Create Quote</button>'
+    +'</div>';
 }
 
-function priceToQuote(price){
-  switchTab('quotes');
-  document.querySelectorAll('.tab').forEach((t,i)=>{ if(t.textContent==='Quotes') t.classList.add('active'); else t.classList.remove('active'); });
-  document.getElementById('q-desc').value = document.getElementById('pricer-jobtype').options[document.getElementById('pricer-jobtype').selectedIndex].text + ' — ' + document.getElementById('pricer-notes').value;
-  addQuoteItemWithPrice(document.getElementById('pricer-jobtype').options[document.getElementById('pricer-jobtype').selectedIndex].text, price);
-  updateQuote();
-}
-
-// ============================
-// PLANNING DATA
-// ============================
-const planningData = [
-  {id:1, addr:'14 Rowan Park, Swords, Co. Dublin', desc:'Single storey rear extension (48sqm), new kitchen and utility area. Planning granted with conditions on materials.', area:'dublin', type:'extension', status:'granted', ref:'FW26D/0124', date:'12 May 2026', est:65000},
-  {id:2, addr:'8 The Pines, Malahide, Co. Dublin', desc:'Two storey side and rear extension. Dormer attic conversion. New windows throughout.', area:'dublin', type:'extension', status:'pending', ref:'FW26D/0298', date:'3 May 2026', est:145000},
-  {id:3, addr:'22 Castleknock Grange, Dublin 15', desc:'Loft conversion to habitable room, velux windows to rear. Garage conversion to home office.', area:'dublin', type:'renovation', status:'granted', ref:'FW26D/0341', date:'18 Apr 2026', est:42000},
-  {id:4, addr:'Hillcrest, Ashbourne, Co. Meath', desc:'New build 4-bed detached dwelling. Septic tank and percolation area. Access road works.', area:'meath', type:'new-build', status:'granted', ref:'ME26/0187', date:'27 Apr 2026', est:280000},
-  {id:5, addr:'3 Hazel Walk, Naas, Co. Kildare', desc:'Single storey extension to rear, conversion of integral garage. Widening of entrance.', area:'kildare', type:'extension', status:'pending', ref:'KE26/0422', date:'10 May 2026', est:58000},
-  {id:6, addr:'47 Palmerstown Heights, Dublin 20', desc:'Demolition of existing shed. New two-storey rear extension. Rooflights front elevation.', area:'dublin', type:'extension', status:'granted', ref:'FW26D/0517', date:'6 May 2026', est:89000},
-  {id:7, addr:'19 Bray Seafront Apts, Co. Wicklow', desc:'Change of use: ground floor retail to 2 residential units. External cladding replacement.', area:'wicklow', type:'commercial', status:'pending', ref:'WW26/0088', date:'8 May 2026', est:95000},
-  {id:8, addr:'Woodland House, Dunboyne, Co. Meath', desc:'Extension and renovation of existing dwelling. Demolition of lean-to garage.', area:'meath', type:'renovation', status:'appeal', ref:'ME26/0204', date:'1 May 2026', est:72000},
-  {id:9, addr:'Unit 4 Swords Business Park', desc:'Change of use from warehouse to gym. New mezzanine level, changing rooms, car park.', area:'dublin', type:'commercial', status:'pending', ref:'FW26D/0599', date:'14 May 2026', est:180000},
-  {id:10, addr:'31 Lucan Heights, Co. Dublin', desc:'Single storey front porch. New vehicular entrance. Block wall to boundary.', area:'dublin', type:'extension', status:'granted', ref:'FW26D/0612', date:'15 May 2026', est:18000},
-  {id:11, addr:'72 Rathoath Road, Mulhuddart, Dublin 15', desc:'Attic conversion with dormer to rear. Two velux to front. Escape window included.', area:'dublin', type:'renovation', status:'refused', ref:'FW26D/0391', date:'2 May 2026', est:38000},
-  {id:12, addr:'Clonee Retail Park Phase 2, Co. Meath', desc:'New commercial development: 3 retail units, car parking for 85 vehicles.', area:'meath', type:'commercial', status:'granted', ref:'ME26/0231', date:'20 Apr 2026', est:420000},
-];
-
-function renderPlanning(){
-  const filtered = planningData.filter(p=>{
-    const areaOk = planFilter==='all' || p.area===planFilter;
-    const typeOk = planTypeFilter==='all' || p.type===planTypeFilter;
-    return areaOk && typeOk;
-  });
-  const el = document.getElementById('planning-list');
-  if(!filtered.length){ el.innerHTML = `<div style="color:var(--text-d);font-size:13px;padding:20px;">No planning permissions match this filter.</div>`; return; }
-  el.innerHTML = filtered.map(p=>`
-    <div class="planning-item">
-      <div class="pi-left">
-        <div class="pi-addr">${p.addr}</div>
-        <div class="pi-desc">${p.desc}</div>
-        <div class="pi-meta">
-          <span class="planning-chip ${statusClass(p.status)}">${p.status.toUpperCase()}</span>
-          <span class="planning-chip pc-ext">${p.type.replace('-',' ').toUpperCase()}</span>
-          <span style="font-size:11px;color:var(--text-d);">Ref: ${p.ref}</span>
-          <span style="font-size:11px;color:var(--text-d);">${p.date}</span>
-        </div>
-        <div style="margin-top:8px;display:flex;gap:6px;">
-          <button class="btn btn-primary btn-sm" onclick="planningToLead('${p.addr}','${p.type}',${p.est})">+ Add as Lead</button>
-          <button class="btn btn-ghost btn-sm" onclick="planningAI(${p.id})">AI Opportunities</button>
-        </div>
-      </div>
-      <div class="pi-value">€${(p.est/1000).toFixed(0)}k</div>
-    </div>`).join('');
-}
-
-function statusClass(s){
-  return {granted:'pc-granted',pending:'pc-pending',refused:'pc-refused',appeal:'pc-appeal'}[s] || 'pc-pending';
-}
-
-function renderDashboardPlanning(){
-  const recent = planningData.filter(p=>p.status==='granted').slice(0,4);
-  const el = document.getElementById('dashboard-planning');
-  el.innerHTML = recent.map(p=>`
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);gap:12px;">
-      <div>
-        ${sourceChip('myhome').replace('MyHome','PP')}
-        <span style="font-size:13px;margin-left:6px;"><strong>${p.addr}</strong></span>
-        <span style="font-size:11px;color:var(--text-m);display:block;margin-top:2px;">${p.desc.substring(0,80)}...</span>
-      </div>
-      <div style="text-align:right;">
-        <span class="planning-chip pc-granted">GRANTED</span>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--orange);font-size:16px;margin-top:3px;">€${(p.est/1000).toFixed(0)}k</div>
-      </div>
-    </div>`).join('');
-}
-
-function filterPlanning(f, el){
-  document.querySelectorAll('#panel-planning .filter-row:first-of-type .filter-chip').forEach(c=>c.classList.remove('active'));
-  el.classList.add('active');
-  planFilter = f;
-  renderPlanning();
-}
-
-function filterPlanType(f, el){
-  document.querySelectorAll('#panel-planning .filter-row:last-of-type .filter-chip').forEach(c=>c.classList.remove('active'));
-  el.classList.add('active');
-  planTypeFilter = f;
-  renderPlanning();
-}
-
-function refreshPlanning(){ renderPlanning(); toast('Planning data refreshed'); }
-
-function planningToLead(addr, type, est){
-  document.getElementById('new-location').value = addr;
-  document.getElementById('new-jobtype').value = type.replace('-',' ');
-  document.getElementById('new-quote').value = est;
-  document.getElementById('new-source').value = 'myhome';
-  openAddLead();
-}
-
-async function planningAI(id){
-  const p = planningData.find(x=>x.id===id);
-  if(!p) return;
-  toast('Getting AI analysis...');
-  const prompt = `A planning permission has been granted/filed in Ireland:\n\nAddress: ${p.addr}\nDescription: ${p.desc}\nEstimated value: €${p.est}\n\nI run a property maintenance and contracting business in Dublin/Leinster area. What are the best opportunities for me to get work from this planning permission? List 3-5 specific services I could offer and how to approach them. Be practical and brief.`;
-  try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,messages:[{role:'user',content:prompt}]})
-    });
-    const data = await resp.json();
-    const text = data.content&&data.content[0]?data.content[0].text:'No analysis available.';
-    alert(text);
-  } catch(e){ toast('AI unavailable'); }
-}
-
-// ============================
-// OUTREACH TEMPLATES
-// ============================
-const templates = [
-  {
-    id:1,
-    title:'Facebook Group — First Response',
-    tag:'FACEBOOK',
-    category:'facebook',
-    preview:'Quick, friendly first contact within minutes of post going live',
-    text:`Hi [Name] 👋
-
-Saw your post — we cover [area] and can sort that out no problem.
-
-Based on what you've described, we're looking at €[price] give or take depending on access/condition.
-
-We're a local team, fully insured, and available this week. Happy to pop out for a free look if that suits?
-
-Drop me a DM or text/WhatsApp [your number] and I'll get back to you straight away.
-
-Cheers,
-[Your name] — EASY Property Services`
-  },
-  {
-    id:2,
-    title:'Facebook Marketplace — Enquiry Reply',
-    tag:'MARKETPLACE',
-    category:'marketplace',
-    preview:'Respond to Marketplace listings professionally',
-    text:`Hi [Name],
-
-Saw your listing on Marketplace. Happy to help with the [job type].
-
-I'm based in [area] — fully insured, been doing this [X] years locally.
-
-Price would be around €[price] all in, including materials and cleanup. I can usually fit jobs in within the week.
-
-Would you be around for a quick look at it? Just DM me here or WhatsApp [number].
-
-Thanks,
-[Your name]`
-  },
-  {
-    id:3,
-    title:'Done Deal — Professional Response',
-    tag:'DONE DEAL',
-    category:'donedeal',
-    preview:'Stand out from other responses on Done Deal',
-    text:`Hello,
-
-Responding to your Done Deal ad regarding [job type].
-
-I'm a local contractor covering [area] — been doing this work for [X] years. Fully insured and all work guaranteed.
-
-Looking at your ad, I'd estimate around €[price] to do this properly. That's all in — labour, materials, and tidy-up.
-
-I could come out to view it at your convenience this week if you'd like an exact quote? There's no charge for a quote.
-
-Feel free to ring or text: [your number]
-
-Kind regards,
-[Your name]
-EASY Property Services`
-  },
-  {
-    id:4,
-    title:'Planning Permission — Cold Outreach',
-    tag:'PLANNING',
-    category:'facebook',
-    preview:'Reach out to homeowners with newly granted permissions',
-    text:`Good morning [Name],
-
-I noticed planning permission has recently been granted for your property at [address] for [type of work].
-
-My name is [name] and I run a local property maintenance and building company in [area]. We specialise in exactly this type of work.
-
-I'd love to put forward a quotation when you're ready to proceed. We're fully insured, experienced in this type of project, and have a reliable local crew.
-
-No pressure at all — just wanted to reach out early so you have options when the time comes.
-
-Feel free to get in touch at [number] or reply here.
-
-Kind regards,
-[Your name]
-EASY Property Services`
-  },
-  {
-    id:5,
-    title:'Follow-Up — No Response (3 days)',
-    tag:'FOLLOW-UP',
-    category:'follow-up',
-    preview:'Chase up leads who haven\'t responded after 3 days',
-    text:`Hi [Name],
-
-Just following up on my message from [day] about the [job type] at [location].
-
-Happy to help if you're still looking — or if you've gone with someone else, no worries at all.
-
-If timing is an issue I can hold a slot for you into [next week/next month].
-
-Best,
-[Your name] — [number]`
-  },
-  {
-    id:6,
-    title:'Follow-Up — Quote Sent, Awaiting Decision',
-    tag:'FOLLOW-UP',
-    category:'follow-up',
-    preview:'Check in after sending a formal quote',
-    text:`Hi [Name],
-
-Hope you're well. Just checking in on the quote I sent over on [date] for the [job type].
-
-Let me know if you have any questions about it or want to adjust anything — I'm flexible on scope or timing.
-
-I do have a slot opening up [date range] which would work well for this job if you're thinking of going ahead.
-
-Just give me a shout either way.
-
-Cheers,
-[Your name]`
-  },
-  {
-    id:7,
-    title:'Job Won — Confirmation Message',
-    tag:'JOB WON',
-    category:'won',
-    preview:'Confirm details and set expectations when you win a job',
-    text:`Hi [Name],
-
-Brilliant — looking forward to getting this done for you!
-
-Just to confirm:
-• Job: [description]
-• Start date: [date]
-• Estimated duration: [X days]
-• Agreed price: €[amount]
-• Payment terms: [e.g. 50% deposit, balance on completion]
-
-I'll be in touch the day before to confirm start time. If anything comes up on your end just give me a shout.
-
-See you [date]!
-
-[Your name] — [number]`
-  },
-  {
-    id:8,
-    title:'Review Request — After Job Completion',
-    tag:'REVIEW',
-    category:'review',
-    preview:'Ask happy customers for a Google review',
-    text:`Hi [Name],
-
-Really glad you're happy with how the [job type] turned out!
-
-If you get a moment, I'd really appreciate a quick Google review — it makes a huge difference for a small local business. Takes less than 2 minutes:
-
-👉 [Your Google Review Link]
-
-And if you ever need anything else — or know anyone looking for similar work — feel free to pass on my number.
-
-Thanks again,
-[Your name]
-EASY Property Services
-[number]`
-  },
-  {
-    id:9,
-    title:'Instagram / TikTok DM — Casual Lead',
-    tag:'INSTAGRAM',
-    category:'facebook',
-    preview:'Casual, mobile-first tone for social media leads',
-    text:`Hey! 👋
-
-Spotted your story/post about needing [job] done. We cover [area] and do this kind of work all the time.
-
-Can give you a rough price now if you tell me more about it, or come out to have a look — totally free.
-
-DM me here or WhatsApp [number] 📱`
-  },
-  {
-    id:10,
-    title:'Winter / Off-Season Promotion',
-    tag:'PROMO',
-    category:'facebook',
-    preview:'Seasonal offer to fill quiet periods',
-    text:`Hi [Name],
-
-Hope all is well! Just reaching out as we have some availability coming up over the next few weeks and I wanted to offer previous customers first refusal.
-
-If you've been putting off any maintenance work — roofing, painting, gutters, general repairs — now's a great time. We're doing [X% off / free X / discounted rates] for jobs booked before [date].
-
-Give me a shout if anything springs to mind.
-
-[Your name] — [number]
-EASY Property Services`
-  },
-];
-
-function renderTemplates(filter){
-  if(filter) templateFilter = filter;
-  const filtered = templateFilter==='all' ? templates : templates.filter(t=>t.category===templateFilter);
-  const el = document.getElementById('templates-list');
-  el.innerHTML = filtered.map(t=>`
-    <div class="template-card" id="tc-${t.id}" onclick="toggleTemplate(${t.id})">
-      <div class="tc-header">
-        <div class="tc-title">${t.title}</div>
-        <div class="tc-tag">${t.tag}</div>
-      </div>
-      <div class="tc-preview">${t.preview}</div>
-      <div class="tc-body">
-        <div class="tc-text">${t.text}</div>
-        <div class="tc-actions">
-          <button class="btn btn-primary btn-sm" onclick="copyTemplate(${t.id},event)">Copy Text</button>
-          <button class="btn btn-ghost btn-sm" onclick="aiPersonalise(${t.id},event)">AI Personalise</button>
-        </div>
-        <div class="ai-box" id="ai-personalised-${t.id}" style="display:none;margin-top:12px;"></div>
-      </div>
-    </div>`).join('');
-}
-
-function filterTemplates(f, el){
-  document.querySelectorAll('#panel-outreach .filter-chip').forEach(c=>c.classList.remove('active'));
-  el.classList.add('active');
-  templateFilter = f;
-  renderTemplates();
-}
-
-function toggleTemplate(id){
-  const el = document.getElementById('tc-'+id);
-  el.classList.toggle('expanded');
-}
-
-function copyTemplate(id, e){
-  e.stopPropagation();
-  const t = templates.find(x=>x.id===id);
-  if(!t) return;
-  navigator.clipboard.writeText(t.text).then(()=>toast('Template copied!')).catch(()=>toast('Copy failed — select text manually'));
-}
-
-async function aiPersonalise(id, e){
-  e.stopPropagation();
-  const t = templates.find(x=>x.id===id);
-  if(!t) return;
-  const aib = document.getElementById('ai-personalised-'+id);
-  aib.style.display = 'block';
-  aib.innerHTML = `<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Personalising...</span></div>`;
-
-  const jobtype = prompt('What job type is this for? (e.g. Gutter cleaning, Roof repair, Extension)') || 'general property maintenance';
-  const loc = prompt('Customer location? (e.g. Swords, Lucan, Naas)') || 'Dublin';
-
-  const prompt2 = `Take this outreach template and personalise it for:\n- Job: ${jobtype}\n- Location: ${loc}\n- Tone: Keep it natural and Irish, not salesy\n\nTemplate:\n${t.text}\n\nReturn ONLY the personalised message, ready to send. Keep it concise.`;
-
-  try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,messages:[{role:'user',content:prompt2}]})
-    });
-    const data = await resp.json();
-    const text = data.content&&data.content[0]?data.content[0].text:'Could not personalise.';
-    aib.innerHTML = `<div class="ai-result">${text}</div><div style="margin-top:8px;"><button class="btn btn-primary btn-sm" onclick="copyFromAI(this)">Copy</button></div>`;
-  } catch(err){
-    aib.innerHTML = `<div style="color:var(--red);font-size:12px;">AI unavailable. Use template as-is.</div>`;
-  }
-}
-
-function copyFromAI(btn){
-  const text = btn.parentElement.previousElementSibling.textContent;
-  navigator.clipboard.writeText(text).then(()=>toast('Copied!')).catch(()=>{});
-}
-
-// ============================
-// RATES
-// ============================
-function renderRates(){
-  const tbody = document.getElementById('rates-tbody');
-  tbody.innerHTML = Object.entries(rates).map(([key,r])=>`
-    <tr>
-      <td>${r.label}</td>
-      <td><input class="rate-input" type="number" value="${r.small}" onchange="updateRate('${key}','small',this.value)"></td>
-      <td><input class="rate-input" type="number" value="${r.medium}" onchange="updateRate('${key}','medium',this.value)"></td>
-      <td><input class="rate-input" type="number" value="${r.large}" onchange="updateRate('${key}','large',this.value)"></td>
-    </tr>`).join('');
-}
-
-function updateRate(key, size, val){
-  rates[key][size] = Number(val);
-}
-
-function saveRates(){
-  localStorage.setItem('ecc_rates', JSON.stringify(rates));
-  toast('Rates saved!');
-}
-
-// ============================
-// QUOTES
-// ============================
-function initQuotes(){
-  if(quoteItems.length === 0) addQuoteItem();
-  document.getElementById('q-date').value = new Date().toISOString().split('T')[0];
-  document.getElementById('q-num').value = 'Q' + new Date().getFullYear() + '-' + String(Math.floor(Math.random()*900)+100);
-  updateQuote();
-}
-
-function addQuoteItem(){
-  quoteItems.push({desc:'', qty:1, rate:0});
-  renderQuoteItems();
-}
-
-function addQuoteItemWithPrice(desc, price){
-  quoteItems.push({desc:desc, qty:1, rate:price});
-  renderQuoteItems();
-}
-
-function renderQuoteItems(){
-  const el = document.getElementById('q-items');
-  el.innerHTML = quoteItems.map((item,i)=>`
-    <div style="display:grid;grid-template-columns:1fr 60px 90px 30px;gap:6px;margin-bottom:6px;align-items:center;">
-      <input type="text" value="${item.desc}" placeholder="Description" onchange="quoteItems[${i}].desc=this.value;updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:7px 10px;color:var(--text);font-size:13px;outline:none;">
-      <input type="number" value="${item.qty}" min="1" onchange="quoteItems[${i}].qty=Number(this.value);updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:7px 8px;color:var(--text);font-size:13px;outline:none;text-align:center;">
-      <input type="number" value="${item.rate}" placeholder="Rate" onchange="quoteItems[${i}].rate=Number(this.value);updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:7px 8px;color:var(--text);font-size:13px;outline:none;text-align:right;">
-      <button onclick="removeQuoteItem(${i})" style="background:none;border:none;color:var(--grey);font-size:16px;cursor:pointer;">×</button>
-    </div>`).join('');
-}
-
-function removeQuoteItem(i){
-  quoteItems.splice(i,1);
-  renderQuoteItems();
-  updateQuote();
-}
-
-function updateQuote(){
-  const subtotal = quoteItems.reduce((s,item)=>s+(item.qty*item.rate),0);
-  const vat = subtotal * 0.135;
-  const total = subtotal + vat;
-  document.getElementById('q-subtotal').textContent = '€'+subtotal.toFixed(2);
-  document.getElementById('q-vat').textContent = '€'+vat.toFixed(2);
-  document.getElementById('q-total').textContent = '€'+total.toFixed(2);
-  renderQuotePreview(subtotal, vat, total);
-}
-
-function renderQuotePreview(sub, vat, total){
-  const name = document.getElementById('q-name').value || '[Customer Name]';
-  const addr = document.getElementById('q-addr').value || '[Customer Address]';
-  const desc = document.getElementById('q-desc').value || '';
-  const num = document.getElementById('q-num').value || 'Q2026-001';
-  const date = document.getElementById('q-date').value || new Date().toLocaleDateString('en-IE');
-
-  const rows = quoteItems.map(item=>`
-    <tr>
-      <td style="padding:6px 8px;border-bottom:1px solid #eee;">${item.desc||'—'}</td>
-      <td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:center;">${item.qty}</td>
-      <td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:right;">€${item.rate.toFixed(2)}</td>
-      <td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:right;">€${(item.qty*item.rate).toFixed(2)}</td>
-    </tr>`).join('');
-
-  document.getElementById('quote-preview').innerHTML = `
-    <div style="border-bottom:3px solid #E8620A;padding-bottom:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:flex-start;">
-      <div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;"><span style="color:#E8620A;">E</span>ASY Property Services</div>
-        <div style="font-size:11px;color:#666;">Dublin, Ireland • hello@easypropertyservices.ie • 01 XXX XXXX</div>
-      </div>
-      <div style="text-align:right;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;">QUOTATION</div>
-        <div style="font-size:11px;color:#888;">${num} | ${date}</div>
-      </div>
-    </div>
-    <div style="margin-bottom:14px;">
-      <strong>To:</strong> ${name}<br>
-      <span style="color:#555;font-size:11px;">${addr.replace(/\n/g,'<br>')}</span>
-    </div>
-    ${desc ? `<div style="margin-bottom:14px;font-size:11px;color:#444;background:#f9f9f9;padding:8px;border-radius:4px;"><strong>Re:</strong> ${desc}</div>` : ''}
-    <table style="width:100%;border-collapse:collapse;font-size:11px;">
-      <thead>
-        <tr style="background:#f5f5f5;">
-          <th style="padding:6px 8px;text-align:left;font-size:10px;text-transform:uppercase;color:#888;">Description</th>
-          <th style="padding:6px 8px;text-align:center;font-size:10px;text-transform:uppercase;color:#888;">Qty</th>
-          <th style="padding:6px 8px;text-align:right;font-size:10px;text-transform:uppercase;color:#888;">Rate</th>
-          <th style="padding:6px 8px;text-align:right;font-size:10px;text-transform:uppercase;color:#888;">Total</th>
-        </tr>
-      </thead>
-      <tbody>${rows}</tbody>
-    </table>
-    <div style="margin-top:12px;text-align:right;border-top:1px solid #eee;padding-top:10px;">
-      <div style="font-size:11px;color:#666;">Subtotal: <strong>€${sub.toFixed(2)}</strong></div>
-      <div style="font-size:11px;color:#666;">VAT @ 13.5%: <strong>€${vat.toFixed(2)}</strong></div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;color:#E8620A;margin-top:4px;">Total: €${total.toFixed(2)}</div>
-    </div>
-    <div style="margin-top:14px;font-size:10px;color:#888;border-top:1px solid #eee;padding-top:10px;">
-      This quotation is valid for 30 days. All work carried out by EASY Property Services, fully insured.
-    </div>`;
-}
-
-function clearQuote(){
-  quoteItems = [];
-  ['q-name','q-addr','q-desc'].forEach(id=>document.getElementById(id).value='');
-  addQuoteItem();
-  updateQuote();
-}
-
-function printQuote(){
-  const preview = document.getElementById('quote-preview').innerHTML;
-  const w = window.open('','_blank');
-  w.document.write(`<!DOCTYPE html><html><head><title>Quote</title><style>body{font-family:Arial,sans-serif;padding:40px;max-width:700px;margin:0 auto;}@media print{body{padding:0;}}</style></head><body>${preview}</body></html>`);
-  w.document.close();
-  w.print();
-}
-
-// ============================
-// TOAST
-// ============================
-function toast(msg){
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'), 2500);
-}
-
-// ============================
-// INIT
-// ============================
-function init(){
-  renderDashboard();
-  renderPlanning();
-  renderTemplates();
-  renderRates();
-  // Add sample leads if none
-  if(!leads.length){
-    leads = [
-      {source:'facebook',name:'Mary O\'Brien',phone:'087 234 5678',jobtype:'Gutter Clean & Repair',location:'Swords, Dublin',quote:280,notes:'3 bed semi-D, full front and back, some damage to fascia',priority:'high',status:'new',date:new Date().toLocaleDateString('en-IE')},
-      {source:'donedeal',name:'Tom Kelly',phone:'086 987 6543',jobtype:'Roof Repair',location:'Naas, Kildare',quote:650,notes:'Missing tiles after recent storm, urgent',priority:'high',status:'quoted',date:new Date().toLocaleDateString('en-IE')},
-      {source:'myhome',name:'Sarah Murphy',phone:'085 111 2222',jobtype:'Attic Conversion',location:'Castleknock, Dublin 15',quote:38000,notes:'Standard attic with dormer window, planning already discussed',priority:'med',status:'follow-up',date:new Date().toLocaleDateString('en-IE')},
-      {source:'referral',name:'Jim Byrne',phone:'089 444 5555',jobtype:'Driveway — Tarmac',location:'Malahide, Co. Dublin',quote:4500,notes:'Referred by previous customer. Full driveway, about 60sqm.',priority:'med',status:'won',date:new Date().toLocaleDateString('en-IE')},
-      {source:'instagram',name:'Lisa O\'Connor',phone:'087 999 0000',jobtype:'Interior Painting',location:'Lucan, Dublin',quote:4200,notes:'4 bed house, all rooms, own brand colours chosen already',priority:'low',status:'new',date:new Date().toLocaleDateString('en-IE')},
-    ];
-    saveLeads();
-  }
-  renderLeads();
-}
-
-init();
-</script>
-</body>
-</html>
