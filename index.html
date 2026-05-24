@@ -817,7 +817,7 @@ function renderLeads(){
   if(!filtered.length){tbody.innerHTML='<tr><td colspan="8" style="color:var(--text-d);text-align:center;padding:30px;font-size:13px;">No leads match this filter.</td></tr>';return;}
   tbody.innerHTML = filtered.map(function(l){
     var i=leads.indexOf(l);
-    return '<tr><td>'+sourceChip(l.source)+'</td><td><strong>'+l.name+'</strong><br><span style="font-size:11px;color:var(--text-m);">'+( l.phone||'')+'</span></td><td>'+l.jobtype+'</td><td>'+l.location+'</td><td style="font-family:\'Barlow Condensed\',sans-serif;font-weight:700;color:var(--orange);">'+(l.quote?'€'+Number(l.quote).toLocaleString():'—')+'</td><td>'+statusChip(l.status)+'</td><td style="color:var(--text-m);font-size:12px;">'+l.date+'</td><td><div class="actions"><select onchange="changeStatus('+i+',this.value)" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:4px 6px;color:var(--text);font-size:11px;"><option value="">Status...</option><option value="new">New</option><option value="quoted">Quoted</option><option value="won">Won</option><option value="lost">Lost</option><option value="follow-up">Follow-Up</option></select><button class="btn btn-danger btn-sm" onclick="deleteLead('+i+')">Del</button></div></td></tr>';
+    return '<tr><td>'+sourceChip(l.source)+'</td><td><strong>'+l.name+'</strong><br><span style="font-size:11px;color:var(--text-m);">'+( l.phone||'')+'</span></td><td>'+l.jobtype+'</td><td>'+l.location+'</td><td style="font-family:Barlow Condensed,sans-serif;font-weight:700;color:var(--orange);">'+(l.quote?'€'+Number(l.quote).toLocaleString():'—')+'</td><td>'+statusChip(l.status)+'</td><td style="color:var(--text-m);font-size:12px;">'+l.date+'</td><td><div class="actions"><select onchange="changeStatus('+i+',this.value)" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:4px 6px;color:var(--text);font-size:11px;"><option value="">Status...</option><option value="new">New</option><option value="quoted">Quoted</option><option value="won">Won</option><option value="lost">Lost</option><option value="follow-up">Follow-Up</option></select><button class="btn btn-danger btn-sm" onclick="deleteLead('+i+')">Del</button></div></td></tr>';
   }).join('');
 }
 function filterLeads(f,el){document.querySelectorAll('#panel-leads .filter-chip').forEach(function(c){c.classList.remove('active');});el.classList.add('active');currentFilter=f;renderLeads();}
@@ -854,9 +854,9 @@ function renderDashboard(){
   var srcEl=document.getElementById('source-breakdown');
   var srcKeys=Object.keys(sources);
   if(!srcKeys.length){srcEl.innerHTML='<div style="color:var(--text-d);font-size:13px;">No data yet.</div>';}
-  else{srcEl.innerHTML=srcKeys.sort(function(a,b){return sources[b]-sources[a];}).map(function(s){return '<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);">'+sourceChip(s)+'<span style="font-family:\'Barlow Condensed\',sans-serif;font-weight:700;color:var(--orange);">'+sources[s]+'</span></div>';}).join('');}
+  else{srcEl.innerHTML=srcKeys.sort(function(a,b){return sources[b]-sources[a];}).map(function(s){return '<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);">'+sourceChip(s)+'<span style="font-family:Barlow Condensed,sans-serif;font-weight:700;color:var(--orange);">'+sources[s]+'</span></div>';}).join('');}
   var recent=planningData.filter(function(p){return p.status==='granted';}).slice(0,4);
-  document.getElementById('dashboard-planning').innerHTML=recent.map(function(p){return '<div style="display:flex;align-items:flex-start;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);gap:12px;"><div><span class="planning-chip pc-granted">GRANTED</span> <strong style="font-size:13px;margin-left:4px;">'+p.addr+'</strong><div style="font-size:11px;color:var(--text-m);margin-top:2px;">'+p.desc.substring(0,80)+'...</div></div><div style="font-family:\'Barlow Condensed\',sans-serif;font-weight:700;color:var(--orange);font-size:16px;white-space:nowrap;">€'+(p.est/1000).toFixed(0)+'k</div></div>';}).join('');
+  document.getElementById('dashboard-planning').innerHTML=recent.map(function(p){return '<div style="display:flex;align-items:flex-start;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);gap:12px;"><div><span class="planning-chip pc-granted">GRANTED</span> <strong style="font-size:13px;margin-left:4px;">'+p.addr+'</strong><div style="font-size:11px;color:var(--text-m);margin-top:2px;">'+p.desc.substring(0,80)+'...</div></div><div style="font-family:Barlow Condensed,sans-serif;font-weight:700;color:var(--orange);font-size:16px;white-space:nowrap;">€'+(p.est/1000).toFixed(0)+'k</div></div>';}).join('');
 }
 
 // ============================================================
@@ -1181,7 +1181,7 @@ function renderQItems(){
       +'<input type="text" value="'+item.desc+'" placeholder="Description" onchange="quoteItems['+i+'].desc=this.value;updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:7px 10px;color:var(--text);font-size:12px;outline:none;">'
       +'<input type="number" value="'+item.qty+'" min="1" placeholder="Qty" onchange="quoteItems['+i+'].qty=Number(this.value);updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:7px 6px;color:var(--text);font-size:12px;outline:none;text-align:center;">'
       +'<input type="number" value="'+item.rate+'" placeholder="€ Rate" onchange="quoteItems['+i+'].rate=Number(this.value);updateQuote()" style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:7px 8px;color:var(--text);font-size:12px;outline:none;text-align:right;">'
-      +'<div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--orange);text-align:right;">€'+(item.qty*item.rate).toLocaleString('en-IE',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div>'
+      +'<div style="font-family:Barlow Condensed,sans-serif;font-size:13px;font-weight:700;color:var(--orange);text-align:right;">€'+(item.qty*item.rate).toLocaleString('en-IE',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div>'
       +'<button onclick="removeQItem('+i+')" style="background:none;border:none;color:var(--text-m);font-size:16px;cursor:pointer;">×</button>'
       +'</div>';
   }).join('');
@@ -1234,8 +1234,7 @@ function updateQuote(){
 function renderPreview(sub, vat, total, vatRate){
   var co = company;
   var name    = (document.getElementById('q-name')  ||{}).value || '[Customer Name]';
-  var addr    = ((document.getElementById('q-addr')  ||{}).value || '[Address]').replace(/
-/g,'<br>');
+  var addr    = ((document.getElementById('q-addr')  ||{}).value || '[Address]').replace(/\n/g,'<br>');
   var email   = (document.getElementById('q-email') ||{}).value || '';
   var phone   = (document.getElementById('q-phone') ||{}).value || '';
   var desc    = (document.getElementById('q-desc')  ||{}).value || '';
@@ -1256,23 +1255,21 @@ function renderPreview(sub, vat, total, vatRate){
   }).join('');
 
   var vatRow2 = vatRate > 0 ? '<tr><td colspan="3" style="padding:4px 8px;text-align:right;font-size:11px;color:#888;">VAT '+(vatRate*100).toFixed(1)+'%</td><td style="padding:4px 8px;text-align:right;font-size:11px;">€'+vat.toFixed(2)+'</td></tr>' : '';
-  var bankSection = isInv && co.bank ? '<div style="margin-top:16px;padding:10px;background:#f9f9f9;border-radius:4px;font-size:10px;color:#555;border-left:3px solid #E8620A;"><strong>Payment Details:</strong><br>'+co.bank.replace(/
-/g,'<br>')+'</div>' : '';
+  var bankSection = isInv && co.bank ? '<div style="margin-top:16px;padding:10px;background:#f9f9f9;border-radius:4px;font-size:10px;color:#555;border-left:3px solid #E8620A;"><strong>Payment Details:</strong><br>'+co.bank.replace(/\n/g,'<br>')+'</div>' : '';
   var termsSection = terms ? '<div style="margin-top:8px;font-size:10px;color:#666;"><strong>Payment Terms:</strong> '+terms+'</div>' : '';
   var contactInfo = [email, phone].filter(Boolean).join(' &nbsp;|&nbsp; ');
 
   document.getElementById('quote-preview').innerHTML =
     '<div style="border-bottom:3px solid #E8620A;padding-bottom:14px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:flex-start;">'
-      +'<div><div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;line-height:1.1;"><span style="color:#E8620A;">'+co.name.charAt(0)+'</span>'+co.name.slice(1)+'</div>'
-      +(co.addr?'<div style="font-size:10px;color:#666;margin-top:2px;">'+co.addr.replace(/
-/g,', ')+'</div>':'')
+      +'<div><div style="font-family:Barlow Condensed,sans-serif;font-size:24px;font-weight:800;line-height:1.1;"><span style="color:#E8620A;">'+co.name.charAt(0)+'</span>'+co.name.slice(1)+'</div>'
+      +(co.addr?'<div style="font-size:10px;color:#666;margin-top:2px;">'+co.addr.replace(/\n/g,', ')+'</div>':'')
       +(co.phone||co.email?'<div style="font-size:10px;color:#666;">'+(co.phone||'')+(co.phone&&co.email?' &nbsp;|&nbsp; ':'')+(co.email||'')+'</div>':'')
       +(co.web?'<div style="font-size:10px;color:#E8620A;">'+co.web+'</div>':'')
       +(co.vat?'<div style="font-size:9px;color:#999;">VAT Reg: '+co.vat+'</div>':'')
       +(co.reg?'<div style="font-size:9px;color:#999;">Reg: '+co.reg+'</div>':'')
       +'</div>'
       +'<div style="text-align:right;">'
-        +'<div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:'+(isInv?'#E8620A':'#333')+';">'+docLabel+'</div>'
+        +'<div style="font-family:Barlow Condensed,sans-serif;font-size:22px;font-weight:800;color:'+(isInv?'#E8620A':'#333')+';">'+docLabel+'</div>'
         +'<div style="font-size:11px;color:#888;margin-top:2px;">#'+num+'</div>'
         +'<div style="font-size:10px;color:#aaa;">Date: '+new Date(date).toLocaleDateString('en-IE')+'</div>'
         +(dueLine?'<div style="font-size:10px;color:'+(isInv?'#e74c3c':'#888')+';">'+dueLine+'</div>':'')
@@ -1293,7 +1290,7 @@ function renderPreview(sub, vat, total, vatRate){
       +'<tfoot>'
         +'<tr><td colspan="3" style="padding:5px 8px;text-align:right;font-size:11px;color:#888;">Subtotal</td><td style="padding:5px 8px;text-align:right;font-size:11px;">€'+sub.toFixed(2)+'</td></tr>'
         +vatRow2
-        +'<tr style="background:#f5f5f5;"><td colspan="3" style="padding:8px;text-align:right;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:#E8620A;">TOTAL</td><td style="padding:8px;text-align:right;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:#E8620A;">€'+total.toFixed(2)+'</td></tr>'
+        +'<tr style="background:#f5f5f5;"><td colspan="3" style="padding:8px;text-align:right;font-family:Barlow Condensed,sans-serif;font-size:14px;font-weight:800;color:#E8620A;">TOTAL</td><td style="padding:8px;text-align:right;font-family:Barlow Condensed,sans-serif;font-size:14px;font-weight:800;color:#E8620A;">€'+total.toFixed(2)+'</td></tr>'
       +'</tfoot>'
     +'</table>'
     +termsSection
@@ -1352,15 +1349,15 @@ function renderSavedDocs(){
       +'<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;">'
         +'<div>'
           +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">'
-            +'<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;background:'+(isInv?'rgba(232,98,10,0.2)':'rgba(41,128,185,0.2)')+';color:'+(isInv?'var(--orange)':'var(--blue)')+';border:1px solid '+(isInv?'rgba(232,98,10,0.3)':'rgba(41,128,185,0.3)')+';">'+(isInv?'INVOICE':'QUOTE')+'</span>'
+            +'<span style="font-family:Barlow Condensed,sans-serif;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;background:'+(isInv?'rgba(232,98,10,0.2)':'rgba(41,128,185,0.2)')+';color:'+(isInv?'var(--orange)':'var(--blue)')+';border:1px solid '+(isInv?'rgba(232,98,10,0.3)':'rgba(41,128,185,0.3)')+';">'+(isInv?'INVOICE':'QUOTE')+'</span>'
             +'<strong style="font-size:14px;">#'+doc.num+'</strong>'
-            +'<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;background:rgba(0,0,0,0.2);color:'+statusColor+';">'+statusLabel+'</span>'
+            +'<span style="font-family:Barlow Condensed,sans-serif;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;background:rgba(0,0,0,0.2);color:'+statusColor+';">'+statusLabel+'</span>'
           +'</div>'
           +'<div style="font-size:13px;color:var(--text-m);">'+doc.name+(doc.desc?' — '+doc.desc.substring(0,50)+'...':'')+'</div>'
           +'<div style="font-size:11px;color:var(--text-d);margin-top:3px;">Date: '+new Date(doc.date).toLocaleDateString('en-IE')+(doc.due?' &nbsp;|&nbsp; Due: '+new Date(doc.due).toLocaleDateString('en-IE'):'')+'</div>'
         +'</div>'
         +'<div style="text-align:right;">'
-          +'<div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--orange);">€'+doc.total.toLocaleString('en-IE',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div>'
+          +'<div style="font-family:Barlow Condensed,sans-serif;font-size:22px;font-weight:800;color:var(--orange);">€'+doc.total.toLocaleString('en-IE',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div>'
           +'<div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;justify-content:flex-end;">'
             +(isInv && doc.status!=='paid' ? '<button class="btn btn-sm" style="background:rgba(39,174,96,0.2);color:#52be80;border:1px solid rgba(39,174,96,0.4);font-size:10px;" onclick="markPaid('+doc.id+')">Mark Paid</button>' : '')
             +'<button class="btn btn-ghost btn-sm" onclick="printSaved('+doc.id+')" style="font-size:10px;">Print</button>'
