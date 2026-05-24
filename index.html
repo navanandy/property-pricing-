@@ -1065,6 +1065,8 @@ async function runAIPricer(){
   var grand=total+contingency;
   var low=Math.round(grand*0.92);
   var high=Math.round(grand*1.08);
+  window._lastPricerGrand=grand;
+  window._lastPricerLabel=label;
   box.innerHTML='<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Getting AI estimate...</span></div>';
   var prompt='You are a property maintenance pricing expert in Ireland.\nJob: '+label+'\nSize: '+size+' | Location: '+location+'\nBase: \u20ac'+adjusted+(extras?'\nExtras: \u20ac'+extras:'')+(contingency?'\nContingency (10%): \u20ac'+contingency:'')+'\nTotal: \u20ac'+grand+'\nRange: \u20ac'+low+' \u2013 \u20ac'+high+'\nNotes: '+(notes||'none')+'\n\nIn under 150 words:\n1. Is this competitive for Ireland 2026?\n2. Key cost risks or upsells?\n3. One tip to win the job';
   try{
@@ -1084,7 +1086,7 @@ function buildResult(label,base,extras,contingency,grand,low,high,size,loc,aiTex
   var machSec='';
   if(machNotes.length){machSec='<div style="margin-top:10px;background:rgba(243,156,18,0.08);border:1px solid rgba(243,156,18,0.25);border-radius:4px;padding:10px 12px;"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--yellow);margin-bottom:6px;">Auto-detected from description</div>'+machNotes.map(function(n){return'<div style="font-size:12px;color:var(--text-m);padding:2px 0;">⚠ '+n+'</div>';}).join('')+'</div>';}
   var aiSec=aiText?'<div style="margin-top:14px;"><div class="ai-result">'+aiText+'</div></div>':'<div style="margin-top:10px;font-size:12px;color:var(--text-m);">AI commentary unavailable — base rate shown.</div>';
-  return machSec+'<div class="price-result"><div class="price-tag">\u20ac'+grand.toLocaleString()+'</div><div class="price-range">Range: \u20ac'+low.toLocaleString()+' \u2013 \u20ac'+high.toLocaleString()+'</div><div class="price-breakdown"><div class="pb-row"><span class="pb-key">Job</span><span class="pb-val">'+label+'</span></div><div class="pb-row"><span class="pb-key">Base</span><span class="pb-val">\u20ac'+base.toLocaleString()+'</span></div>'+extRow+conRow+'<div class="pb-row"><span class="pb-key">Size / Location</span><span class="pb-val">'+size+' \u00b7 '+loc.replace('-',' ')+'</span></div></div></div>'+aiSec+'<div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;"><button class="btn btn-primary btn-sm" onclick="priceToLead('+grand+')">Add as Lead</button><button class="btn btn-outline btn-sm" onclick="priceToQuote('+grand+')">New Quote</button><button class="btn btn-ghost btn-sm" onclick="resetPricer()">Clear Pricer</button></div>';
+  return machSec+'<div class="price-result"><div class="price-tag">\u20ac'+grand.toLocaleString()+'</div><div class="price-range">Range: \u20ac'+low.toLocaleString()+' \u2013 \u20ac'+high.toLocaleString()+'</div><div class="price-breakdown"><div class="pb-row"><span class="pb-key">Job</span><span class="pb-val">'+label+'</span></div><div class="pb-row"><span class="pb-key">Base</span><span class="pb-val">\u20ac'+base.toLocaleString()+'</span></div>'+extRow+conRow+'<div class="pb-row"><span class="pb-key">Size / Location</span><span class="pb-val">'+size+' \u00b7 '+loc.replace('-',' ')+'</span></div></div></div>'+aiSec+'<div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;"><button class="btn btn-primary btn-sm" onclick="priceToLead(window._lastPricerGrand)">Add as Lead</button><button class="btn btn-outline btn-sm" onclick="priceToQuote(window._lastPricerGrand)">New Quote</button><button class="btn btn-ghost btn-sm" onclick="resetPricer()">Clear Pricer</button></div>';
 }
 
 function priceToLead(price){
@@ -1095,7 +1097,8 @@ function priceToLead(price){
 }
 function priceToQuote(price){
   switchTab('quotes',document.querySelectorAll('.tab')[6]);
-  var jobLabel=document.getElementById('pricer-jobtype').options[document.getElementById('pricer-jobtype').selectedIndex].text.replace(' ↗','');
+  var sel=document.getElementById('pricer-jobtype');
+  var jobLabel=(sel&&sel.selectedIndex>=0)?sel.options[sel.selectedIndex].text.replace(' ↗',''):(window._lastPricerLabel||'Job');
   // Clear everything and start fresh
   quoteItems=[];
   var qi=document.getElementById('q-items');if(qi)qi.innerHTML='';
