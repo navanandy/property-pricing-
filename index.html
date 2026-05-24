@@ -1084,7 +1084,7 @@ function buildResult(label,base,extras,contingency,grand,low,high,size,loc,aiTex
   var machSec='';
   if(machNotes.length){machSec='<div style="margin-top:10px;background:rgba(243,156,18,0.08);border:1px solid rgba(243,156,18,0.25);border-radius:4px;padding:10px 12px;"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--yellow);margin-bottom:6px;">Auto-detected from description</div>'+machNotes.map(function(n){return'<div style="font-size:12px;color:var(--text-m);padding:2px 0;">⚠ '+n+'</div>';}).join('')+'</div>';}
   var aiSec=aiText?'<div style="margin-top:14px;"><div class="ai-result">'+aiText+'</div></div>':'<div style="margin-top:10px;font-size:12px;color:var(--text-m);">AI commentary unavailable — base rate shown.</div>';
-  return machSec+'<div class="price-result"><div class="price-tag">\u20ac'+grand.toLocaleString()+'</div><div class="price-range">Range: \u20ac'+low.toLocaleString()+' \u2013 \u20ac'+high.toLocaleString()+'</div><div class="price-breakdown"><div class="pb-row"><span class="pb-key">Job</span><span class="pb-val">'+label+'</span></div><div class="pb-row"><span class="pb-key">Base</span><span class="pb-val">\u20ac'+base.toLocaleString()+'</span></div>'+extRow+conRow+'<div class="pb-row"><span class="pb-key">Size / Location</span><span class="pb-val">'+size+' \u00b7 '+loc.replace('-',' ')+'</span></div></div></div>'+aiSec+'<div style="margin-top:14px;display:flex;gap:8px;"><button class="btn btn-primary btn-sm" onclick="priceToLead('+grand+')">Add as Lead</button><button class="btn btn-outline btn-sm" onclick="priceToQuote('+grand+')">Create Quote</button></div>';
+  return machSec+'<div class="price-result"><div class="price-tag">\u20ac'+grand.toLocaleString()+'</div><div class="price-range">Range: \u20ac'+low.toLocaleString()+' \u2013 \u20ac'+high.toLocaleString()+'</div><div class="price-breakdown"><div class="pb-row"><span class="pb-key">Job</span><span class="pb-val">'+label+'</span></div><div class="pb-row"><span class="pb-key">Base</span><span class="pb-val">\u20ac'+base.toLocaleString()+'</span></div>'+extRow+conRow+'<div class="pb-row"><span class="pb-key">Size / Location</span><span class="pb-val">'+size+' \u00b7 '+loc.replace('-',' ')+'</span></div></div></div>'+aiSec+'<div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;"><button class="btn btn-primary btn-sm" onclick="priceToLead('+grand+')">Add as Lead</button><button class="btn btn-outline btn-sm" onclick="priceToQuote('+grand+')">New Quote</button><button class="btn btn-ghost btn-sm" onclick="resetPricer()">Clear Pricer</button></div>';
 }
 
 function priceToLead(price){
@@ -1096,6 +1096,10 @@ function priceToLead(price){
 function priceToQuote(price){
   switchTab('quotes',document.querySelectorAll('.tab')[6]);
   var jobLabel=document.getElementById('pricer-jobtype').options[document.getElementById('pricer-jobtype').selectedIndex].text.replace(' ↗','');
+  // Clear everything and start fresh
+  quoteItems=[];
+  var qi=document.getElementById('q-items');if(qi)qi.innerHTML='';
+  // Don't call initQuotes (adds blank) - just add the priced item directly
   addQuoteItemWithPrice(jobLabel,price);
   var scope=document.getElementById('pricer-scope');
   var qdesc=document.getElementById('q-desc');
@@ -1526,6 +1530,15 @@ function saveCompany(){
   localStorage.setItem('ecc_company',JSON.stringify(company));
   toast('Company details saved!');
   updateQuote();
+}
+
+function resetPricer(){
+  document.getElementById('pricer-jobtype').value='';
+  document.getElementById('pricer-notes').value='';
+  var ps=document.getElementById('pricer-scope');if(ps)ps.value='';
+  document.getElementById('pricer-result-box').innerHTML='<div style="color:var(--text-d);font-size:13px;padding:10px 0;">Select a job type and click Get AI Price Estimate.</div>';
+  toggleCalcPanels();
+  toast('Pricer cleared');
 }
 
 function clearQuote(){
