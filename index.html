@@ -296,16 +296,6 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
               <option value="skip-hire">Skip Hire (standard, 7 days)</option>
               <option value="scaffolding">Scaffolding (per week)</option>
             </optgroup>
-            <optgroup label="Demolition &amp; Strip Out">
-              <option value="demo-chimney">Demolition — Chimney Stack</option>
-              <option value="demo-wall-int">Demolition — Internal Wall (non-structural)</option>
-              <option value="demo-wall-str">Demolition — Structural Wall (inc. RSJ)</option>
-              <option value="demo-bathroom">Strip Out — Full Bathroom</option>
-              <option value="demo-kitchen">Strip Out — Full Kitchen</option>
-              <option value="demo-garage">Demolition — Garage / Shed</option>
-              <option value="demo-extension">Demolition — Full Extension / Structure</option>
-              <option value="demo-full">Full House Strip Out</option>
-            </optgroup>
             <optgroup label="Labour Day Rates">
               <option value="day-tradesman">Tradesman Day Rate ↗</option>
               <option value="day-labourer">Labourer Day Rate ↗</option>
@@ -389,9 +379,8 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
         <div class="form-group">
           <label>Property Size</label>
           <select id="pricer-size">
-            <option value="medium">-- Not applicable / General job --</option>
             <option value="small">Small (1-2 bed / apartment)</option>
-            <option value="medium">Medium (3 bed semi-D)</option>
+            <option value="medium" selected>Medium (3 bed semi-D)</option>
             <option value="large">Large (4+ bed / detached)</option>
           </select>
         </div>
@@ -437,10 +426,6 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
         </div>
 
         <div class="form-group">
-          <label>Description of Works</label>
-          <textarea id="pricer-scope" rows="4" placeholder="Detailed scope of works (this will appear on your quote/invoice)&#10;e.g.&#10;— Remove existing chimney stack from roof level&#10;— Reinstate slates and make good&#10;— Remove all rubble and waste from site&#10;— Make good internal plasterwork"></textarea>
-        </div>
-        <div class="form-group">
           <label>Notes / Paste Lead Here</label>
           <textarea id="pricer-notes" placeholder="Paste the original post or describe the job..."></textarea>
         </div>
@@ -461,12 +446,20 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
     <div class="section-title">Planning Permissions</div>
     <div class="section-actions"><button class="btn btn-outline btn-sm" onclick="renderPlanning()">↻ Refresh</button></div>
   </div>
+  <div class="card" style="padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-d);">Live Council Portals</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <a href="https://www.meath.ie/council/council-services/planning-and-building/planning-permission/view-or-search-planning-applications/weekly-planning-permissions-list" target="_blank" class="btn btn-ghost btn-sm">Meath Weekly List ↗</a>
+      <a href="https://www.cavancoco.ie/services/planning/planning-applications/" target="_blank" class="btn btn-ghost btn-sm">Cavan Portal ↗</a>
+      <a href="https://www.louthcoco.ie/en/services/planning/planning-applications/" target="_blank" class="btn btn-ghost btn-sm">Louth Portal ↗</a>
+      <a href="https://planning.localgov.ie" target="_blank" class="btn btn-primary btn-sm">National Portal ↗</a>
+    </div>
+  </div>
   <div class="filter-row">
     <span class="filter-chip active" onclick="filterPlanning('all',this)">All Areas</span>
-    <span class="filter-chip" onclick="filterPlanning('dublin',this)">Dublin</span>
     <span class="filter-chip" onclick="filterPlanning('meath',this)">Meath</span>
-    <span class="filter-chip" onclick="filterPlanning('kildare',this)">Kildare</span>
-    <span class="filter-chip" onclick="filterPlanning('wicklow',this)">Wicklow</span>
+    <span class="filter-chip" onclick="filterPlanning('cavan',this)">Cavan</span>
+    <span class="filter-chip" onclick="filterPlanning('louth',this)">Louth</span>
   </div>
   <div class="filter-row">
     <span class="filter-chip active" onclick="filterPlanType('all',this)">All Types</span>
@@ -514,10 +507,10 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
   </div>
 
   <!-- SUB-TABS -->
-  <div style="display:flex;gap:0;margin-bottom:16px;border:1px solid var(--border);border-radius:6px;overflow:hidden;width:fit-content;">
-    <button class="qtab active" id="qtab-builder" onclick="showQTab('builder')" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 18px;border:none;cursor:pointer;background:var(--orange);color:#fff;">Builder</button>
-    <button class="qtab" id="qtab-saved" onclick="showQTab('saved')" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 18px;border:none;cursor:pointer;background:var(--bg-card);color:var(--text-m);">Saved</button>
-    <button class="qtab" id="qtab-settings" onclick="showQTab('settings')" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 18px;border:none;cursor:pointer;background:var(--bg-card);color:var(--text-m);">Settings</button>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-bottom:16px;border:1px solid var(--border);border-radius:6px;overflow:hidden;">
+    <button class="qtab active" id="qtab-builder" onclick="showQTab('builder')" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:12px 8px;border:none;cursor:pointer;background:var(--orange);color:#fff;">Builder</button>
+    <button class="qtab" id="qtab-saved" onclick="showQTab('saved')" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:12px 8px;border:none;cursor:pointer;background:var(--bg-card);color:var(--text-m);border-left:1px solid var(--border);border-right:1px solid var(--border);">Saved Docs</button>
+    <button class="qtab" id="qtab-settings" onclick="showQTab('settings')" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:12px 8px;border:none;cursor:pointer;background:var(--bg-card);color:var(--text-m);">Settings</button>
   </div>
 
   <!-- BUILDER -->
@@ -615,9 +608,9 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
 
   <!-- SAVED DOCS -->
   <div id="qpanel-saved" style="display:none;">
-    <div class="section-header" style="margin-bottom:12px;">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--text-m);">Saved Quotes &amp; Invoices</div>
-      <div style="display:flex;gap:8px;">
+    <div style="margin-bottom:14px;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;color:var(--text);margin-bottom:12px;">Saved Quotes &amp; Invoices</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
         <span class="filter-chip active" onclick="filterDocs('all',this)">All</span>
         <span class="filter-chip" onclick="filterDocs('quote',this)">Quotes</span>
         <span class="filter-chip" onclick="filterDocs('invoice',this)">Invoices</span>
@@ -700,19 +693,7 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
 // STATE
 // ============================================================
 var leads = JSON.parse(localStorage.getItem('ecc_leads') || '[]');
-var _defaultRates = getDefaultRates();
-var _savedRates = JSON.parse(localStorage.getItem('ecc_rates') || 'null');
-var _rateVersion = 'v5';
-if(localStorage.getItem('ecc_rate_ver') !== _rateVersion){ 
-  _savedRates = null; 
-  localStorage.removeItem('ecc_rates');
-  localStorage.setItem('ecc_rate_ver', _rateVersion);
-}
-var rates = _defaultRates;
-if(_savedRates){ 
-  Object.keys(_defaultRates).forEach(function(k){ if(!_savedRates[k]) _savedRates[k]=_defaultRates[k]; }); 
-  rates=_savedRates; 
-}
+var rates = JSON.parse(localStorage.getItem('ecc_rates') || 'null') || getDefaultRates();
 var API_KEY = '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';
 var currentFilter = 'all';
 var planFilter = 'all';
@@ -817,15 +798,7 @@ function getDefaultRates(){
     'scaffolding':      {label:'Scaffolding (per week)',              small:800,  medium:1400, large:2200},
     'day-tradesman':    {label:'Tradesman Day Rate',                  small:400,  medium:400,  large:400},
     'day-labourer':     {label:'Labourer Day Rate',                   small:250,  medium:250,  large:250},
-    'day-mixed':        {label:'Mixed Crew (tradesman + labourer)',   small:650,  medium:650,  large:650},
-    'demo-chimney':     {label:'Demolition — Chimney Stack',           small:800,  medium:1400, large:2200},
-    'demo-wall-int':    {label:'Demolition — Internal Wall',           small:400,  medium:700,  large:1100},
-    'demo-wall-str':    {label:'Demolition — Structural Wall (RSJ)',   small:1800, medium:3000, large:5000},
-    'demo-bathroom':    {label:'Strip Out — Full Bathroom',            small:600,  medium:900,  large:1400},
-    'demo-kitchen':     {label:'Strip Out — Full Kitchen',             small:500,  medium:800,  large:1200},
-    'demo-garage':      {label:'Demolition — Garage / Shed',           small:1200, medium:2000, large:3500},
-    'demo-extension':   {label:'Demolition — Full Extension',          small:3000, medium:5500, large:9000},
-    'demo-full':        {label:'Full House Strip Out',                 small:4000, medium:7000, large:12000}
+    'day-mixed':        {label:'Mixed Crew (tradesman + labourer)',   small:650,  medium:650,  large:650}
   };
 }
 
@@ -890,7 +863,7 @@ function renderDashboard(){
   var srcKeys=Object.keys(sources);
   if(!srcKeys.length){srcEl.innerHTML='<div style="color:var(--text-d);font-size:13px;">No data yet.</div>';}
   else{srcEl.innerHTML=srcKeys.sort(function(a,b){return sources[b]-sources[a];}).map(function(s){return '<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);">'+sourceChip(s)+'<span style="font-family:Barlow Condensed,sans-serif;font-weight:700;color:var(--orange);">'+sources[s]+'</span></div>';}).join('');}
-  var recent=planningData.filter(function(p){return p.status==='granted';}).slice(0,4);
+  var recent=planningData.filter(function(p){return p.status==='granted'&&p.area!=='dublin';}).slice(0,4);
   document.getElementById('dashboard-planning').innerHTML=recent.map(function(p){return '<div style="display:flex;align-items:flex-start;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);gap:12px;"><div><span class="planning-chip pc-granted">GRANTED</span> <strong style="font-size:13px;margin-left:4px;">'+p.addr+'</strong><div style="font-size:11px;color:var(--text-m);margin-top:2px;">'+p.desc.substring(0,80)+'...</div></div><div style="font-family:Barlow Condensed,sans-serif;font-weight:700;color:var(--orange);font-size:16px;white-space:nowrap;">€'+(p.est/1000).toFixed(0)+'k</div></div>';}).join('');
 }
 
@@ -1005,48 +978,8 @@ async function runAIPricer(){
   var size=document.getElementById('pricer-size').value;
   var location=document.getElementById('pricer-location').value;
   var notes=document.getElementById('pricer-notes').value;
-  var scope=document.getElementById('pricer-scope')?document.getElementById('pricer-scope').value:'';
-  var allText=(notes+' '+scope).toLowerCase();
   var box=document.getElementById('pricer-result-box');
   if(!jobtype){toast('Please select a job type');return;}
-
-  // Auto-detect machinery / special costs from description
-  var machineryBonus=0;
-  var machineryNotes=[];
-  var machineKW=[
-    // Machinery & plant hire
-    {words:['mini digger','digger','excavator','jcb'],cost:300,label:'Mini digger hire'},
-    {words:['dumper','dumper truck','skip lorry'],cost:200,label:'Dumper hire'},
-    {words:['crane','hiab','telehandler'],cost:600,label:'Crane / Hiab hire'},
-    {words:['scaffolding','scaffold'],cost:800,label:'Scaffolding (detected)'},
-    {words:['man power','manpower','extra men','extra hands','labour only','day rate','gang'],cost:400,label:'Extra labour'},
-    {words:['skip','waste removal','rubbish removal','rubble removal'],cost:280,label:'Skip hire'},
-    {words:['asbestos','hazardous','specialist disposal'],cost:800,label:'Specialist disposal'},
-    {words:['pump','concrete pump'],cost:350,label:'Concrete pump hire'},
-    {words:['generator','power supply'],cost:200,label:'Generator hire'},
-    {words:['cherry picker','access platform','boom lift'],cost:400,label:'Cherry picker hire'},
-    // Materials
-    {words:['cement','concrete','ready mix','readymix'],cost:350,label:'Cement / Concrete materials'},
-    {words:['timber','lumber','joists','rafters','decking boards'],cost:400,label:'Timber / Structural timber'},
-    {words:['block','breeze block','blockwork','masonry'],cost:500,label:'Block / Masonry materials'},
-    {words:['steel','rsj','beam','lintel','steel frame'],cost:600,label:'Steel / Structural steel'},
-    {words:['insulation','kingspan','rockwool','cavity board'],cost:300,label:'Insulation materials'},
-    {words:['tiles','tiling','floor tiles','wall tiles','porcelain','ceramic'],cost:400,label:'Tiles / Tiling materials'},
-    {words:['slate','slates','roof slates','natural slate'],cost:500,label:'Roof slates'},
-    {words:['pvc','upvc','fascia board','soffit board'],cost:250,label:'uPVC / Fascia materials'},
-    {words:['sand','gravel','hardcore','stone','ballast','mot'],cost:200,label:'Aggregates / Sand & gravel'},
-    {words:['plasterboard','drywall','plaster','multifinish'],cost:250,label:'Plaster / Plasterboard'},
-    {words:['paint','primer','undercoat','emulsion','gloss'],cost:180,label:'Paint & decorating materials'},
-    {words:['flooring','laminate','lvt','vinyl','engineered wood'],cost:350,label:'Flooring materials'},
-    {words:['pipe','copper pipe','pvc pipe','soil pipe','drainage'],cost:200,label:'Pipework / Drainage materials'},
-    {words:['wire','cable','conduit','electrical materials'],cost:200,label:'Electrical materials'},
-    {words:['window','windows','upvc window','double glazing'],cost:600,label:'Windows / Glazing'},
-    {words:['door','doors','external door','internal door'],cost:300,label:'Door / Door materials'},
-  ];
-  machineKW.forEach(function(m){
-    var found=m.words.some(function(w){return allText.indexOf(w)>=0;});
-    if(found){machineryBonus+=m.cost;machineryNotes.push(m.label+' (+€'+m.cost+')');}
-  });
   var calcBase=getCalcPrice();
   var adjusted,label;
   var r=rates[jobtype];
@@ -1059,34 +992,29 @@ async function runAIPricer(){
     adjusted=Math.round(r[size]*locMult);
     label=r.label;
   } else {toast('No rate for this job');return;}
-  var extras=(extrasAmt||0)+machineryBonus;
+  var extras=extrasAmt||0;
   var total=adjusted+extras;
   var contingency=document.getElementById('contingency-check').checked?Math.round(total*0.10):0;
   var grand=total+contingency;
   var low=Math.round(grand*0.92);
   var high=Math.round(grand*1.08);
-  window._lastPricerGrand=grand;
-  window._lastPricerLabel=label;
   box.innerHTML='<div class="ai-loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Getting AI estimate...</span></div>';
   var prompt='You are a property maintenance pricing expert in Ireland.\nJob: '+label+'\nSize: '+size+' | Location: '+location+'\nBase: \u20ac'+adjusted+(extras?'\nExtras: \u20ac'+extras:'')+(contingency?'\nContingency (10%): \u20ac'+contingency:'')+'\nTotal: \u20ac'+grand+'\nRange: \u20ac'+low+' \u2013 \u20ac'+high+'\nNotes: '+(notes||'none')+'\n\nIn under 150 words:\n1. Is this competitive for Ireland 2026?\n2. Key cost risks or upsells?\n3. One tip to win the job';
   try{
     var resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:350,messages:[{role:'user',content:prompt}]})});
     var data=await resp.json();
     var txt=data.content&&data.content[0]?data.content[0].text:'Could not get estimate.';
-    box.innerHTML=buildResult(label,adjusted,extras,contingency,grand,low,high,size,location,txt,machineryNotes);
+    box.innerHTML=buildResult(label,adjusted,extras,contingency,grand,low,high,size,location,txt);
   } catch(e){
-    box.innerHTML=buildResult(label,adjusted,extras,contingency,grand,low,high,size,location,'',machineryNotes);
+    box.innerHTML=buildResult(label,adjusted,extras,contingency,grand,low,high,size,location,'');
   }
 }
 
-function buildResult(label,base,extras,contingency,grand,low,high,size,loc,aiText,machNotes){
-  machNotes=machNotes||[];
+function buildResult(label,base,extras,contingency,grand,low,high,size,loc,aiText){
   var extRow=extras>0?'<div class="pb-row"><span class="pb-key">Add-ons</span><span class="pb-val" style="color:var(--yellow);">+\u20ac'+extras.toLocaleString()+'</span></div>':'';
   var conRow=contingency>0?'<div class="pb-row"><span class="pb-key">Contingency (10%)</span><span class="pb-val">+\u20ac'+contingency.toLocaleString()+'</span></div>':'';
-  var machSec='';
-  if(machNotes.length){machSec='<div style="margin-top:10px;background:rgba(243,156,18,0.08);border:1px solid rgba(243,156,18,0.25);border-radius:4px;padding:10px 12px;"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--yellow);margin-bottom:6px;">Auto-detected from description</div>'+machNotes.map(function(n){return'<div style="font-size:12px;color:var(--text-m);padding:2px 0;">⚠ '+n+'</div>';}).join('')+'</div>';}
   var aiSec=aiText?'<div style="margin-top:14px;"><div class="ai-result">'+aiText+'</div></div>':'<div style="margin-top:10px;font-size:12px;color:var(--text-m);">AI commentary unavailable — base rate shown.</div>';
-  return machSec+'<div class="price-result"><div class="price-tag">\u20ac'+grand.toLocaleString()+'</div><div class="price-range">Range: \u20ac'+low.toLocaleString()+' \u2013 \u20ac'+high.toLocaleString()+'</div><div class="price-breakdown"><div class="pb-row"><span class="pb-key">Job</span><span class="pb-val">'+label+'</span></div><div class="pb-row"><span class="pb-key">Base</span><span class="pb-val">\u20ac'+base.toLocaleString()+'</span></div>'+extRow+conRow+'<div class="pb-row"><span class="pb-key">Size / Location</span><span class="pb-val">'+size+' \u00b7 '+loc.replace('-',' ')+'</span></div></div></div>'+aiSec+'<div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;"><button class="btn btn-primary btn-sm" onclick="priceToLead(window._lastPricerGrand)">Add as Lead</button><button class="btn btn-outline btn-sm" onclick="priceToQuote(window._lastPricerGrand)">New Quote</button><button class="btn btn-ghost btn-sm" onclick="resetPricer()">Clear Pricer</button></div>';
+  return '<div class="price-result"><div class="price-tag">\u20ac'+grand.toLocaleString()+'</div><div class="price-range">Range: \u20ac'+low.toLocaleString()+' \u2013 \u20ac'+high.toLocaleString()+'</div><div class="price-breakdown"><div class="pb-row"><span class="pb-key">Job</span><span class="pb-val">'+label+'</span></div><div class="pb-row"><span class="pb-key">Base</span><span class="pb-val">\u20ac'+base.toLocaleString()+'</span></div>'+extRow+conRow+'<div class="pb-row"><span class="pb-key">Size / Location</span><span class="pb-val">'+size+' \u00b7 '+loc.replace('-',' ')+'</span></div></div></div>'+aiSec+'<div style="margin-top:14px;display:flex;gap:8px;"><button class="btn btn-primary btn-sm" onclick="priceToLead('+grand+')">Add as Lead</button><button class="btn btn-outline btn-sm" onclick="priceToQuote('+grand+')">Create Quote</button></div>';
 }
 
 function priceToLead(price){
@@ -1097,17 +1025,7 @@ function priceToLead(price){
 }
 function priceToQuote(price){
   switchTab('quotes',document.querySelectorAll('.tab')[6]);
-  var sel=document.getElementById('pricer-jobtype');
-  var jobLabel=(sel&&sel.selectedIndex>=0)?sel.options[sel.selectedIndex].text.replace(' ↗',''):(window._lastPricerLabel||'Job');
-  // Clear everything and start fresh
-  quoteItems=[];
-  var qi=document.getElementById('q-items');if(qi)qi.innerHTML='';
-  // Don't call initQuotes (adds blank) - just add the priced item directly
-  addQuoteItemWithPrice(jobLabel,price);
-  var scope=document.getElementById('pricer-scope');
-  var qdesc=document.getElementById('q-desc');
-  if(scope&&qdesc&&scope.value.trim()){qdesc.value=scope.value.trim();}
-  else if(qdesc&&jobLabel){qdesc.value=jobLabel;}
+  addQuoteItemWithPrice(document.getElementById('pricer-jobtype').options[document.getElementById('pricer-jobtype').selectedIndex].text.replace(' \u2197',''),price);
   updateQuote();
 }
 
@@ -1115,18 +1033,32 @@ function priceToQuote(price){
 // PLANNING DATA
 // ============================================================
 var planningData=[
-  {id:1,addr:'14 Rowan Park, Swords, Co. Dublin',desc:'Single storey rear extension (48sqm), new kitchen and utility area.',area:'dublin',type:'extension',status:'granted',ref:'FW26D/0124',date:'12 May 2026',est:65000},
-  {id:2,addr:'8 The Pines, Malahide, Co. Dublin',desc:'Two storey side and rear extension. Dormer attic conversion. New windows throughout.',area:'dublin',type:'extension',status:'pending',ref:'FW26D/0298',date:'3 May 2026',est:145000},
-  {id:3,addr:'22 Castleknock Grange, Dublin 15',desc:'Loft conversion to habitable room, velux to rear. Garage conversion to home office.',area:'dublin',type:'renovation',status:'granted',ref:'FW26D/0341',date:'18 Apr 2026',est:42000},
-  {id:4,addr:'Hillcrest, Ashbourne, Co. Meath',desc:'New build 4-bed detached dwelling. Septic tank and percolation area.',area:'meath',type:'new-build',status:'granted',ref:'ME26/0187',date:'27 Apr 2026',est:280000},
-  {id:5,addr:'3 Hazel Walk, Naas, Co. Kildare',desc:'Single storey rear extension, conversion of integral garage.',area:'kildare',type:'extension',status:'pending',ref:'KE26/0422',date:'10 May 2026',est:58000},
-  {id:6,addr:'47 Palmerstown Heights, Dublin 20',desc:'Demolition of existing shed. New two-storey rear extension.',area:'dublin',type:'extension',status:'granted',ref:'FW26D/0517',date:'6 May 2026',est:89000},
-  {id:7,addr:'19 Bray Seafront Apts, Co. Wicklow',desc:'Change of use: ground floor retail to 2 residential units.',area:'wicklow',type:'commercial',status:'pending',ref:'WW26/0088',date:'8 May 2026',est:95000},
-  {id:8,addr:'Woodland House, Dunboyne, Co. Meath',desc:'Extension and renovation of existing dwelling.',area:'meath',type:'renovation',status:'appeal',ref:'ME26/0204',date:'1 May 2026',est:72000},
-  {id:9,addr:'Unit 4 Swords Business Park',desc:'Change of use from warehouse to gym. New mezzanine level, changing rooms.',area:'dublin',type:'commercial',status:'pending',ref:'FW26D/0599',date:'14 May 2026',est:180000},
-  {id:10,addr:'31 Lucan Heights, Co. Dublin',desc:'Single storey front porch. New vehicular entrance. Block wall to boundary.',area:'dublin',type:'extension',status:'granted',ref:'FW26D/0612',date:'15 May 2026',est:18000},
-  {id:11,addr:'72 Rathoath Road, Mulhuddart, Dublin 15',desc:'Attic conversion with dormer to rear. Two velux to front.',area:'dublin',type:'renovation',status:'refused',ref:'FW26D/0391',date:'2 May 2026',est:38000},
-  {id:12,addr:'Clonee Retail Park Phase 2, Co. Meath',desc:'New commercial development: 3 retail units, car parking for 85 vehicles.',area:'meath',type:'commercial',status:'granted',ref:'ME26/0231',date:'20 Apr 2026',est:420000}
+  // MEATH
+  {id:1,addr:'14 Rowan Park, Swords Road, Navan, Co. Meath',desc:'Single storey rear extension (48sqm), new kitchen and utility area. Planning granted with standard conditions.',area:'meath',type:'extension',status:'granted',ref:'ME26/0124',date:'12 May 2026',est:65000},
+  {id:2,addr:'8 The Pines, Trim, Co. Meath',desc:'Two storey side and rear extension. Dormer attic conversion. New windows throughout.',area:'meath',type:'extension',status:'pending',ref:'ME26/0298',date:'3 May 2026',est:145000},
+  {id:3,addr:'22 Castleknock Avenue, Dunboyne, Co. Meath',desc:'Loft conversion to habitable room, velux windows to rear. Garage conversion to home office.',area:'meath',type:'renovation',status:'granted',ref:'ME26/0341',date:'18 Apr 2026',est:42000},
+  {id:4,addr:'Hillcrest, Ashbourne, Co. Meath',desc:'New build 4-bed detached dwelling. Septic tank and percolation area. Access road works.',area:'meath',type:'new-build',status:'granted',ref:'ME26/0187',date:'27 Apr 2026',est:280000},
+  {id:5,addr:'31 Lucan Heights, Kells, Co. Meath',desc:'Single storey front porch. New vehicular entrance. Block wall to boundary.',area:'meath',type:'extension',status:'granted',ref:'ME26/0612',date:'15 May 2026',est:18000},
+  {id:6,addr:'72 Rathoath Road, Ratoath, Co. Meath',desc:'Attic conversion with dormer to rear. Two velux to front. Escape window included.',area:'meath',type:'renovation',status:'refused',ref:'ME26/0391',date:'2 May 2026',est:38000},
+  {id:7,addr:'Woodland House, Dunshaughlin, Co. Meath',desc:'Extension and renovation of existing dwelling. Demolition of lean-to garage. New utility and bedroom.',area:'meath',type:'renovation',status:'granted',ref:'ME26/0204',date:'1 May 2026',est:72000},
+  {id:8,addr:'4 Bridge Street, Slane, Co. Meath',desc:'Change of use ground floor from retail to residential. Full internal renovation.',area:'meath',type:'renovation',status:'pending',ref:'ME26/0445',date:'8 May 2026',est:95000},
+  {id:9,addr:'Rathfeigh House, Tara, Co. Meath',desc:'New build two-storey dwelling. Detached garage. Landscaping and boundary walls.',area:'meath',type:'new-build',status:'granted',ref:'ME26/0502',date:'10 May 2026',est:320000},
+  {id:10,addr:'12 The Meadows, Oldcastle, Co. Meath',desc:'Single storey rear extension (32sqm). New patio area. Revised boundary treatment.',area:'meath',type:'extension',status:'pending',ref:'ME26/0567',date:'14 May 2026',est:38000},
+  // CAVAN
+  {id:11,addr:'3 Hazel Walk, Virginia, Co. Cavan',desc:'Single storey rear extension, conversion of integral garage to living space.',area:'cavan',type:'extension',status:'pending',ref:'CV26/0422',date:'10 May 2026',est:58000},
+  {id:12,addr:'Lakeside, Bailieborough, Co. Cavan',desc:'New build 3-bed bungalow. Septic tank, percolation area and entrance works.',area:'cavan',type:'new-build',status:'granted',ref:'CV26/0231',date:'20 Apr 2026',est:240000},
+  {id:13,addr:'18 Main Street, Cavan Town, Co. Cavan',desc:'Renovation of existing dwelling. Rear extension (28sqm). New roof covering.',area:'cavan',type:'renovation',status:'granted',ref:'CV26/0188',date:'5 May 2026',est:65000},
+  {id:14,addr:'Drumcor, Kingscourt, Co. Cavan',desc:'Two storey dwelling house. Detached domestic garage. New entrance off local road.',area:'cavan',type:'new-build',status:'granted',ref:'CV26/0304',date:'28 Apr 2026',est:290000},
+  {id:15,addr:'7 Cootehill Road, Bailieborough, Co. Cavan',desc:'Demolition of existing shed. Single storey extension to side and rear.',area:'cavan',type:'extension',status:'appeal',ref:'CV26/0256',date:'1 May 2026',est:45000},
+  {id:16,addr:'Cornafean, Cavan Town, Co. Cavan',desc:'New build dwelling. Wastewater treatment system. Entrance with sightlines.',area:'cavan',type:'new-build',status:'pending',ref:'CV26/0388',date:'12 May 2026',est:260000},
+  // LOUTH
+  {id:17,addr:'47 Cherrywood, Drogheda, Co. Louth',desc:'Demolition of existing shed. New two-storey rear extension. Rooflights to front.',area:'louth',type:'extension',status:'granted',ref:'LH26/0517',date:'6 May 2026',est:89000},
+  {id:18,addr:'19 Ard Easmuinn, Dundalk, Co. Louth',desc:'Attic conversion with dormer to rear. Two velux windows. Revised rear elevation.',area:'louth',type:'renovation',status:'pending',ref:'LH26/0088',date:'8 May 2026',est:38000},
+  {id:19,addr:'Unit 4 Muirhevnamor, Dundalk, Co. Louth',desc:'Change of use from warehouse to gym. New mezzanine, changing rooms, car parking.',area:'louth',type:'commercial',status:'pending',ref:'LH26/0599',date:'14 May 2026',est:180000},
+  {id:20,addr:'Gyles Quay, Carlingford, Co. Louth',desc:'Extension and renovation of existing holiday cottage. New entrance gates.',area:'louth',type:'renovation',status:'granted',ref:'LH26/0143',date:'22 Apr 2026',est:55000},
+  {id:21,addr:'12 Moneymore Road, Drogheda, Co. Louth',desc:'Single storey rear extension (36sqm). New patio. Boundary wall alterations.',area:'louth',type:'extension',status:'granted',ref:'LH26/0612',date:'15 May 2026',est:42000},
+  {id:22,addr:'Termonfeckin Village, Co. Louth',desc:'New build two storey dwelling. Wastewater treatment system. Mature planting.',area:'louth',type:'new-build',status:'granted',ref:'LH26/0398',date:'9 May 2026',est:295000},
+  {id:23,addr:'8 Castle Road, Ardee, Co. Louth',desc:'Full renovation of existing semi-detached dwelling. External insulation and render.',area:'louth',type:'renovation',status:'granted',ref:'LH26/0287',date:'30 Apr 2026',est:48000},
 ];
 var planFilter='all',planTypeFilter='all';
 
@@ -1429,33 +1361,27 @@ function renderSavedDocs(){
     return true;
   });
   var el = document.getElementById('saved-docs-list');
-  if(!filtered.length){el.innerHTML='<div style="color:var(--text-d);font-size:13px;padding:20px;text-align:center;">No documents match this filter.</div>';renderRevSummary();return;}
+  if(!filtered.length){
+    el.innerHTML='<div style="color:var(--text-d);font-size:13px;padding:30px;text-align:center;">No documents here yet.<br><br>Create a quote or invoice in the Builder tab and tap Save Doc.</div>';
+    renderRevSummary();return;
+  }
   el.innerHTML = filtered.map(function(doc){
     var isInv = doc.type==='invoice';
     var isOverdue = !doc.due ? false : (doc.status!=='paid' && new Date(doc.due)<new Date());
     var statusColor = doc.status==='paid' ? 'var(--green)' : isOverdue ? 'var(--red)' : 'var(--yellow)';
     var statusLabel = doc.status==='paid' ? 'PAID' : isOverdue ? 'OVERDUE' : isInv ? 'UNPAID' : 'SENT';
-    return '<div class="card" style="padding:14px;margin-bottom:10px;">'
-      +'<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;">'
-        +'<div>'
-          +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">'
-            +'<span style="font-family:Barlow Condensed,sans-serif;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;background:'+(isInv?'rgba(232,98,10,0.2)':'rgba(41,128,185,0.2)')+';color:'+(isInv?'var(--orange)':'var(--blue)')+';border:1px solid '+(isInv?'rgba(232,98,10,0.3)':'rgba(41,128,185,0.3)')+';">'+(isInv?'INVOICE':'QUOTE')+'</span>'
-            +'<strong style="font-size:14px;">#'+doc.num+'</strong>'
-            +'<span style="font-family:Barlow Condensed,sans-serif;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;background:rgba(0,0,0,0.2);color:'+statusColor+';">'+statusLabel+'</span>'
-          +'</div>'
-          +'<div style="font-size:13px;color:var(--text-m);">'+doc.name+(doc.desc?' — '+doc.desc.substring(0,50)+'...':'')+'</div>'
-          +'<div style="font-size:11px;color:var(--text-d);margin-top:3px;">Date: '+new Date(doc.date).toLocaleDateString('en-IE')+(doc.due?' &nbsp;|&nbsp; Due: '+new Date(doc.due).toLocaleDateString('en-IE'):'')+'</div>'
-        +'</div>'
-        +'<div style="text-align:right;">'
-          +'<div style="font-family:Barlow Condensed,sans-serif;font-size:22px;font-weight:800;color:var(--orange);">€'+doc.total.toLocaleString('en-IE',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div>'
-          +'<div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;justify-content:flex-end;">'
-            +(isInv && doc.status!=='paid' ? '<button class="btn btn-sm" style="background:rgba(39,174,96,0.2);color:#52be80;border:1px solid rgba(39,174,96,0.4);font-size:10px;" onclick="markPaid('+doc.id+')">Mark Paid</button>' : '')
-            +'<button class="btn btn-ghost btn-sm" onclick="printSaved('+doc.id+')" style="font-size:10px;">Print</button>'
-            +'<button class="btn btn-danger btn-sm" onclick="deleteDoc('+doc.id+')" style="font-size:10px;">Del</button>'
-          +'</div>'
-        +'</div>'
-      +'</div>'
-    +'</div>';
+    var typeColor = isInv ? 'rgba(232,98,10,0.2)' : 'rgba(41,128,185,0.2)';
+    var typeTextColor = isInv ? 'var(--orange)' : 'var(--blue)';
+    var typeBorder = isInv ? 'rgba(232,98,10,0.3)' : 'rgba(41,128,185,0.3)';
+    var dateStr = doc.date ? new Date(doc.date).toLocaleDateString('en-IE') : '';
+    var dueStr = doc.due ? new Date(doc.due).toLocaleDateString('en-IE') : '';
+    return '<div class="card" style="padding:16px;margin-bottom:12px;">'      // TYPE + NUMBER + STATUS row
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;">'        +'<span style="font-family:Barlow Condensed,sans-serif;font-size:12px;font-weight:700;padding:3px 10px;border-radius:3px;background:'+typeColor+';color:'+typeTextColor+';border:1px solid '+typeBorder+';">'+(isInv?'INVOICE':'QUOTE')+'</span>'        +'<span style="font-family:Barlow Condensed,sans-serif;font-size:15px;font-weight:800;color:var(--text);">#'+doc.num+'</span>'        +'<span style="margin-left:auto;font-family:Barlow Condensed,sans-serif;font-size:12px;font-weight:700;padding:3px 10px;border-radius:3px;color:'+statusColor+';background:rgba(0,0,0,0.2);">'+statusLabel+'</span>'      +'</div>'      // CUSTOMER NAME
+      +'<div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px;">'+doc.name+'</div>'      // DESCRIPTION
+      +(doc.desc?'<div style="font-size:12px;color:var(--text-m);margin-bottom:8px;line-height:1.4;">'+doc.desc.substring(0,80)+(doc.desc.length>80?'...':'')+'</div>':'')      // DATES ROW
+      +'<div style="display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap;">'        +(dateStr?'<div style="font-size:12px;color:var(--text-d);">Date: <strong style="color:var(--text-m);">'+dateStr+'</strong></div>':'')        +(dueStr?'<div style="font-size:12px;color:var(--text-d);">'+(isInv?'Due':'Valid')+': <strong style="color:'+(isOverdue?'var(--red)':'var(--text-m)')+';">'+dueStr+'</strong></div>':'')      +'</div>'      // TOTAL - big and prominent
+      +'<div style="font-family:Barlow Condensed,sans-serif;font-size:28px;font-weight:900;color:var(--orange);margin-bottom:12px;">€'+doc.total.toLocaleString('en-IE',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div>'      // BUTTONS - full width stacked on mobile
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">'        +(isInv && doc.status!=='paid' ? '<button class="btn btn-sm" style="background:rgba(39,174,96,0.15);color:#52be80;border:1px solid rgba(39,174,96,0.4);font-size:12px;padding:10px;" onclick="markPaid('+doc.id+')">✓ Mark Paid</button>' : '<div></div>')        +'<button class="btn btn-ghost btn-sm" style="font-size:12px;padding:10px;" onclick="printSaved('+doc.id+')">🖨 Print / PDF</button>'      +'</div>'      +'<button class="btn btn-danger btn-sm" style="width:100%;margin-top:8px;font-size:12px;padding:10px;" onclick="deleteDoc('+doc.id+')">Delete</button>'    +'</div>';
   }).join('');
   renderRevSummary();
 }
@@ -1533,15 +1459,6 @@ function saveCompany(){
   localStorage.setItem('ecc_company',JSON.stringify(company));
   toast('Company details saved!');
   updateQuote();
-}
-
-function resetPricer(){
-  document.getElementById('pricer-jobtype').value='';
-  document.getElementById('pricer-notes').value='';
-  var ps=document.getElementById('pricer-scope');if(ps)ps.value='';
-  document.getElementById('pricer-result-box').innerHTML='<div style="color:var(--text-d);font-size:13px;padding:10px 0;">Select a job type and click Get AI Price Estimate.</div>';
-  toggleCalcPanels();
-  toast('Pricer cleared');
 }
 
 function clearQuote(){
