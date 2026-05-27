@@ -175,10 +175,10 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
     <div class="section-actions"><button class="btn btn-primary btn-sm" onclick="openAddLead()">+ New Lead</button></div>
   </div>
   <div class="grid4" style="margin-bottom:16px;">
-    <div class="stat-card"><div class="stat-label">Total Leads</div><div class="stat-val" id="stat-total">0</div><div class="stat-sub">All time</div></div>
-    <div class="stat-card"><div class="stat-label">Active</div><div class="stat-val" id="stat-active" style="color:var(--blue);">0</div><div class="stat-sub">New + Quoted</div></div>
-    <div class="stat-card"><div class="stat-label">Won</div><div class="stat-val" id="stat-won" style="color:var(--green);">0</div><div class="stat-sub">Jobs confirmed</div></div>
-    <div class="stat-card"><div class="stat-label">Pipeline</div><div class="stat-val" id="stat-pipeline" style="color:var(--orange);">€0</div><div class="stat-sub">Quoted value</div></div>
+    <div class="stat-card" onclick="openAddLead()" style="cursor:pointer;" title="Add new lead"><div class="stat-label">Total Leads</div><div class="stat-val" id="stat-total">0</div><div class="stat-sub">Tap to add lead</div></div>
+    <div class="stat-card" onclick="switchTab('leads',document.querySelectorAll('.tab')[1]);filterLeads('new',document.querySelectorAll('#panel-leads .filter-chip')[1])" style="cursor:pointer;" title="View active leads"><div class="stat-label">Active</div><div class="stat-val" id="stat-active" style="color:var(--blue);">0</div><div class="stat-sub">Tap to view</div></div>
+    <div class="stat-card" onclick="switchTab('leads',document.querySelectorAll('.tab')[1]);filterLeads('won',document.querySelectorAll('#panel-leads .filter-chip')[4])" style="cursor:pointer;" title="View won jobs"><div class="stat-label">Won</div><div class="stat-val" id="stat-won" style="color:var(--green);">0</div><div class="stat-sub">Tap to view</div></div>
+    <div class="stat-card" onclick="switchTab('leads',document.querySelectorAll('.tab')[1]);filterLeads('quoted',document.querySelectorAll('#panel-leads .filter-chip')[3])" style="cursor:pointer;" title="View pipeline"><div class="stat-label">Pipeline</div><div class="stat-val" id="stat-pipeline" style="color:var(--orange);">€0</div><div class="stat-sub">Quoted value</div></div>
   </div>
   <div class="grid2">
     <div class="card card-accent"><div class="card-title">Hot Leads</div><div id="hot-leads-list"><div style="color:var(--text-d);font-size:13px;">No hot leads yet.</div></div></div>
@@ -1655,7 +1655,7 @@ function updateQuote(){
 function renderPreview(sub, vat, total, vatRate){
   var co = company;
   var name    = (document.getElementById('q-name')  ||{}).value || '[Customer Name]';
-  var addr    = ((document.getElementById('q-addr')  ||{}).value || '[Address]').replace(/\n/g,'<br>');
+  var addr    = ((document.getElementById('q-addr')  ||{}).value || '[Address]').split('\n').join('<br>');
   var email   = (document.getElementById('q-email') ||{}).value || '';
   var phone   = (document.getElementById('q-phone') ||{}).value || '';
   var desc    = (document.getElementById('q-desc')  ||{}).value || '';
@@ -1676,7 +1676,7 @@ function renderPreview(sub, vat, total, vatRate){
   }).join('');
 
   var vatRow2 = vatRate > 0 ? '<tr><td colspan="3" style="padding:4px 8px;text-align:right;font-size:11px;color:#888;">VAT '+(vatRate*100).toFixed(1)+'%</td><td style="padding:4px 8px;text-align:right;font-size:11px;">EUR'+vat.toFixed(2)+'</td></tr>' : '';
-  var bankSection = isInv && co.bank ? '<div style="margin-top:16px;padding:10px;background:#f9f9f9;border-radius:4px;font-size:10px;color:#555;border-left:3px solid #E8620A;"><strong>Payment Details:</strong><br>'+co.bank.replace(/\n/g,'<br>')+'</div>' : '';
+  var bankSection = isInv && co.bank ? '<div style="margin-top:16px;padding:10px;background:#f9f9f9;border-radius:4px;font-size:10px;color:#555;border-left:3px solid #E8620A;"><strong>Payment Details:</strong><br>'+co.bank.split('\n').join('<br>')+'</div>' : '';
   var termsSection = terms ? '<div style="margin-top:8px;font-size:10px;color:#666;"><strong>Payment Terms:</strong> '+terms+'</div>' : '';
   var contactInfo = [email, phone].filter(Boolean).join(' &nbsp;|&nbsp; ');
 
@@ -1727,24 +1727,36 @@ function saveDoc(){
   var sub = quoteItems.reduce(function(s,item){return s+(item.qty*item.rate);},0);
   var vat = sub * vatRate;
   var total = sub + vat;
+  // Store only the data, not the HTML preview - keeps storage small
   var doc = {
     id: Date.now(),
     type: docType,
-    num:  (document.getElementById('q-num')  ||{}).value || '',
-    name: (document.getElementById('q-name') ||{}).value || 'Unknown',
-    desc: (document.getElementById('q-desc') ||{}).value || '',
-    date: (document.getElementById('q-date') ||{}).value || '',
-    due:  (document.getElementById('q-duedate')||{}).value || '',
+    num:   (document.getElementById('q-num')     ||{}).value || '',
+    name:  (document.getElementById('q-name')    ||{}).value || 'Unknown',
+    email: (document.getElementById('q-email')   ||{}).value || '',
+    phone: (document.getElementById('q-phone')   ||{}).value || '',
+    addr:  (document.getElementById('q-addr')    ||{}).value || '',
+    desc:  (document.getElementById('q-desc')    ||{}).value || '',
+    date:  (document.getElementById('q-date')    ||{}).value || '',
+    due:   (document.getElementById('q-duedate') ||{}).value || '',
     terms: getPaymentTermsText(),
+    footer:(document.getElementById('q-footer-note')||{}).value || '',
     items: JSON.parse(JSON.stringify(quoteItems)),
-    sub: sub, vat: vat, total: total,
-    vatRate: vatRate,
-    status: docType==='quote' ? 'sent' : 'unpaid',
-    preview: document.getElementById('quote-preview').innerHTML
+    sub: sub, vat: vat, total: total, vatRate: vatRate,
+    status: docType==='quote' ? 'sent' : 'unpaid'
   };
   savedDocs.unshift(doc);
-  localStorage.setItem('ecc_docs', JSON.stringify(savedDocs));
-  toast('Document saved!');
+  try {
+    localStorage.setItem('ecc_docs', JSON.stringify(savedDocs));
+    toast('Document saved!');
+  } catch(e) {
+    // Storage full - remove oldest docs and retry
+    while(savedDocs.length > 1) {
+      savedDocs.pop();
+      try { localStorage.setItem('ecc_docs', JSON.stringify(savedDocs)); break; } catch(e2){}
+    }
+    toast('Saved (old docs trimmed - storage was full)');
+  }
 }
 
 function renderSavedDocs(){
@@ -1808,8 +1820,41 @@ function deleteDoc(id){
 function printSaved(id){
   var doc = savedDocs.find(function(d){return d.id===id;});
   if(!doc) return;
+  // Regenerate the preview HTML from stored data
+  var rows = (doc.items||[]).map(function(item){
+    return '<tr><td style="padding:6px 8px;border-bottom:1px solid #eee;">'+( item.desc||'-')+'</td>'
+      +'<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:center;">'+item.qty+'</td>'
+      +'<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:right;">EUR'+Number(item.rate).toFixed(2)+'</td>'
+      +'<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:right;font-weight:600;">EUR'+(item.qty*item.rate).toFixed(2)+'</td></tr>';
+  }).join('');
+  var vatRow = doc.vatRate > 0 ? '<tr><td colspan="3" style="padding:4px 8px;text-align:right;color:#888;">VAT '+(doc.vatRate*100).toFixed(1)+'%</td><td style="padding:4px 8px;text-align:right;">EUR'+doc.vat.toFixed(2)+'</td></tr>' : '';
+  var co = company || {};
+  var isInv = doc.type==='invoice';
+  var html = '<div style="border-bottom:3px solid #E8620A;padding-bottom:14px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:flex-start;">'
+    +'<div><div style="font-family:Arial,sans-serif;font-size:22px;font-weight:800;"><span style="color:#E8620A;">'+(co.name||'EASY Property Services').charAt(0)+'</span>'+(co.name||'EASY Property Services').slice(1)+'</div>'
+    +(co.addr?'<div style="font-size:11px;color:#666;">'+co.addr+'</div>':'')
+    +(co.phone||co.email?'<div style="font-size:11px;color:#666;">'+(co.phone||'')+(co.phone&&co.email?' | ':'')+(co.email||'')+'</div>':'')
+    +'</div>'
+    +'<div style="text-align:right;"><div style="font-size:20px;font-weight:800;color:'+(isInv?'#E8620A':'#333')+';">'+(isInv?'INVOICE':'QUOTATION')+'</div>'
+    +'<div style="font-size:11px;color:#888;">#'+doc.num+'</div>'
+    +'<div style="font-size:10px;color:#aaa;">'+new Date(doc.date).toLocaleDateString('en-IE')+'</div></div></div>'
+    +'<div style="margin-bottom:14px;"><strong>To:</strong> '+doc.name+'<br><span style="color:#666;font-size:12px;">'+String(doc.addr||'').split('\n').join('<br>')+'</span></div>'
+    +(doc.desc?'<div style="margin-bottom:12px;font-size:11px;background:#f9f9f9;padding:8px;"><strong>Re:</strong> '+doc.desc+'</div>':'')
+    +'<table style="width:100%;border-collapse:collapse;"><thead><tr style="background:#2B2D2F;">'
+    +'<th style="padding:7px 8px;text-align:left;color:#ccc;font-size:10px;">Description</th>'
+    +'<th style="padding:7px 8px;text-align:center;color:#ccc;font-size:10px;">Qty</th>'
+    +'<th style="padding:7px 8px;text-align:right;color:#ccc;font-size:10px;">Rate</th>'
+    +'<th style="padding:7px 8px;text-align:right;color:#ccc;font-size:10px;">Amount</th>'
+    +'</tr></thead><tbody>'+rows+'</tbody>'
+    +'<tfoot><tr><td colspan="3" style="padding:5px 8px;text-align:right;color:#888;font-size:11px;">Subtotal</td><td style="padding:5px 8px;text-align:right;font-size:11px;">EUR'+doc.sub.toFixed(2)+'</td></tr>'
+    +vatRow
+    +'<tr style="background:#f5f5f5;"><td colspan="3" style="padding:8px;text-align:right;font-size:14px;font-weight:800;color:#E8620A;">TOTAL</td><td style="padding:8px;text-align:right;font-size:14px;font-weight:800;color:#E8620A;">EUR'+doc.total.toFixed(2)+'</td></tr>'
+    +'</tfoot></table>'
+    +(doc.terms?'<div style="margin-top:10px;font-size:11px;color:#666;"><strong>Payment Terms:</strong> '+doc.terms+'</div>':'')
+    +(isInv&&co.bank?'<div style="margin-top:12px;padding:10px;background:#f9f9f9;border-left:3px solid #E8620A;font-size:10px;"><strong>Payment Details:</strong><br>'+String(co.bank||'').split('\n').join('<br>')+'</div>':'')
+    +(doc.footer?'<div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;font-size:10px;color:#999;">'+doc.footer+'</div>':'');
   var w = window.open('','_blank');
-  w.document.write('<!DOCTYPE html><html><head><title>'+(doc.type==='invoice'?'Invoice':'Quote')+' '+doc.num+'</title><style>body{font-family:Arial,sans-serif;padding:40px;max-width:750px;margin:0 auto;}@media print{body{padding:20px;margin:0;}}</style></head><body>'+doc.preview+'</body></html>');
+  w.document.write('<!DOCTYPE html><html><head><title>'+(isInv?'Invoice':'Quote')+' '+doc.num+'</title><style>body{font-family:Arial,sans-serif;padding:40px;max-width:750px;margin:0 auto;}@media print{body{padding:20px;}}</style></head><body>'+html+'</body></html>');
   w.document.close();
   setTimeout(function(){w.print();},500);
 }
