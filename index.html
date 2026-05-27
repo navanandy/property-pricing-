@@ -383,12 +383,31 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
         </div>
 
         <div class="form-group">
-          <label>Property Size</label>
-          <select id="pricer-size">
-            <option value="small">Small (1-2 bed / apartment)</option>
-            <option value="medium" selected>Medium (3 bed semi-D)</option>
-            <option value="large">Large (4+ bed / detached)</option>
+          <label>Property / Job Size</label>
+          <select id="pricer-size" onchange="toggleCustomSize(this.value)">
+            <option value="small">Small — 1-2 bed / apartment</option>
+            <option value="medium" selected>Medium — 3 bed semi-D</option>
+            <option value="large">Large — 4+ bed / detached</option>
+            <option value="small">Garden Room / Shed / Garage</option>
+            <option value="medium">Commercial Unit (small)</option>
+            <option value="large">Commercial Unit (large)</option>
+            <option value="small">Bungalow</option>
+            <option value="large">Farmhouse / Period Property</option>
+            <option value="custom">Other — Enter Size Manually ↗</option>
           </select>
+          <div id="custom-size-panel" style="display:none;margin-top:8px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <div class="form-group" style="margin:0;">
+                <label>Floor Area (sqm)</label>
+                <input type="number" id="custom-sqm" placeholder="e.g. 45" min="1" oninput="updateCustomSize()">
+              </div>
+              <div class="form-group" style="margin:0;">
+                <label>Job Description</label>
+                <input type="text" id="custom-size-desc" placeholder="e.g. Garden room, Office, Farm shed">
+              </div>
+            </div>
+            <div id="custom-size-note" style="margin-top:8px;font-size:12px;color:var(--text-m);line-height:1.5;"></div>
+          </div>
         </div>
         <div class="form-group">
           <label>Location</label>
@@ -1160,6 +1179,35 @@ function getCalcPrice(){
 }
 
 // ============================================================
+// CUSTOM SIZE HANDLER
+// ============================================================
+function toggleCustomSize(val){
+  var panel = document.getElementById('custom-size-panel');
+  if(val === 'custom'){
+    panel.style.display = 'block';
+  } else {
+    panel.style.display = 'none';
+  }
+}
+
+function updateCustomSize(){
+  var sqm = Number(document.getElementById('custom-sqm').value)||0;
+  var noteEl = document.getElementById('custom-size-note');
+  if(!sqm){ noteEl.textContent=''; return; }
+  var sizeLabel = sqm < 30 ? 'small' : sqm < 80 ? 'medium' : 'large';
+  var hint = sqm < 30 ? 'Treated as small property for pricing' : sqm < 80 ? 'Treated as medium property for pricing' : 'Treated as large property for pricing';
+  noteEl.innerHTML = 'ℹ️ '+hint+' ('+sqm+'m²) — <strong style="color:var(--orange);">'+sizeLabel.toUpperCase()+'</strong> rate will apply';
+  // Auto-set the size select value
+  var sel = document.getElementById('pricer-size');
+  // We keep custom selected but use sqm to determine pricing band
+  sel._customSqm = sqm;
+  sel._customBand = sizeLabel;
+}
+
+// Override getCalcPrice to respect custom size
+var _origGetCalcPrice = null;
+
+// ============================================================
 // SITE VISIT NOTES
 // ============================================================
 function showHCTab(tab, btn){
@@ -1269,7 +1317,9 @@ function applySiteExtras(){
 // ============================================================
 async function runAIPricer(){
   var jobtype=document.getElementById('pricer-jobtype').value;
-  var size=document.getElementById('pricer-size').value;
+  var sizeEl=document.getElementById('pricer-size');
+  var size = sizeEl.value === 'custom' ? (sizeEl._customBand || 'medium') : sizeEl.value;
+  var sizeLabel = sizeEl.value === 'custom' ? ((document.getElementById('custom-size-desc').value||'Custom') + ' ' + (document.getElementById('custom-sqm').value||'')+'m²') : size;
   var location=document.getElementById('pricer-location').value;
   var notes=document.getElementById('pricer-notes').value;
   var box=document.getElementById('pricer-result-box');
@@ -2385,12 +2435,31 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-
         </div>
 
         <div class="form-group">
-          <label>Property Size</label>
-          <select id="pricer-size">
-            <option value="small">Small (1-2 bed / apartment)</option>
-            <option value="medium" selected>Medium (3 bed semi-D)</option>
-            <option value="large">Large (4+ bed / detached)</option>
+          <label>Property / Job Size</label>
+          <select id="pricer-size" onchange="toggleCustomSize(this.value)">
+            <option value="small">Small — 1-2 bed / apartment</option>
+            <option value="medium" selected>Medium — 3 bed semi-D</option>
+            <option value="large">Large — 4+ bed / detached</option>
+            <option value="small">Garden Room / Shed / Garage</option>
+            <option value="medium">Commercial Unit (small)</option>
+            <option value="large">Commercial Unit (large)</option>
+            <option value="small">Bungalow</option>
+            <option value="large">Farmhouse / Period Property</option>
+            <option value="custom">Other — Enter Size Manually ↗</option>
           </select>
+          <div id="custom-size-panel" style="display:none;margin-top:8px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <div class="form-group" style="margin:0;">
+                <label>Floor Area (sqm)</label>
+                <input type="number" id="custom-sqm" placeholder="e.g. 45" min="1" oninput="updateCustomSize()">
+              </div>
+              <div class="form-group" style="margin:0;">
+                <label>Job Description</label>
+                <input type="text" id="custom-size-desc" placeholder="e.g. Garden room, Office, Farm shed">
+              </div>
+            </div>
+            <div id="custom-size-note" style="margin-top:8px;font-size:12px;color:var(--text-m);line-height:1.5;"></div>
+          </div>
         </div>
         <div class="form-group">
           <label>Location</label>
