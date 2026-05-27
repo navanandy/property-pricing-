@@ -1792,7 +1792,19 @@ function renderSavedDocs(){
       +(doc.desc?'<div style="font-size:12px;color:var(--text-m);margin-bottom:8px;line-height:1.4;">'+doc.desc.substring(0,80)+(doc.desc.length>80?'...':'')+'</div>':'')      // DATES ROW
       +'<div style="display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap;">'        +(dateStr?'<div style="font-size:12px;color:var(--text-d);">Date: <strong style="color:var(--text-m);">'+dateStr+'</strong></div>':'')        +(dueStr?'<div style="font-size:12px;color:var(--text-d);">'+(isInv?'Due':'Valid')+': <strong style="color:'+(isOverdue?'var(--red)':'var(--text-m)')+';">'+dueStr+'</strong></div>':'')      +'</div>'      // TOTAL - big and prominent
       +'<div style="font-family:Barlow Condensed,sans-serif;font-size:28px;font-weight:900;color:var(--orange);margin-bottom:12px;">EUR'+doc.total.toLocaleString('en-IE',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div>'      // BUTTONS - full width stacked on mobile
-      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">'        +(isInv && doc.status!=='paid' ? '<button class="btn btn-sm" style="background:rgba(39,174,96,0.15);color:#52be80;border:1px solid rgba(39,174,96,0.4);font-size:12px;padding:10px;" onclick="markPaid('+doc.id+')">v Mark Paid</button>' : '<div></div>')        +'<button class="btn btn-ghost btn-sm" style="font-size:12px;padding:10px;" onclick="printSaved('+doc.id+')"> Print / PDF</button>'      +'</div>'      +'<button class="btn btn-danger btn-sm" style="width:100%;margin-top:8px;font-size:12px;padding:10px;" onclick="deleteDoc('+doc.id+')">Delete</button>'    +'</div>';
+      +'<div style="display:flex;flex-direction:column;gap:8px;">'
+      // Row 1 - primary actions
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">'
+        +(isInv && doc.status!=='paid' ? '<button class="btn btn-sm" style="background:rgba(39,174,96,0.15);color:#52be80;border:1px solid rgba(39,174,96,0.4);font-size:12px;padding:10px;" onclick="markPaid('+doc.id+')">Mark Paid</button>' : '')
+        +(!isInv ? '<button class="btn btn-sm" style="background:rgba(232,98,10,0.15);color:var(--orange);border:1px solid rgba(232,98,10,0.4);font-size:12px;padding:10px;font-weight:700;" onclick="convertToInvoice('+doc.id+')">Convert to Invoice</button>' : '')
+        +'<button class="btn btn-ghost btn-sm" style="font-size:12px;padding:10px;" onclick="printSaved('+doc.id+')">Print / PDF</button>'
+      +'</div>'
+      // Row 2 - secondary
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">'
+        +'<button class="btn btn-ghost btn-sm" style="font-size:12px;padding:10px;" onclick="editSavedDoc('+doc.id+')">Edit / Update</button>'
+        +'<button class="btn btn-danger btn-sm" style="font-size:12px;padding:10px;" onclick="deleteDoc('+doc.id+')">Delete</button>'
+      +'</div>'
+    +'</div>'    +'</div>';
   }).join('');
   renderRevSummary();
 }
@@ -1865,6 +1877,60 @@ function printQuote(){
   w.document.write('<!DOCTYPE html><!-- EASY Command Centre v13.1 - updated 27 May 2026 --><html><head><title>'+docType+'</title><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800&family=Barlow:wght@400;600&display=swap" rel="stylesheet"><style>body{font-family:Arial,sans-serif;padding:40px;max-width:750px;margin:0 auto;}@media print{body{padding:20px;margin:0;}button{display:none!important;}}</style></head><body>'+preview+'</body></html>');
   w.document.close();
   setTimeout(function(){w.print();},500);
+}
+
+function convertToInvoice(id){
+  var doc = savedDocs.find(function(d){return d.id===id;});
+  if(!doc) return;
+  if(!confirm('Convert quote #'+doc.num+' to an invoice for '+doc.name+'?')) return;
+  // Change type and generate new invoice number
+  doc.type = 'invoice';
+  doc.status = 'unpaid';
+  var year = new Date().getFullYear();
+  var seq = String(savedDocs.filter(function(d){return d.type==='invoice';}).length + 1).padStart(3,'0');
+  doc.num = 'INV'+year+'-'+seq;
+  doc.invoicedDate = new Date().toISOString().split('T')[0];
+  // Set due date 14 days from now if not set
+  if(!doc.due){
+    var due = new Date(); due.setDate(due.getDate()+14);
+    doc.due = due.toISOString().split('T')[0];
+  }
+  try {
+    localStorage.setItem('ecc_docs', JSON.stringify(savedDocs));
+    renderSavedDocs();
+    toast('Converted to Invoice '+doc.num);
+  } catch(e) {
+    toast('Error saving - try again');
+  }
+}
+
+function editSavedDoc(id){
+  var doc = savedDocs.find(function(d){return d.id===id;});
+  if(!doc) return;
+  // Load the doc back into the builder
+  docType = doc.type;
+  setDocType(doc.type);
+  quoteItems = JSON.parse(JSON.stringify(doc.items||[]));
+  // Fill in form fields
+  var fields = {
+    'q-name': doc.name, 'q-email': doc.email||'', 'q-phone': doc.phone||'',
+    'q-addr': doc.addr||'', 'q-desc': doc.desc||'', 'q-num': doc.num,
+    'q-date': doc.date||'', 'q-duedate': doc.due||'',
+    'q-footer-note': doc.footer||''
+  };
+  Object.keys(fields).forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.value = fields[id];
+  });
+  renderQItems();
+  updateQuote();
+  // Switch to builder tab
+  showQTab('builder');
+  document.querySelectorAll('.qtab').forEach(function(t,i){
+    t.style.background = i===0 ? 'var(--orange)' : 'var(--bg-card)';
+    t.style.color = i===0 ? '#fff' : 'var(--text-m)';
+  });
+  toast('Loaded into builder - make changes and save again');
 }
 
 function renderRevSummary(){
